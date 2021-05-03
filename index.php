@@ -15,6 +15,7 @@
     ?>
     
     <body>
+        <!-- Homepage here -->
     </body>
     
     <?php
