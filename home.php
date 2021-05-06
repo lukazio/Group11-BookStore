@@ -18,12 +18,12 @@
     <body>
         
         <!-- Banner (Remove Container for FULL WIDTH)-->
-        <div class="container">
+        
            <div class="jumbotron background-tint">
               <h1>Welcome to Mondstadt Book Store</h1>
               <p>This is 696969696969696969699696969699696966969969696969699696 HAhahahha Okay.</p>
             </div> 
-        </div>
+        
         
         <!-- Search Bar -->
         <div class="container">
