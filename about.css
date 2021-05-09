@@ -8,6 +8,7 @@ html {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%) brightness(0.5);
     -webkit-transition: all 1s ease;
@@ -139,6 +140,7 @@ html {
     padding-bottom: 50px;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 #testimonial4 .carousel-inner .item{
