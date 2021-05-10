@@ -7,6 +7,8 @@
         <?php
         require 'modules/link.php';
         ?>
+        
+        <link rel="stylesheet" type="text/css" href="modules/stock_levels.css">
     </head>
     
     <?php
@@ -18,13 +20,16 @@
         <div class="container text-white">
             <h1 class="py-4 font-weight-light">Welcome, Administrator.</h1>
             <h3>Stock Levels</h3>
-            <hr style="border-color: white;">
+            <hr>
             
             <div class="text-right">
-                <a class="mb-3 btn btn-success"><i class="fa fa-plus"></i> Add Stock</a>
+                <a class="mb-3 btn btn-success" href="add_stock.php"><i class="fa fa-plus"></i>&nbsp; Add Stock</a>
             </div>
             
-            <input type="text" class="form-control mb-3" id="searchStock" name="searchStock" placeholder="Search book titles in stock...">
+            <div class="form-group search mb-3">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input type="text" class="form-control" id="searchStock" name="searchStock" placeholder="Search for book information in system">
+            </div>
             
             <?php
             // Get all books in the system
@@ -43,7 +48,7 @@
                             <th scope="col" class="text-right">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="stockTable">
                         <?php
                         if(mysqli_num_rows($getBooksResult) > 0){
                             foreach($getBooksResult as $row){
@@ -55,7 +60,7 @@
                                     echo  '<td><span class="badge badge-light">'.$row['quantity'].'</span></td>';
                                 else
                                     echo  '<td><span class="badge badge-danger">'.$row['quantity'].'</span></td>';
-                                echo      '<td class="text-right"><a href="book_details.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i> Details</a></td>';
+                                echo      '<td class="text-right"><a href="book_details.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a></td>';
                             }
                         }
                         else{
@@ -75,3 +80,14 @@
     ?>
     
 </html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#searchStock").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#stockTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+</script>
