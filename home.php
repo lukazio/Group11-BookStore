@@ -32,7 +32,7 @@
                     <span id="selectedView" class="fa fa-th"></span>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a id="grid" class="dropdown-item" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
+                    <a id="grid" class="dropdown-item active" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
                     <a id="list" class="dropdown-item" href="#">List View &nbsp;<span class="fa fa-list"></span></a>
                   </div>
                 </div>
