@@ -1,15 +1,16 @@
-:root {
-    font-size: 100%;
-    font-size: 16px;
-    line-height: 1.5;
+.bg{
+    background: #f29d16;
+    width: 100%;
+    height: 100vh;
+    background-size: 100%;
 }
 
-body {
-    padding: 0;
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    background: #f29d16;
+.form-container{
+    margin-top: 50px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
 }
 
 h1 {
@@ -29,47 +30,8 @@ a:hover {
     text-decoration: underline;
 }
 
-.left {
-    height: 200px;
-    background: #e3f2fd;
-    background-size: cover;
-}
-
-.left, .right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.right .login_section {
-    color: black;
+.login_section {
     text-align: center;
-}
-
-.right .login_section p {
-    margin: 1.5rem 0;
-    font-size: 14px;
-}
-
-.right form{
-    width: 350px;
-}
-
-form input[type="email"], form input[type="password"]{
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 8px;
-    border: 1px  solid #c4c4c4;
-    padding: 16px;
-    margin-bottom: 20px;
-    font-size: 10px;
-}
-
-label{
-    display: block;
-    margin-bottom: 8px;
-    font-size: 15px;
 }
 
 .btn_login {
@@ -90,7 +52,6 @@ label{
     background-color: #2c4893;
     cursor: pointer;
 }
-
 
 
 
