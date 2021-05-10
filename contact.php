@@ -68,7 +68,7 @@
                                 <p class="info-underline lead"><i class="fa fa-envelope fa-fw"></i> contact@mondstadt.com</p>                           
                             </div>
                             <div class="info-div">
-                                <p class="info-underline lead"><i class="fa fa-map-marker fa-fw"></i>Arngrímsgata, Reykjavík, Iceland</p>               
+                                <p class="info-underline lead"><i class="fa fa-map-marker fa-fw"></i>HQ: Kirova Street, Chornobyl, Ukraine </p>                                   
                             </div>
                             <div class="info-div">
                                 <p class="info-underline lead"><i class="fa fa-clock-o fa-fw"></i>Mon - Sat 8.00 - 18.00</p>               
@@ -108,18 +108,16 @@
 
         <!--contact map-->
         <div id="map" class="map-responsive" data-aos="fade-up" data-aos-duration="800" data-aos-easing="ease-in-quad">
-            <iframe             
+            <iframe 
+                src="https://www.google.com/maps/d/embed?mid=1bNbiB9n3P_EmUJCoF5OiAo5GA0uXVPV_" 
                 width="100%"
                 height="100%"
                 style="border:0"
-                loading="lazy"
-                allowfullscreen
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBqZUHPOe-rP7n_ab71FO8JTzfbmmgUFC4
-                &q=64.143335,%20-21.950492">
-            </iframe>
+                loading="lazy"               
+                allowfullscreen>                     
+            </iframe>       
         </div>
         <script>AOS.init();</script>
-
     </body>
 
     <?php

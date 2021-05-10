@@ -55,8 +55,13 @@ html {
 
 @media screen and (max-width: 700px){
 
-    .banner-card{width: 100%;height: auto;margin: 1em 0em;}
-    .banner-card:hover img{top:30%;opacity: 0.5;}
+    .banner-image{
+        width: 100%;
+        height: auto;
+    }
+    
+    .banner-card{width: 100%;height:auto ;margin: 1em 0em;}
+    .banner-card:hover img{top:5%;opacity: 0.5;}
 
     .banner-card .overlay{
         position: relative;
@@ -66,14 +71,17 @@ html {
         height: 200px;
     }
     .banner-card img{
+        top:15%;
         position: relative;
         display: block;
-        width: 100%;
-        height: auto;
-        -webkit-transform: translate(-50%, 0%);-moz-transform: translate(-50%, 0%);-ms-transform: translate(-50%, 0%);-o-transform: translate(-50%, 0%);transform: translate(-50%,0%);
+        width: 60%;
+        height: 50%;
+        -webkit-transform: translate(-50%, 0%);
+        -moz-transform: translate(-50%, 0%);
+        -ms-transform: translate(-50%, 0%);
+        -o-transform: translate(-50%, 0%);
+        transform: translate(-50%,0%);
     }
-    .banner-card:hover .overlay{bottom:0px;}
-    .banner-card:hover img{top:50%;opacity: 1;}
 }
 /*banner cards end*/
 /*info effect*/
@@ -113,9 +121,8 @@ html {
 /*map*/
 .map-responsive{
     position: relative;
-/*    padding-bottom: 56.25%;*/
     padding-top: 30px;
-    height:450px;
+    height:480px;
     overflow: hidden;
 }
 
