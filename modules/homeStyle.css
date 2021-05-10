@@ -39,9 +39,8 @@
 
 .listView {
     margin-bottom: 32px;
-    -webkit-box-shadow: 3px 3px 5px 3px #ccc;
-    -moz-box-shadow:    3px 3px 5px 3px #ccc;
-    box-shadow:         3px 3px 5px 3px #ccc; 
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
 }
 
 .has-search .form-control {
