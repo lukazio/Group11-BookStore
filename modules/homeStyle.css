@@ -1,0 +1,84 @@
+.jumbotron {
+  background-image: url("https://www.stmellitus.ac.uk/sites/default/files/Library%20banner_0.png");
+  background-size: cover;
+  color: white
+}
+
+.background-tint {
+  background-color: rgba(0,0,0,.9);
+  background-blend-mode: multiply;
+}
+
+#grid:hover{
+    background-color: #d99d7b !important;
+}
+
+#grid.active:after {
+    content: '\f00c';
+    font-family: FontAwesome;
+    float: left;
+}
+
+#grid.active{
+    background-color: #d99d7b !important;
+}
+
+#list:hover{
+    background-color: #d99d7b !important;
+}
+
+#list.active:after {
+    content: '\f00c';
+    font-family: FontAwesome;
+    float: left;
+}
+
+#list.active{
+    background-color: #d99d7b !important;
+}
+
+.listView {
+    margin-bottom: 32px;
+    -webkit-box-shadow: 3px 3px 5px 3px #ccc;
+    -moz-box-shadow:    3px 3px 5px 3px #ccc;
+    box-shadow:         3px 3px 5px 3px #ccc; 
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.card-title{
+    color: #55a2d9;    
+}
+
+.card-text{
+    padding-bottom: 8px;
+    font-weight: lighter
+}
+
+.cart-btn{
+    width: 100%;
+    background-color: #d99d7b;
+    border: none;
+    color: white;
+    padding: 3px 4px;
+    font-weight: lighter;
+    cursor: pointer;
+}
+
+.cart-btn:hover{
+    background-color: #bd8566;
+}
