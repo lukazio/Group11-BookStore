@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>About</title>
-        <link href="./about.css" rel="stylesheet">
+        <link type="text/css" href="modules/about.css" rel="stylesheet">
         <!--library for fade-up effect-->
         <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
         <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
@@ -19,13 +19,14 @@
 
     <body >
         <!--about us banner-->
-        <div class="banner-bg-image"> 
+        <div class="banner-bg-image">  
+            <div class="banner-text">
+                <h1 class="display-1" data-aos="fade-up" data-aos-duration="500">Who We Are</h1>
+                <h3 data-aos="fade-up" data-aos-duration="500">The Mondstadt Library Family</h3>
+            </div>
             <a href="#story" class="scroll-down" address="true"></a>
         </div>
-        <div class="banner-text">
-            <h1 class="display-1" data-aos="fade-up" data-aos-duration="500">Who We Are</h1>
-            <h3 data-aos="fade-up" data-aos-duration="500">The Mondstadt Library Family</h3>
-        </div>
+
 
         <!--about us our-story-->
         <div class="story-image" id="story">   

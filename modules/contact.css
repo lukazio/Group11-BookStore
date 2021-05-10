@@ -3,7 +3,7 @@ html {
 }
 /*banner image*/
 .banner-image{
-    background-image: url("img/contact-banner.jpg");
+    background-image: url("../img/contact-banner.jpg");
     background-size: 600px 800px;
     background-repeat: no-repeat;
     background-position: right top;

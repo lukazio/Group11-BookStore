@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Contact</title>
-        <link href="./contact.css" rel="stylesheet">
+        <link type="text/css" href="modules/contact.css" rel="stylesheet">
         <!--library for fade-up effect-->
         <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
         <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
