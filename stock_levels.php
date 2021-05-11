@@ -28,7 +28,7 @@
             
             <div class="form-group search mb-3">
                 <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control" id="searchStock" name="searchStock" placeholder="Search for book information in system">
+                <input type="text" class="form-control" id="searchStock" name="searchStock" placeholder="Search for book title or ISBN in system">
             </div>
             
             <?php
@@ -54,8 +54,8 @@
                             foreach($getBooksResult as $row){
                                 echo  '<tr>'
                                         . '<td><img src="'.$row['picture'].'" height="80"></td>'
-                                        . '<td>'.$row['isbn'].'</td>'
-                                        . '<td>'.$row['title'].'</td>';
+                                        . '<td class="isbn">'.$row['isbn'].'</td>'
+                                        . '<td class="title">'.$row['title'].'</td>';
                                 if($row['quantity'] > 3)
                                     echo  '<td><span class="badge badge-light">'.$row['quantity'].'</span></td>';
                                 else
@@ -86,7 +86,7 @@ $(document).ready(function(){
     $("#searchStock").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $("#stockTable tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            $(this).toggle($(this).find(".title, .isbn").text().toLowerCase().indexOf(value) > -1);
         });
     });
 });
