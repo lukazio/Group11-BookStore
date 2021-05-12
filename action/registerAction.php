@@ -101,7 +101,7 @@ if(isset($_POST['submitted'])){
                               VALUES('$email','$username','$password',0)";
             mysqli_query($conn, $query);
             $_SESSION['username'] = $username;
-            /*header('location: index.php');*/
+            header('location: home.php');
         }
     }
 }
