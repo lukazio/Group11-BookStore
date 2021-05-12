@@ -35,6 +35,36 @@ if(isset($_POST['submitted'])){
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>';
         $errorcount++;
+    }elseif(strlen($password) <= '8'){
+        echo '<div class="alert alert-danger alert-dismissible fade in">
+            Your Password Must Contain At Least 8 Digits!
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>';
+        $errorcount++;
+    }elseif(!preg_match("#[0-9]+#",$password)){
+        echo '<div class="alert alert-danger alert-dismissible fade in">
+            Your Password Must Contain At Least 1 Number!
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>';
+        $errorcount++;
+    }elseif(!preg_match("#[A-Z]+#",$password)){
+        echo '<div class="alert alert-danger alert-dismissible fade in">
+            Your Password Must Contain At Least 1 Capital Letter!
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>';
+        $errorcount++;
+    }elseif(!preg_match("#[a-z]+#",$password)){
+        echo '<div class="alert alert-danger alert-dismissible fade in">
+            Your Password Must Contain At Least 1 Lowercase Letter!
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>';
+        $errorcount++;
+    }elseif(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/',$password)){
+        echo '<div class="alert alert-danger alert-dismissible fade in">
+            Your Password Must Contain At Least 1 Special Character!
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>';
+        $errorcount++;
     }elseif($password!=$password2){
         echo '<div class="alert alert-danger alert-dismissible fade in">
             Password did not match
