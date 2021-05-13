@@ -38,7 +38,7 @@ if(!isset($_SESSION))
                 <?php if(isset($_SESSION['username'])) { ?>
                 <div class="dropdown-menu" aria-labelledby="profileDropdown">
                     <a class="dropdown-item" href="profile.php">Profile</a>
-                    <a class="dropdown-item text-danger" href="action/logout.php">Logout</a>
+                    <a class="dropdown-item text-danger" href="action/logout_action.php">Logout</a>
                 </div>
                 <?php } else { ?>
                 <div class="dropdown-menu" aria-labelledby="profileDropdown">
