@@ -32,6 +32,7 @@ function loginUser($conn, $email, $password){
     if(md5($password) == $pwdHashed){
         session_start();
         $_SESSION["user_id"] = $uidExists["user_id"];
+         $_SESSION["username"] = $uidExists["username"];
         $_SESSION["email"] = $uidExists["email"];
         
         header("Location: ../home.php");
