@@ -2,7 +2,7 @@
     display: block;
     visibility: hidden;
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(-20px);
     transition: .5s ease all;
 }
 #profileDropdownMenu.show {
@@ -30,6 +30,6 @@
   transition-property: transform;
 }
 .logo-header:hover, .logo-header:focus, .logo-header:active {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
 }
