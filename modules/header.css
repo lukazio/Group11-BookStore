@@ -33,3 +33,6 @@
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
 }
+.top-banner {
+    background-color: #f29d16;
+}

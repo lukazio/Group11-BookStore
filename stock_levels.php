@@ -38,7 +38,7 @@
             ?>
             
             <div class="table-responsive">
-                <table class="table table-dark table-hover">
+                <table class="table table-dark table-hover mb-4">
                     <thead>
                         <tr>
                             <th scope="col">Image</th>
