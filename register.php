@@ -47,7 +47,7 @@ background: #f29d16;
                     <button type="submit" class="btn btn-success btn-lg btn-block" name="submitted">Register Now</button>
                 </div>
             </form>
-        <div class="text-center">Already have an account? <a href="">Sign in</a></div>
+        <div class="text-center">Already have an account? <a href="login.php">Sign in</a></div>
         </div>
     </div>
     <?php include ('modules/footer.php')?>
