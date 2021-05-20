@@ -26,16 +26,41 @@
         <!-- Heading -->
         <div class="container">
             <div class="row">
-                <h1 class="col-11 font-weight-light" style="padding-bottom: 16px;">Books</h1>
-                <div class="col-1 dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span id="selectedView" class="fa fa-th"></span>
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a id="grid" class="dropdown-item active" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
-                    <a id="list" class="dropdown-item" href="#">List View &nbsp;<span class="fa fa-list"></span></a>
-                  </div>
-                </div>
+                <?php
+                    if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin'){
+                        echo '
+                            <h1 class="col-md-10 font-weight-light" style="padding-bottom: 16px;">Books</h1>
+                            <div class="col-md-1">
+                                <button class="btn btn-primary type="button" style="margin-right: 16px;">
+                                    Stocks
+                                </button>
+                            </div>
+                            <div class="col-md-1 dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span id="selectedView" class="fa fa-th"></span>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a id="grid" class="dropdown-item active" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
+                                <a id="list" class="dropdown-item" href="#">List View &nbsp;<span class="fa fa-list"></span></a>
+                              </div>
+                            </div>
+                        ';
+                    }
+                    else{
+                        echo '
+                            <h1 class="col-11 font-weight-light" style="padding-bottom: 16px;">Books</h1>
+                            <div class="col-1 dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span id="selectedView" class="fa fa-th"></span>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a id="grid" class="dropdown-item active" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
+                                <a id="list" class="dropdown-item" href="#">List View &nbsp;<span class="fa fa-list"></span></a>
+                              </div>
+                            </div>
+                        ';                      
+                    }
+                ?>
             </div> 
         </div>
         
