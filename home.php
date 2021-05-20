@@ -31,9 +31,9 @@
                         echo '
                             <h1 class="col-md-10 font-weight-light" style="padding-bottom: 16px;">Books</h1>
                             <div class="col-md-1">
-                                <button class="btn btn-primary type="button" style="margin-right: 16px;">
+                                <a class="btn btn-primary" href="#" role="button" style="margin-right: 16px;">
                                     Stocks
-                                </button>
+                                </a>
                             </div>
                             <div class="col-md-1 dropdown">
                               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
