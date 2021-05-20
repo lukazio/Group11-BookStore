@@ -17,7 +17,7 @@
     
     <body>
         
-        <!-- Banner (Remove Container for FULL WIDTH)-->       
+        <!-- Banner -->       
         <div class="jumbotron background-tint">
             <h1>Welcome to Mondstadt Book Store</h1>
             <p>WE ARE LOCATED AT PLACES NO ONE KNOWS<br>BUT WE DELIVER TO DOORSTEPS.</p>
@@ -29,10 +29,10 @@
                 <?php
                     if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin'){
                         echo '
-                            <h1 class="col-md-10 font-weight-light" style="padding-bottom: 16px;">Books</h1>
-                            <div class="col-md-1">
-                                <a class="btn btn-primary" href="#" role="button" style="margin-right: 16px;">
-                                    Stocks
+                            <h1 class="col-md-9 font-weight-light" style="padding-bottom: 16px;">Books</h1>
+                            <div class="col-md-2">
+                                <a class="btn btn-primary" href="/Group11-BookStore/stock_levels.php" role="button" style="margin-right: 16px;">
+                                    Stocks Level
                                 </a>
                             </div>
                             <div class="col-md-1 dropdown">
