@@ -19,12 +19,11 @@
     <body class="bg-dark">
         <div class="container text-white">
             <h1 class="py-4 font-weight-light">Welcome, Administrator.</h1>
-            <h3>Stock Levels</h3>
+            <h3>
+                Stock Levels
+                <span class="float-right"><a class="mb-3 btn btn-success" href="add_stock.php"><i class="fa fa-plus"></i>&nbsp; Add Stock</a></span>
+            </h3>
             <hr>
-            
-            <div class="text-right">
-                <a class="mb-3 btn btn-success" href="add_stock.php"><i class="fa fa-plus"></i>&nbsp; Add Stock</a>
-            </div>
             
             <div class="form-group search mb-3">
                 <span class="fa fa-search form-control-feedback"></span>
@@ -53,7 +52,7 @@
                         if(mysqli_num_rows($getBooksResult) > 0){
                             foreach($getBooksResult as $row){
                                 echo  '<tr>'
-                                        . '<td><img src="'.$row['picture'].'" height="80"></td>'
+                                        . '<td><img class="book-img" src="'.$row['picture'].'" height="65"></td>'
                                         . '<td class="isbn">'.$row['isbn'].'</td>'
                                         . '<td class="title">'.$row['title'].'</td>';
                                 if($row['quantity'] > 3)
@@ -73,6 +72,21 @@
                 </table>
             </div>
         </div>
+        
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#searchStock").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#stockTable tr").filter(function() {
+                        $(this).toggle($(this).find(".title, .isbn").text().toLowerCase().indexOf(value) > -1);
+                    });
+                });
+            });
+
+            $('.book-img').on('error', function(){
+                $(this).attr('src', './img/placeholder.png');
+            });
+        </script>
     </body>
     
     <?php
@@ -80,14 +94,3 @@
     ?>
     
 </html>
-
-<script type="text/javascript">
-$(document).ready(function(){
-    $("#searchStock").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#stockTable tr").filter(function() {
-            $(this).toggle($(this).find(".title, .isbn").text().toLowerCase().indexOf(value) > -1);
-        });
-    });
-});
-</script>

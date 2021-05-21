@@ -1,0 +1,12 @@
+hr {
+    border-color: white;
+}
+
+#bookImg {
+    height: 250px;
+}
+
+.slider-label {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
