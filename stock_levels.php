@@ -52,14 +52,14 @@
                         if(mysqli_num_rows($getBooksResult) > 0){
                             foreach($getBooksResult as $row){
                                 echo  '<tr>'
-                                        . '<td><img class="book-img" src="'.$row['picture'].'" height="65"></td>'
+                                        . '<td><img class="book-img" src="'.$row['picture'].'" height="70"></td>'
                                         . '<td class="isbn">'.$row['isbn'].'</td>'
                                         . '<td class="title">'.$row['title'].'</td>';
                                 if($row['quantity'] > 3)
                                     echo  '<td><span class="badge badge-light">'.$row['quantity'].'</span></td>';
                                 else
                                     echo  '<td><span class="badge badge-danger">'.$row['quantity'].'</span></td>';
-                                echo      '<td class="text-right"><a href="book_details.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a></td>';
+                                echo      '<td class="text-right"><a href="edit_book.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a></td>';
                             }
                         }
                         else{

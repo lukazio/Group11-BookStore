@@ -21,7 +21,29 @@
             <h3 class="pt-4">Add Stock<span class="float-right"><a class="mb-3 btn btn-info" href="stock_levels.php"><i class="fa fa-arrow-left"></i>&nbsp; Back</a></span></h3>
             <hr>
             
-            <form action="add_stock_action.php" method="post" class="mb-4">
+            <!-- START OF ALERT -->
+            <?php
+            if(isset($_SESSION['addstock_alert'])) {
+                $addstock_status = $_SESSION['addstock_alert'];
+            ?>
+                <div class="alert alert-<?php echo $addstock_status; ?> alert-dismissible fade show" role="alert">
+                    <?php
+                    if($addstock_status == 'success')
+                        echo '<i class="fa fa-fw fa-check-circle"></i> Book successfully added! <a href="stock_levels.php">Click here</a> if you wish to return to previous page.';
+                    else if($addstock_status == 'danger')
+                        echo '<i class="fa fa-fw fa-exclamation-triangle"></i> Failed to add book, please ensure valid details and ISBN-13 number must not be a duplicate.';
+                    ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php
+            }
+            unset($_SESSION['addstock_alert']);
+            ?>
+            <!-- END OF ALERT -->
+            
+            <form action="action/add_stock_action.php" method="post" class="mb-4">
                 <img id="bookImg" class="img-thumbnail mb-3" src="img/placeholder.png">
                 <div class="form-row">
                     <div class="form-group col-12">
@@ -90,7 +112,7 @@
                 </div>
                 <hr>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-success" name="add_stock_submit"><i class="fa fa-plus"></i>&nbsp; Submit</button>
+                    <button type="submit" class="btn btn-success" name="addstock_submit"><i class="fa fa-plus"></i>&nbsp; Submit</button>
                 </div>
             </form>
         </div>
