@@ -78,12 +78,10 @@
                 classToChg.parent().addClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
-                card.removeClass("row").addClass("card");
+                card.removeClass("row").addClass("card").addClass("h-100");
                 // Change Image View
                 var img = $('img[data-role="cardImgTop"]');
                 img.removeClass("col-3").addClass("card-img-top");
-                img.css('max-width','100%');
-                img.css('max-height','100%');
                 // Change Card Body to Row
                 var cardBody = $('div[data-role="cardBody"]');
                 cardBody.addClass("card-body").removeClass("col-9").removeClass("row");
@@ -105,12 +103,10 @@
                 classToChg.parent().removeClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
-                card.removeClass("card").addClass("row");
+                card.removeClass("card").removeClass("h-100").addClass("row");
                 // Change Image View
                 var img = $('img[data-role="cardImgTop"]');
                 img.removeClass("card-img-top").addClass("col-3");
-                img.css('max-width','');
-                img.css('max-height','');
                 // Change Card Body to Row
                 var cardBody = $('div[data-role="cardBody"]');
                 cardBody.removeClass("card-body").addClass("col-9").addClass("row");
@@ -153,8 +149,8 @@
                       while($row = $result->fetch_assoc()) {
                         echo
                           "<div data-role=\"holder\" class=\"col-3 mb-5\">".
-                              "<div class=\"card\" data-role=\"book\">".
-                                "<img data-role=\"cardImgTop\" class=\"card-img-top\" src=\"".$row["picture"]."\" alt=\"".$row["title"]."\" style=\"max-width:100%;max-height:100%\">".
+                              "<div class=\"card h-100\" data-role=\"book\">".
+                                "<img data-role=\"cardImgTop\" class=\"card-img-top\" src=\"".$row["picture"]."\" alt=\"".$row["title"]."\">".
                                 "<div data-role=\"cardBody\" class=\"card-body\">".    
                                     "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12 card-title\">".$row["title"]."</h5></div>".
                                     "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">".$row["author"]."</p></div>".
