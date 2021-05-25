@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <link href="modules/add_stock.css" rel="stylesheet" type="text/css"/>
-        <title>Admin Edit</title>
+        <title>Book Details - Admin</title>
         
         <?php
             require 'modules/link.php';
@@ -17,8 +17,7 @@
     
     <body class="bg-dark">
         <?php
-            //$isbn = $_GET['isbn'];
-            $isbn = 69;
+            $isbn = $_GET['isbn'];
             $sql = 'SELECT * FROM book WHERE isbn="'.$isbn.'"';
             $result = $conn->query($sql);
 
@@ -26,7 +25,7 @@
               while($row = $result->fetch_assoc()) {
                 echo'
                     <div class="container text-white">
-                        <h3 class="pt-4">Edit Book '.$isbn.' Details<span class="float-right"><a class="mb-3 btn btn-info" href="stock_levels.php"><i class="fa fa-arrow-left"></i>&nbsp; Back</a></span></h3>
+                        <h3 class="pt-4">Book Details - Edit '.$row["title"].' Details<span class="float-right"><a class="mb-3 btn btn-info" href="stock_levels.php"><i class="fa fa-arrow-left"></i>&nbsp; Back</a></span></h3>
                         <hr>
                         
                         <div id="alert_box" class="hide" role="alert">
