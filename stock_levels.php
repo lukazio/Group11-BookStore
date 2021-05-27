@@ -19,12 +19,11 @@
     <body class="bg-dark">
         <div class="container text-white">
             <h1 class="py-4 font-weight-light">Welcome, Administrator.</h1>
-            <h3>Stock Levels</h3>
+            <h3>
+                Stock Levels
+                <span class="float-right"><a class="mb-3 btn btn-success" href="add_stock.php"><i class="fa fa-plus"></i>&nbsp; Add Stock</a></span>
+            </h3>
             <hr>
-            
-            <div class="text-right">
-                <a class="mb-3 btn btn-success" href="add_stock.php"><i class="fa fa-plus"></i>&nbsp; Add Stock</a>
-            </div>
             
             <div class="form-group search mb-3">
                 <span class="fa fa-search form-control-feedback"></span>
@@ -38,7 +37,7 @@
             ?>
             
             <div class="table-responsive">
-                <table class="table table-dark table-hover">
+                <table class="table table-dark table-hover mb-4">
                     <thead>
                         <tr>
                             <th scope="col">Image</th>
@@ -53,14 +52,14 @@
                         if(mysqli_num_rows($getBooksResult) > 0){
                             foreach($getBooksResult as $row){
                                 echo  '<tr>'
-                                        . '<td><img src="'.$row['picture'].'" height="80"></td>'
+                                        . '<td><img class="book-img" src="'.$row['picture'].'" height="70"></td>'
                                         . '<td class="isbn">'.$row['isbn'].'</td>'
                                         . '<td class="title">'.$row['title'].'</td>';
                                 if($row['quantity'] > 3)
                                     echo  '<td><span class="badge badge-light">'.$row['quantity'].'</span></td>';
                                 else
                                     echo  '<td><span class="badge badge-danger">'.$row['quantity'].'</span></td>';
-                                echo      '<td class="text-right"><a href="book_details.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a></td>';
+                                echo      '<td class="text-right"><a href="edit_book.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a></td>';
                             }
                         }
                         else{
@@ -73,6 +72,21 @@
                 </table>
             </div>
         </div>
+        
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#searchStock").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#stockTable tr").filter(function() {
+                        $(this).toggle($(this).find(".title, .isbn").text().toLowerCase().indexOf(value) > -1);
+                    });
+                });
+            });
+
+            $('.book-img').on('error', function(){
+                $(this).attr('src', './img/placeholder.png');
+            });
+        </script>
     </body>
     
     <?php
@@ -80,14 +94,3 @@
     ?>
     
 </html>
-
-<script type="text/javascript">
-$(document).ready(function(){
-    $("#searchStock").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#stockTable tr").filter(function() {
-            $(this).toggle($(this).find(".title, .isbn").text().toLowerCase().indexOf(value) > -1);
-        });
-    });
-});
-</script>

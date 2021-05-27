@@ -3,8 +3,13 @@ if(!isset($_SESSION))
     session_start();
 ?>
 
-<nav class="navbar navbar-expand-md navbar-light px-3 px-lg-5" style="background-color: #e3f2fd;">
-    <a class="navbar-brand logo-header" href="index.php">
+<div class="top-banner py-3 px-3 px-lg-5">
+    <span class="h3">Imported books from around the world</span><br>
+    <span class="h3 font-weight-light">By readers, for readers.</span>
+</div>
+
+<nav id="navbar_top" class="navbar navbar-expand-md navbar-light px-3 px-lg-5" style="background-color: #e3f2fd;">
+    <a class="navbar-brand logo-header" href="home.php">
         <img src="img/logo.png" width="50" height="50" class="d-inline-block align-top mr-1" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Expand navbar">
@@ -14,7 +19,7 @@ if(!isset($_SESSION))
     <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active color-fade">
-                <a class="nav-link font-weight-bold" href="index.php">Store</a>
+                <a class="nav-link font-weight-bold" href="home.php">Store</a>
             </li>
             <li class="nav-item active color-fade">
                 <a class="nav-link" href="about.php">About</a>
@@ -52,6 +57,7 @@ if(!isset($_SESSION))
 </nav>
 
 <script type="text/javascript">
+// Account dropdown hover to open
 var hoverTimeout;
 $('#profileDropdownContainer').hover(function() {
     clearTimeout(hoverTimeout);
@@ -62,5 +68,20 @@ $('#profileDropdownContainer').hover(function() {
         $('#profileDropdownContainer').removeClass('show');
         $('#profileDropdownMenu').removeClass('show');
     }, 150);
+});
+</script>
+
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            document.getElementById('navbar_top').classList.add('fixed-top');
+            navbar_height = document.querySelector('.navbar').offsetHeight;
+            document.body.style.paddingTop = navbar_height + 'px';
+        } else {
+            document.getElementById('navbar_top').classList.remove('fixed-top');
+            document.body.style.paddingTop = '0';
+        }
+    });
 });
 </script>
