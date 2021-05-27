@@ -31,7 +31,7 @@
                         echo '
                             <h1 class="col-md-9 font-weight-light" style="padding-bottom: 16px;">Books</h1>
                             <div class="col-md-2">
-                                <a class="btn btn-primary" href="/Group11-BookStore/stock_levels.php" role="button" style="margin-right: 16px;">
+                                <a class="btn btn-primary" href="stock_levels.php" role="button" style="margin-right: 16px;">
                                     Stocks Level
                                 </a>
                             </div>
