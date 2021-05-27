@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Register</title>
         <link rel="stylesheet" href="modules/register.css">
-        
 <?php require 'modules/link.php'; ?> 
 <style>
 :root {
@@ -15,8 +14,6 @@ line-height: 1.5;
 body {
 padding: 0;
 margin: 0;
-font-family: 'Montserrat', sans-serif;
-font-weight: bold;
 background: #f29d16;
 }
 
@@ -26,7 +23,7 @@ background: #f29d16;
 
 <body>
     <div class="bs-example">
-        <?php include('C:/xampp/htdocs/Group11-BookStore/action/registerAction.php') ?>
+        <?php include('action/registerAction.php') ?>
         <div class="signup-form">
             <form action="register.php" method="post">
                 <h2>Sign Up</h2>
@@ -50,7 +47,7 @@ background: #f29d16;
                     <button type="submit" class="btn btn-success btn-lg btn-block" name="submitted">Register Now</button>
                 </div>
             </form>
-        <div class="text-center">Already have an account? <a href="">Sign in</a></div>
+        <div class="text-center">Already have an account? <a href="login.php">Sign in</a></div>
         </div>
     </div>
     <?php include ('modules/footer.php')?>
