@@ -112,7 +112,7 @@
                 </div>
                 <hr>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-success" name="addstock_submit"><i class="fa fa-plus"></i>&nbsp; Submit</button>
+                    <button type="submit" class="btn btn-success" name="addstock_submit"><i class="fa fa-floppy-o"></i>&nbsp; Submit</button>
                 </div>
             </form>
         </div>

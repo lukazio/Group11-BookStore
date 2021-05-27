@@ -59,7 +59,17 @@
                                     echo  '<td><span class="badge badge-light">'.$row['quantity'].'</span></td>';
                                 else
                                     echo  '<td><span class="badge badge-danger">'.$row['quantity'].'</span></td>';
-                                echo      '<td class="text-right"><a href="edit_book.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a></td>';
+                                echo      '<td class="text-right">'
+                                            . '<div class="btn-group">'
+                                                . '<a href="edit_book.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a>'
+                                                . '<button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>'
+                                                . '<div class="dropdown-menu py-1">'
+                                                    . '<form action="action/delete_book_action.php" method="post">'
+                                                        . '<button type="submit" name="deletebook_submit" value="'.$row['isbn'].'" onclick="return confirm(\'Confirm delete book '.$row['title'].'?\')" class="btn btn-link text-danger py-0"><i class="fa fa-times"></i>&nbsp; Delete</button>'
+                                                    . '</form>'
+                                                . '</div>'
+                                            . '</div>'
+                                        . '</td>';
                             }
                         }
                         else{

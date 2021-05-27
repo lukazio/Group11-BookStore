@@ -17,3 +17,7 @@
 hr {
     border-color: white;
 }
+
+.btn-link:hover {
+    text-decoration: none !important;
+}
