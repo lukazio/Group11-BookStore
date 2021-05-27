@@ -81,3 +81,9 @@
 .cart-btn:hover{
     background-color: #bd8566;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 18vw;
+    object-fit: cover;
+}

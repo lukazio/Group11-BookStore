@@ -17,7 +17,7 @@
     
     <body>
         
-        <!-- Banner (Remove Container for FULL WIDTH)-->       
+        <!-- Banner -->       
         <div class="jumbotron background-tint">
             <h1>Welcome to Mondstadt Book Store</h1>
             <p>WE ARE LOCATED AT PLACES NO ONE KNOWS<br>BUT WE DELIVER TO DOORSTEPS.</p>
@@ -26,16 +26,41 @@
         <!-- Heading -->
         <div class="container">
             <div class="row">
-                <h1 class="col-11 font-weight-light" style="padding-bottom: 16px;">Books</h1>
-                <div class="col-1 dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span id="selectedView" class="fa fa-th"></span>
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a id="grid" class="dropdown-item active" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
-                    <a id="list" class="dropdown-item" href="#">List View &nbsp;<span class="fa fa-list"></span></a>
-                  </div>
-                </div>
+                <?php
+                    if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin'){
+                        echo '
+                            <h1 class="col-md-9 font-weight-light" style="padding-bottom: 16px;">Books</h1>
+                            <div class="col-md-2">
+                                <a class="btn btn-primary" href="/Group11-BookStore/stock_levels.php" role="button" style="margin-right: 16px;">
+                                    Stocks Level
+                                </a>
+                            </div>
+                            <div class="col-md-1 dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span id="selectedView" class="fa fa-th"></span>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a id="grid" class="dropdown-item active" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
+                                <a id="list" class="dropdown-item" href="#">List View &nbsp;<span class="fa fa-list"></span></a>
+                              </div>
+                            </div>
+                        ';
+                    }
+                    else{
+                        echo '
+                            <h1 class="col-11 font-weight-light" style="padding-bottom: 16px;">Books</h1>
+                            <div class="col-1 dropdown">
+                              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span id="selectedView" class="fa fa-th"></span>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a id="grid" class="dropdown-item active" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
+                                <a id="list" class="dropdown-item" href="#">List View &nbsp;<span class="fa fa-list"></span></a>
+                              </div>
+                            </div>
+                        ';                      
+                    }
+                ?>
             </div> 
         </div>
         
@@ -53,12 +78,10 @@
                 classToChg.parent().addClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
-                card.removeClass("row").addClass("card");
+                card.removeClass("row").addClass("card").addClass("h-100");
                 // Change Image View
                 var img = $('img[data-role="cardImgTop"]');
                 img.removeClass("col-3").addClass("card-img-top");
-                img.css('max-width','100%');
-                img.css('max-height','100%');
                 // Change Card Body to Row
                 var cardBody = $('div[data-role="cardBody"]');
                 cardBody.addClass("card-body").removeClass("col-9").removeClass("row");
@@ -80,12 +103,10 @@
                 classToChg.parent().removeClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
-                card.removeClass("card").addClass("row");
+                card.removeClass("card").removeClass("h-100").addClass("row");
                 // Change Image View
                 var img = $('img[data-role="cardImgTop"]');
                 img.removeClass("card-img-top").addClass("col-3");
-                img.css('max-width','');
-                img.css('max-height','');
                 // Change Card Body to Row
                 var cardBody = $('div[data-role="cardBody"]');
                 cardBody.removeClass("card-body").addClass("col-9").addClass("row");
@@ -128,8 +149,8 @@
                       while($row = $result->fetch_assoc()) {
                         echo
                           "<div data-role=\"holder\" class=\"col-3 mb-5\">".
-                              "<div class=\"card\" data-role=\"book\">".
-                                "<img data-role=\"cardImgTop\" class=\"card-img-top\" src=\"".$row["picture"]."\" alt=\"".$row["title"]."\" style=\"max-width:100%;max-height:100%\">".
+                              "<div class=\"card h-100\" data-role=\"book\">".
+                                "<img data-role=\"cardImgTop\" class=\"card-img-top\" src=\"".$row["picture"]."\" alt=\"".$row["title"]."\">".
                                 "<div data-role=\"cardBody\" class=\"card-body\">".    
                                     "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12 card-title\">".$row["title"]."</h5></div>".
                                     "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">".$row["author"]."</p></div>".
