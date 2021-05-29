@@ -63,7 +63,7 @@
                                             . '<div class="btn-group">'
                                                 . '<a href="edit_book.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a>'
                                                 . '<button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>'
-                                                . '<div class="dropdown-menu py-1">'
+                                                . '<div class="dropdown-menu dropdown-menu-right py-1">'
                                                     . '<form action="action/delete_book_action.php" method="post">'
                                                         . '<button type="submit" name="deletebook_submit" value="'.$row['isbn'].'" onclick="return confirm(\'Confirm delete book '.$row['title'].'?\')" class="btn btn-link text-danger py-0"><i class="fa fa-times"></i>&nbsp; Delete</button>'
                                                     . '</form>'

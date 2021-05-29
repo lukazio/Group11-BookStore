@@ -14,6 +14,11 @@
     <?php
     require 'modules/dbconnect.php';
     include 'modules/header.php';
+    /* UN-COMMENT WHEN THIS PAGE IS DONE
+    if(!isset($_GET['isbn'])){
+        header('Location: home.php');
+        exit();
+    }*/
     
     $isbn = $_GET['isbn'];
     
