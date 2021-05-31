@@ -55,7 +55,7 @@
                                         . '<td><img class="book-img" src="'.$row['picture'].'" height="70"></td>'
                                         . '<td class="isbn">'.$row['isbn'].'</td>'
                                         . '<td class="title">'.$row['title'].'</td>';
-                                if($row['quantity'] > 3)
+                                if($row['quantity'] > 5)
                                     echo  '<td><span class="badge badge-light">'.$row['quantity'].'</span></td>';
                                 else
                                     echo  '<td><span class="badge badge-danger">'.$row['quantity'].'</span></td>';
