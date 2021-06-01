@@ -14,11 +14,11 @@
     <?php
     require 'modules/dbconnect.php';
     include 'modules/header.php';
-    /* UN-COMMENT WHEN THIS PAGE IS DONE
+    
     if(!isset($_GET['isbn'])){
         header('Location: home.php');
         exit();
-    }*/
+    }
     
     $isbn = $_GET['isbn'];
     
@@ -38,9 +38,10 @@
                         <img class="img-preview" src="<?php echo $bookRow['picture']; ?>">
                     </div>
                     <div class="card text-left">
-                        <h4 class="mb-3">Description</h4>
+                        <h4 class="mb-4">Description</h4>
                         <!-- TODO: If description too long, make it collapsible -->
-                        <p class="m-0 text-justify"><?php echo nl2br($bookRow['description']); ?></p>
+                        <p id="descCollapse" class="m-0 text-justify" aria-expanded="false"><?php echo nl2br($bookRow['description']); ?></p>
+                        <a id="collapseBtn" role="button" class="collapsed collapse-btn mt-4 orange" data-toggle="collapse" href="#descCollapse" aria-expanded="false" aria-controls="descCollapse"></a>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 text-center right-column pl-0">
@@ -78,20 +79,29 @@
                                 <div class="d-table-cell"><span class="h6">Quantity:</span></div>
                                 <div class="d-table-cell w-100 pl-3">
                                     <div class="input-group">
-                                        <!-- TODO: Increment and decrement quantity with buttons -->
                                         <div class="input-group-prepend">
-                                            <button type="button" class="btn btn-outline-secondary btn-qty"><span class="small"><i class="fa fa-fw fa-minus"></i></span></button>
+                                            <button id="decQty" type="button" class="btn btn-outline-secondary btn-qty"><span class="small"><i class="fa fa-fw fa-minus"></i></span></button>
                                         </div>
-                                        <input type="number" id="bookQty" class="book-qty form-control text-center" value="1">
+                                        <?php
+                                        if($bookRow['quantity'] > 0)
+                                            echo '<input type="number" id="bookQty" class="book-qty form-control text-center" value="1" readonly="readonly">';
+                                        else
+                                            echo '<input type="number" id="bookQty" class="book-qty form-control text-center" value="0" readonly="readonly">';
+                                        ?>
                                         <div class="input-group-append">
-                                            <button type="button" class="btn btn-outline-secondary btn-qty"><span class="small"><i class="fa fa-fw fa-plus"></i></span></button>
+                                            <button id="incQty" type="button" class="btn btn-outline-secondary btn-qty"><span class="small"><i class="fa fa-fw fa-plus"></i></span></button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div>
-                            <button id="addToCart" type="button" class="btn btn-warning btn-block"><i class="fa fa-fw fa-shopping-cart"></i> Add to Cart</button>
+                            <?php
+                            if($bookRow['quantity'] > 0)
+                                echo '<button id="addToCart" type="button" class="btn btn-warning btn-block"><i class="fa fa-fw fa-shopping-cart"></i> Add to Cart</button>';
+                            else
+                                echo '<button type="button" class="btn btn-secondary btn-block" disabled="disabled"><i class="fa fa-fw fa-shopping-cart"></i> Sold Out</button>';
+                            ?>
                         </div>
                     </div>
                     <div class="card text-left">
@@ -103,6 +113,49 @@
                 </div>
             </div>
         </div>
+        
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var $qty = $('#bookQty').val();
+                var $max = <?php echo $bookRow['quantity']; ?>;
+                
+                $('#incQty').click(function(){
+                    $qty++;
+                    $('#bookQty').val($qty);
+                    
+                    if($('#bookQty').val() > $max){
+                        $qty = $max;
+                        $('#bookQty').val($max);
+                    }
+                });
+                $('#decQty').click(function(){
+                    $qty--;
+                    $('#bookQty').val($qty);
+                    
+                    if($('#bookQty').val() <= 0){
+                        $qty = 1;
+                        $('#bookQty').val($qty);
+                    }
+                    if($max == 0){
+                        $qty = 0;
+                        $('#bookQty').val($qty);
+                    }
+                });
+                
+                var $line_height = parseInt($('#descCollapse').css('line-height'));
+                var $desc_height = $('#descCollapse').height();
+                var $line_count = $desc_height / $line_height;
+
+                if($line_count > 6) {
+                    $('#collapseBtn').show();
+                    $('#descCollapse').addClass('collapse');
+                }
+                else {
+                    $('#collapseBtn').hide();
+                    $('#descCollapse').removeClass('collapse');
+                }
+            });
+        </script>
     </body>
     
     <?php

@@ -85,10 +85,10 @@
         
         <script type="text/javascript">
             $(document).ready(function(){
-                $("#searchStock").on("keyup", function() {
+                $('#searchStock').on('keyup', function() {
                     var value = $(this).val().toLowerCase();
-                    $("#stockTable tr").filter(function() {
-                        $(this).toggle($(this).find(".title, .isbn").text().toLowerCase().indexOf(value) > -1);
+                    $('#stockTable tr').filter(function() {
+                        $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf(value) > -1);
                     });
                 });
             });

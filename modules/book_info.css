@@ -50,6 +50,7 @@ body {
     width: initial !important;
 }
 #bookQty {
+    background-color: white;
     max-width: 64px;
     -moz-appearance: textfield;
 }
@@ -63,4 +64,23 @@ body {
 #addToCart {
     background-color: #f29d16;
     color: white;
+}
+
+#descCollapse.collapse:not(.show) {
+  display: block;
+  height: 9rem;
+  overflow: hidden;
+}
+#descCollapse.collapsing {
+  height: 9rem;
+}
+.collapse-btn.collapsed::after {
+  content: 'Show More';
+}
+.collapse-btn:not(.collapsed)::after {
+  content: 'Show Less';
+}
+.collapse-btn:hover {
+    text-decoration: none;
+    color: #f29d16;
 }
