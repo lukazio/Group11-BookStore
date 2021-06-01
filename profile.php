@@ -12,7 +12,6 @@
                 background-color: #f4f5f7; 
             }
         </style>
-        <link rel="stylesheet" type="text/css" href="modules/(link your CSS if needed)">
     </head>
 
     <?php
@@ -95,19 +94,19 @@
                                                     <div class="form-group row">
                                                         <label for="oldInputPassword" class="col-sm-2 col-form-label" style="font-weight:bold;">Old Password</label>
                                                         <div class="col-sm-4">
-                                                            <input type="password" class="form-control" id="oldInputPassword" placeholder="Enter Old password">
+                                                            <input type="password" class="form-control" name="old_password" id="oldInputPassword" placeholder="Enter Old password">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="newInputPassword" class="col-sm-2 col-form-label" style="font-weight:bold;">New Password</label>
                                                         <div class="col-sm-4">
-                                                            <input type="password" class="form-control" id="newInputPassword" placeholder="Enter New password">
+                                                            <input type="password" class="form-control" name="new_password" id="newInputPassword" placeholder="Enter New password">
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="retypeInputPassword" class="col-sm-2 col-form-label" style="font-weight:bold;">Retype Password</label>
                                                         <div class="col-sm-4">
-                                                            <input type="password" class="form-control" id="retypeInputPassword" placeholder="Retype password">
+                                                            <input type="password" class="form-control" name="new_retype_password" id="retypeInputPassword" placeholder="Retype password">
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary" name="submitted">Submit</button>
