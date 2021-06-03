@@ -39,6 +39,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    <div class="my-3">
+                        <?php
+                        if (isset($_GET["error"])) {
+                            if ($_GET["error"] == "emptyinput") {
+                                echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>No empty fields are allowed !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
+                            } elseif ($_GET["error"] == "confirm_pw") {
+                                echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Confirmation password doesn't match !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
+                            } elseif ($_GET["error"] == "incorrect_password") {
+                                echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Incorrect password !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
+                            } elseif ($_GET["error"] == "passwordvalidate") {
+                                echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your Password Must Contain At Least 8 Digits !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
+                            } elseif ($_GET["error"] == "format_password") {
+                                echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your Password Must Contain At Least 1 Number,1 Capital letter,1 Lowercase Letter, and 1 Special Character !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
+                            } elseif ($_GET["error"] == "password_check") {
+                                echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your old password cannot be same with new password !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
+                            }
+                        }
+
+                        if (isset($_GET["success"])) {
+                            echo "<div class=\"alert alert-success alert-dismissable\" role=\"alert\"><span>Your password has been changed successfully !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
+                        }
+                        ?>
+                    </div>
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
@@ -84,12 +107,12 @@
                                         </div>
 
                                     </div>
-                                    
+
                                     <! --Change password part-- >
                                     <div class="tab-pane fade" id="changePassword" role="tabpanel" aria-labelledby="changePassword-tab">
                                         <div class="row">
                                             <div class="col">
-                                                <form action="" method="post">
+                                                <form action="action/change_pw.php" method="post">
 
                                                     <div class="form-group row">
                                                         <label for="oldInputPassword" class="col-sm-2 col-form-label" style="font-weight:bold;">Old Password</label>
@@ -109,6 +132,8 @@
                                                             <input type="password" class="form-control" name="new_retype_password" id="retypeInputPassword" placeholder="Retype password">
                                                         </div>
                                                     </div>
+
+
                                                     <button type="submit" class="btn btn-primary" name="submitted">Submit</button>
                                                 </form>
                                             </div>
@@ -117,7 +142,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
