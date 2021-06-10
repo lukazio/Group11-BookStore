@@ -73,7 +73,7 @@
                 selectedIcon.removeClass("fa fa-list").addClass("fa fa-th");
                 // Change Holder to Row
                 var classToChg = $('div[data-role="holder"]');
-                classToChg.addClass('col-3').addClass('mb-5').removeClass('row').removeClass('listView');
+                classToChg.addClass('col-md-3').addClass('col-6').addClass('mb-5').removeClass('row').removeClass('listView');
                 classToChg.parent().addClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
@@ -98,7 +98,7 @@
                 selectedIcon.removeClass("fa fa-th").addClass("fa fa-list");
                 // Change Holder to Row
                 var classToChg = $('div[data-role="holder"]');
-                classToChg.addClass('row').addClass('listView').removeClass('col-3').removeClass('mb-5');
+                classToChg.addClass('row').addClass('listView').removeClass('col-md-3').removeClass('mb-5').removeClass('col-6');
                 classToChg.parent().removeClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
@@ -154,7 +154,7 @@
                         "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12\"><a class=\"card-title\" href=\"book_info.php?isbn=" . $row["isbn"] . "\">" . $row["title"] . "</a></h5></div>" .
                         "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">" . $row["author"] . "</p></div>" .
                         "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">RM " . $row["retail_price"] . "</p></div>" .
-                        "<a class=\"btn cart-btn\" href=\"action/home_action.php?isbn=" . $row['isbn'] . "&title=" . $row['title'] . "&pic=" . $row['picture'] ."&price=" .$row['retail_price']."\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> Add to Cart</i></a>" .
+                        "<div data-role=\"cartBtn\"><a class=\"btn cart-btn\" href=\"action/home_action.php?isbn=" . $row['isbn'] . "&title=" . $row['title'] . "&pic=" . $row['picture'] . "&price=" . $row['retail_price'] . "\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> Add to Cart</i></a></div>" .
                         "</div>" .
                         "</div>" .
                         "</div>";
@@ -169,8 +169,8 @@
 
     </body>
 
-    <?php
-    include 'modules/footer.php';
-    ?>
+<?php
+include 'modules/footer.php';
+?>
 
 </html>
