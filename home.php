@@ -141,7 +141,7 @@
         <div class="container">
             <div class="row">
                 <?php
-                $sql = "SELECT isbn, title, author, picture, retail_price FROM book";
+                $sql = "SELECT isbn, title, author, picture, retail_price, quantity FROM book";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -153,8 +153,27 @@
                         "<div data-role=\"cardBody\" class=\"card-body\">" .
                         "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12\"><a class=\"card-title\" href=\"book_info.php?isbn=" . $row["isbn"] . "\">" . $row["title"] . "</a></h5></div>" .
                         "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">" . $row["author"] . "</p></div>" .
-                        "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">RM " . $row["retail_price"] . "</p></div>" .
-                        "<div data-role=\"cartBtn\"><a class=\"btn cart-btn\" href=\"action/home_action.php?isbn=" . $row['isbn'] . "&title=" . $row['title'] . "&pic=" . $row['picture'] . "&price=" . $row['retail_price'] . "\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> Add to Cart</i></a></div>" .
+                        "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">RM " . $row["retail_price"] . "</p></div>";
+
+                        if (isset($_SESSION['cart'])) {
+                            $available = true;
+                            foreach ($_SESSION['cart'] as $id => $props) {
+                                if ($props['isbn'] == $row["isbn"]) {
+                                    if ($props['amt'] >= $row["quantity"]) {
+                                        $available = false;
+                                        break;
+                                    }
+                                }
+                            }
+                            if ($available == true) {
+                                echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn\" href=\"action/home_action.php?isbn=" . $row['isbn'] . "&title=" . $row['title'] . "&pic=" . $row['picture'] . "&price=" . $row['retail_price'] . "\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> Add To Cart</i></a></div>";
+                            } else {
+                                echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn disabled\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> No Stock</i></a></div>";
+                            }
+                        } else {
+                            echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn\" href=\"action/home_action.php?isbn=" . $row['isbn'] . "&title=" . $row['title'] . "&pic=" . $row['picture'] . "&price=" . $row['retail_price'] . "\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> Add To Cart</i></a></div>";
+                        }
+                        echo
                         "</div>" .
                         "</div>" .
                         "</div>";
@@ -169,8 +188,8 @@
 
     </body>
 
-<?php
-include 'modules/footer.php';
-?>
+    <?php
+    include 'modules/footer.php';
+    ?>
 
 </html>
