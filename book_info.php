@@ -97,8 +97,22 @@
                         </div>
                         <div>
                             <?php
-                            if($bookRow['quantity'] > 0)
-                                echo '<button id="addToCart" type="button" class="btn btn-warning btn-block"><i class="fa fa-fw fa-shopping-cart"></i> Add to Cart</button>';
+                            $cart_qty = 0;
+                            if(isset($_SESSION['cart'])){
+                                foreach($_SESSION['cart'] as $id => $props){
+                                    if($props['isbn'] == $bookRow['isbn']){
+                                        $cart_qty = $_SESSION['cart'][$id]['amt'];
+                                        break;
+                                    }
+                                }
+                            }
+                            
+                            if($bookRow['quantity'] > 0){
+                                if($cart_qty >= $bookRow['quantity'])
+                                    echo '<button type="button" class="btn btn-secondary btn-block" disabled="disabled"><i class="fa fa-fw fa-shopping-cart"></i> All Stock in Cart</button>';
+                                else
+                                    echo '<button id="addToCart" type="button" class="btn btn-warning btn-block"><i class="fa fa-fw fa-shopping-cart"></i> Add to Cart</button>';
+                            }
                             else
                                 echo '<button type="button" class="btn btn-secondary btn-block" disabled="disabled"><i class="fa fa-fw fa-shopping-cart"></i> Sold Out</button>';
                             ?>
@@ -113,7 +127,6 @@
                 </div>
             </div>
         </div>
-        
         <script type="text/javascript">
             $(document).ready(function(){
                 var $qty = $('#bookQty').val();
@@ -154,6 +167,24 @@
                     $('#collapseBtn').hide();
                     $('#descCollapse').removeClass('collapse');
                 }
+                
+                $('#addToCart').click(function(){
+                    var isbn = <?php echo $_GET['isbn']; ?>;
+                    var title = '<?php echo $bookRow['title']; ?>';
+                    var pic = '<?php echo $bookRow['picture']; ?>';
+                    var price = <?php echo $bookRow['retail_price']; ?>;
+                    var quantity = parseInt($('#bookQty').val());
+                    
+                    var stock = parseInt(<?php echo $bookRow['quantity']; ?>);
+                    var cart_qty = parseInt(<?php echo $cart_qty; ?>);
+                    
+                    if(quantity + cart_qty <= stock)
+                        window.location.href = "action/book_info_action.php?isbn=" + isbn + "&title=" + title + "&pic=" + pic + "&price=" + price + "&quantity=" + quantity;
+                    else if(stock - cart_qty > 0)
+                        alert('The total quantity in your cart and the selected amount has exceeded the stock, please choose an amount of ' + (stock - cart_qty) + ' or lower.');
+                    else
+                        alert('The entire stock is already in your cart.');
+                });
             });
         </script>
     </body>
