@@ -31,8 +31,8 @@ if(isset($_POST['addstock_submit'])) {
             header("Location: ../add_stock.php");
             $_SESSION['addstock_alert'] = 'success';
             
-            exit();
             $conn->close();
+            exit();
         }
     }
     

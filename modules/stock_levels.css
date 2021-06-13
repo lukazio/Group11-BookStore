@@ -21,3 +21,7 @@ hr {
 .btn-link:hover {
     text-decoration: none !important;
 }
+
+.book-img {
+    max-width: 120px;
+}

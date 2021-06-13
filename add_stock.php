@@ -55,7 +55,7 @@
                             <input type="url" class="form-control" name="img_link" placeholder="Image Link">
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-info" id="imgPreviewBtn">Preview</button>
-                                <button type="button" class="btn btn-secondary" id="imgResetBtn" data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Warning:</b> This will also revert the image link input!">Revert</button>
+                                <button type="button" class="btn btn-secondary" id="imgResetBtn" data-toggle="tooltip" data-placement="top" data-html="true" title="<b>Warning:</b> This will also clear the image link input!">Clear</button>
                             </div>
                         </div>
                     </div>
