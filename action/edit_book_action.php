@@ -10,11 +10,11 @@
     
     <?php
         $target = $_POST["target_isbn"];
-        $imgUrlNew = $_POST["img_link"];
-        $titleNew = $_POST["title"];
-        $authorNew = $_POST["author"];
-        $dateNew = $_POST["date"];
-        $descNew = $_POST["description"];
+        $imgUrlNew = trim(htmlspecialchars($_POST["img_link"]));
+        $titleNew = trim(htmlspecialchars($_POST['title']));
+        $authorNew = trim(htmlspecialchars($_POST['author']));
+        $dateNew = trim($_POST['date']);
+        $descNew = htmlspecialchars($_POST['description']);
         $tradeNew = $_POST["number_trade"];
         $retailNew = $_POST["number_retail"];
         $qtyNew = $_POST["number_qty"];

@@ -4,11 +4,11 @@ if(isset($_POST['addstock_submit'])) {
     require '../modules/dbconnect.php';
     
     $isbn = trim($_POST['isbn']);
-    $title = trim($_POST['title']);
-    $author = trim($_POST['author']);
+    $title = trim(htmlspecialchars($_POST['title']));
+    $author = trim(htmlspecialchars($_POST['author']));
     $date = trim($_POST['date']);
-    $description = $_POST['description'];
-    $img_link = trim($_POST['img_link']);
+    $description = htmlspecialchars($_POST['description']);
+    $img_link = trim(htmlspecialchars($_POST['img_link']));
     $price_trade = $_POST['number_trade'];
     $price_retail = $_POST['number_retail'];
     $quantity = $_POST['number_qty'];
@@ -31,8 +31,8 @@ if(isset($_POST['addstock_submit'])) {
             header("Location: ../add_stock.php");
             $_SESSION['addstock_alert'] = 'success';
             
-            exit();
             $conn->close();
+            exit();
         }
     }
     
