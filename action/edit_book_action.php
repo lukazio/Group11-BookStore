@@ -25,10 +25,10 @@
         
         $result = $conn->query($updateSQL);
         if($conn->affected_rows > 0){
-            header('Location:../edit_book.php?status=success');
+            header('Location:../edit_book.php?status=success&isbn='.$target);
         }
         else{
-            header('Location:../edit_book.php?status=fail');
+            header('Location:../edit_book.php?status=fail&isbn='.$target);
         }
         exit;
         $conn->close();

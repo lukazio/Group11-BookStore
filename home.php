@@ -15,7 +15,7 @@
     include 'modules/header.php';
     ?>
     
-    <body>
+    <body class="body-bg">
         
         <!-- Banner -->       
         <div class="jumbotron background-tint">
@@ -74,7 +74,7 @@
                 selectedIcon.removeClass("fa fa-list").addClass("fa fa-th");
                 // Change Holder to Row
                 var classToChg = $('div[data-role="holder"]');
-                classToChg.addClass('col-3').addClass('mb-5').removeClass('row').removeClass('listView');
+                classToChg.addClass('col-md-3').addClass('col-6').addClass('mb-5').removeClass('row').removeClass('listView');
                 classToChg.parent().addClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
@@ -99,7 +99,7 @@
                 selectedIcon.removeClass("fa fa-th").addClass("fa fa-list");
                 // Change Holder to Row
                 var classToChg = $('div[data-role="holder"]');
-                classToChg.addClass('row').addClass('listView').removeClass('col-3').removeClass('mb-5');
+                classToChg.addClass('row').addClass('listView').removeClass('col-md-3').removeClass('mb-5').removeClass('col-6');
                 classToChg.parent().removeClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
@@ -142,17 +142,17 @@
         <div class="container">
             <div class="row">
                 <?php
-                    $sql = "SELECT title, author, picture, retail_price FROM book";
+                    $sql = "SELECT isbn, title, author, picture, retail_price FROM book";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
                       while($row = $result->fetch_assoc()) {
                         echo
-                          "<div data-role=\"holder\" class=\"col-3 mb-5\">".
+                          "<div data-role=\"holder\" class=\"col-6 col-md-3 mb-5\">".
                               "<div class=\"card h-100\" data-role=\"book\">".
                                 "<img data-role=\"cardImgTop\" class=\"card-img-top\" src=\"".$row["picture"]."\" alt=\"".$row["title"]."\">".
                                 "<div data-role=\"cardBody\" class=\"card-body\">".    
-                                    "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12 card-title\">".$row["title"]."</h5></div>".
+                                    "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12\"><a class=\"card-title\" href=\"book_info.php?isbn=".$row["isbn"]."\">".$row["title"]."</a></h5></div>".
                                     "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">".$row["author"]."</p></div>".
                                     "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">RM ".$row["retail_price"]."</p></div>".
                                     "<div data-role=\"cartBtn\"><button class=\"cart-btn\"><i class=\"fa fa-shopping-cart\"></i> Add to Cart</button></div>".
