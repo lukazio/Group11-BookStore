@@ -104,16 +104,6 @@ if (!isset($_SESSION))
                     </ul>
                 <?php } ?>
             </li>
-            <li class="nav-item active dropdown color-fade" id="cartDropdownContainer">
-                <a class="nav-link h4" href="" id="cartDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-shopping-cart"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right cart-dropdown-menu" id="cartDropdownMenu">
-                    <li class="text-center">
-                        <p class="cart-empty">Your shopping cart is empty!</p>
-                    </li>
-                </ul>
-            </li>
         </ul>
     </div>
 </nav>
