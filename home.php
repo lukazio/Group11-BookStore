@@ -140,7 +140,6 @@
         <div class="container">
             <div class="row">
                 <?php
-
                 $sql = "SELECT isbn, title, author, picture, retail_price, quantity FROM book";
                 $result = $conn->query($sql);
 
@@ -155,23 +154,27 @@
                         "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">" . $row["author"] . "</p></div>" .
                         "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">RM " . $row["retail_price"] . "</p></div>";
 
-                        if (isset($_SESSION['cart'])) {
+                        if (isset($_SESSION['cart'])) { //if cart session is intialized
                             $available = true;
                             foreach ($_SESSION['cart'] as $id => $props) {
                                 if ($props['isbn'] == $row["isbn"]) {
-                                    if ($props['amt'] >= $row["quantity"]) {
+                                    if ($props['amt'] >= $row["quantity"]) { //if cart amount> DB qty
                                         $available = false;
                                         break;
                                     }
                                 }
                             }
-                            if ($available == true) {
+                            if ($available == true && $row["quantity"]>0) { //if cart amount <DB qty and DB not 0
                                 echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn\" href=\"action/home_action.php?isbn=" . $row['isbn'] . "&title=" . $row['title'] . "&pic=" . $row['picture'] . "&price=" . $row['retail_price'] . "\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> Add To Cart</i></a></div>";
-                            } else {
+                            } else { //if cart amount> DB qty
                                 echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn disabled\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> No Stock</i></a></div>";
                             }
-                        } else {
-                            echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn\" href=\"action/home_action.php?isbn=" . $row['isbn'] . "&title=" . $row['title'] . "&pic=" . $row['picture'] . "&price=" . $row['retail_price'] . "\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> Add To Cart</i></a></div>";
+                        } else {//if cart session not  intialized
+                            if ($row["quantity"] == 0) { //when DB qty is 0
+                                echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn disabled\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> No Stock</i></a></div>";
+                            } else {
+                                echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn\" href=\"action/home_action.php?isbn=" . $row['isbn'] . "&title=" . $row['title'] . "&pic=" . $row['picture'] . "&price=" . $row['retail_price'] . "\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> Add To Cart</i></a></div>";
+                            }
                         }
                         echo
 
