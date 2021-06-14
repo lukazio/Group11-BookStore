@@ -18,58 +18,31 @@ if(isset($_POST['submitted'])){
     
     
     if (strlen(trim($username)) == 0){
-       echo '<div class="alert alert-danger alert-dismissible fade in">
-            Username is require
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
-       $errorcount++;
+        echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>No empty fields are allowed !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
+        $errorcount++;
     }elseif(strlen(trim($email)) == 0){
-        echo '<div class="alert alert-danger alert-dismissible fade in">
-            Email is require
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+         echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>No empty fields are allowed !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
     }elseif(strlen(trim($password)) == 0){
-        echo '<div class="alert alert-danger alert-dismissible fade in">
-            Password is require
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+         echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>No empty fields are allowed !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
-    }elseif(strlen($password) <= '8'){
-        echo '<div class="alert alert-danger alert-dismissible fade in">
-            Your Password Must Contain At Least 8 Digits!
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+    }elseif(strlen($password) <'8'){
+         echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Password at least 8 character!</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
     }elseif(!preg_match("#[0-9]+#",$password)){
-        echo '<div class="alert alert-danger alert-dismissible fade in">
-            Your Password Must Contain At Least 1 Number!
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+        echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your Password Must Contain At Least 1 Number,1 Capital letter,1 Lowercase Letter, and 1 Special Character!!</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
     }elseif(!preg_match("#[A-Z]+#",$password)){
-        echo '<div class="alert alert-danger alert-dismissible fade in">
-            Your Password Must Contain At Least 1 Capital Letter!
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+        echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your Password Must Contain At Least 1 Number,1 Capital letter,1 Lowercase Letter, and 1 Special Character!!</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
     }elseif(!preg_match("#[a-z]+#",$password)){
-        echo '<div class="alert alert-danger alert-dismissible fade in">
-            Your Password Must Contain At Least 1 Lowercase Letter!
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+        echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your Password Must Contain At Least 1 Number,1 Capital letter,1 Lowercase Letter, and 1 Special Character!!</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
     }elseif(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/',$password)){
-        echo '<div class="alert alert-danger alert-dismissible fade in">
-            Your Password Must Contain At Least 1 Special Character!
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+        echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your Password Must Contain At Least 1 Number,1 Capital letter,1 Lowercase Letter, and 1 Special Character!</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
     }elseif($password!=$password2){
-        echo '<div class="alert alert-danger alert-dismissible fade in">
-            Password did not match
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+         echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span> Password did not match !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
     }else{
         $user_check_query = "SELECT * FROM user WHERE username ='$username' OR email ='$email' LIMIT 1";
@@ -78,18 +51,10 @@ if(isset($_POST['submitted'])){
 
     if ($user){
         if($user['username']=== $username){
-            echo '<div class="alert alert-danger alert-dismissible fade in">
-            User already exist 
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+            echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span> User already exist !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
             $errorcount++;
-        }
-
-        if($user['email']===$email){
-            echo '<div class="alert alert-danger alert-dismissible fade in">
-            Email already exist
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>';
+        }else if($user['email']===$email){
+            echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span> User already exist !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
             $errorcount++;
         }
     }
