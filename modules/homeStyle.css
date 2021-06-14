@@ -87,8 +87,14 @@
     cursor: pointer;
 }
 
+.cart-btn .disabled{
+    pointer-events: none;
+    cursor:default;
+}
+
 .cart-btn:hover{
     background-color: #bd8566;
+    color:white;
 }
 
 .card-img-top {
