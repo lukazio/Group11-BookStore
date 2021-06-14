@@ -10,11 +10,11 @@
     
     <?php
         $target = $_POST["target_isbn"];
-        $imgUrlNew = $_POST["img_link"];
-        $titleNew = $_POST["title"];
-        $authorNew = $_POST["author"];
-        $dateNew = $_POST["date"];
-        $descNew = $_POST["description"];
+        $imgUrlNew = trim(htmlspecialchars($_POST["img_link"]));
+        $titleNew = trim(htmlspecialchars($_POST['title']));
+        $authorNew = trim(htmlspecialchars($_POST['author']));
+        $dateNew = trim($_POST['date']);
+        $descNew = htmlspecialchars($_POST['description']);
         $tradeNew = $_POST["number_trade"];
         $retailNew = $_POST["number_retail"];
         $qtyNew = $_POST["number_qty"];
@@ -25,10 +25,10 @@
         
         $result = $conn->query($updateSQL);
         if($conn->affected_rows > 0){
-            header('Location:../edit_book.php?status=success');
+            header('Location:../edit_book.php?status=success&isbn='.$target);
         }
         else{
-            header('Location:../edit_book.php?status=fail');
+            header('Location:../edit_book.php?status=fail&isbn='.$target);
         }
         exit;
         $conn->close();

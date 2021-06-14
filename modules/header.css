@@ -44,6 +44,7 @@
 .cart-dropdown-menu {
     min-width: 400px;
     padding: 20px 15px 20px 15px;
+
     height: auto;
     max-height: 400px;
     overflow-x: hidden;

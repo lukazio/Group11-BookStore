@@ -16,7 +16,6 @@
     ?>
 
     <body class="body-bg">
-
         <!-- Banner -->       
         <div class="jumbotron background-tint">
             <h1>Welcome to Mondstadt Book Store</h1>
@@ -141,6 +140,7 @@
         <div class="container">
             <div class="row">
                 <?php
+
                 $sql = "SELECT isbn, title, author, picture, retail_price, quantity FROM book";
                 $result = $conn->query($sql);
 
@@ -174,6 +174,7 @@
                             echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn\" href=\"action/home_action.php?isbn=" . $row['isbn'] . "&title=" . $row['title'] . "&pic=" . $row['picture'] . "&price=" . $row['retail_price'] . "\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> Add To Cart</i></a></div>";
                         }
                         echo
+
                         "</div>" .
                         "</div>" .
                         "</div>";
