@@ -128,8 +128,34 @@
                   </div>
                   <div class="col-md-2 align-self-center">
                     <div class="card-body">
-                      <a class="btn btn-danger" href="action/remove_item_action.php?id='.$id.'"><i class="fa fa-trash"></i></a>
+                      <a id="remove"'.$id.' onclick="remove'.$id.'OnClick()" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </div>
+                    <script>
+                        function remove'.$id.'OnClick(){
+                            var link = "action/remove_item_action.php?id='.$id.'";
+                            Swal.fire({
+                                icon: "warning",
+                                type: "warning",
+                                title: "Remove '.$book["title"].' from cart?",
+                                text: "Once this book is removed from cart, you can add it again.",
+                                showCancelButton: true,
+                                confirmButtonText: "Remove",
+                                confirmButtonColor: "#d9534f",
+                                cancelButtonText: "Cancel",
+                                reverseButtons: true
+                            }).then((result) => {
+                                if(result.value){
+                                    Swal.fire({
+                                        icon: "success",
+                                        type: "success",
+                                        title: "Removing from cart...",
+                                        showConfirmButton: false
+                                    });
+                                    window.location=link;
+                                }
+                            });
+                        }
+                    </script>
                   </div>
                 </div>
               </div>

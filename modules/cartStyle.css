@@ -65,3 +65,7 @@ a.disabled {
     color: red !important;
 }
 
+.btn-danger{
+    color: white !important;
+}
+
