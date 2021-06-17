@@ -180,11 +180,28 @@
                     
                     if(quantity + cart_qty <= stock)
                         window.location.href = "action/book_info_action.php?isbn=" + isbn + "&title=" + title + "&pic=" + pic + "&price=" + price + "&quantity=" + quantity;
-                    else if(stock - cart_qty > 0)
-                        alert('The total quantity in your cart and the selected amount has exceeded the stock, please choose an amount of ' + (stock - cart_qty) + ' or lower.');
-                    else
+                    else if(stock - cart_qty > 0) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Quantity exceeded',
+                            html: '<p>The total quantity in your cart and the selected amount has exceeded the stock quantity.</p><p class="m-0">Please choose an amount of <b>' + (stock - cart_qty) + '</b> or lower.</p>',
+                            confirmButtonColor: '#f29d16'
+                        });
+                    }
+                    else {
                         alert('The entire stock is already in your cart.');
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Out of stock',
+                            text: 'The entire stock is already in your cart.',
+                            confirmButtonColor: '#f29d16'
+                        });
+                    }
                 });
+            });
+            
+            $('.img-preview').on('error', function(){
+                $(this).attr('src', './img/placeholder.png');
             });
         </script>
     </body>

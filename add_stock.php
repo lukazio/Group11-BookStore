@@ -112,7 +112,7 @@
                 </div>
                 <hr>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-success" name="addstock_submit"><i class="fa fa-floppy-o"></i>&nbsp; Submit</button>
+                    <button id="btnAddBook" type="button" class="btn btn-success" name="addstock_submit"><i class="fa fa-floppy-o"></i>&nbsp; Submit</button>
                 </div>
             </form>
         </div>
@@ -173,6 +173,40 @@
                         $(this).val(0);
                         $('#rangeQty').val(0);
                     }
+                });
+                
+                $('#btnAddBook').on('click', function(e){
+                    var $form = $(this).closest('form');
+                    
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Confirm book insertion?',
+                        text: 'Please check if details are entered correctly, you may edit the details anytime but the ISBN cannot be changed.',
+                        showCancelButton: true,
+                        confirmButtonColor: '#5cb85c',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if(result.value){
+                            jQuery('<button></button>', {
+                                id: 'btnAddBookSubmit',
+                                type: 'submit',
+                                name: 'addstock_submit',
+                                style: 'display: none;'
+                            }).insertAfter('#btnAddBook');
+                            
+                            setTimeout(function(){
+                                $('#btnAddBookSubmit').click();
+                            }, 300);
+                            
+                            $form.submit(function(){
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Adding new book...'
+                                });
+                            });
+                        }
+                    });
                 });
             });
         </script>

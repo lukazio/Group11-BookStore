@@ -98,7 +98,6 @@
                     
                     Swal.fire({
                         icon: 'warning',
-                        type: 'warning',
                         title: 'Confirm book deletion?',
                         text: 'Once this book is deleted, it cannot be restored!',
                         showCancelButton: true,
@@ -110,8 +109,7 @@
                         if(result.value){
                             Swal.fire({
                                 icon: 'success',
-                                type: 'success',
-                                title: 'Deleting...',
+                                title: 'Deleting book...',
                                 showConfirmButton: false
                             });
                             $form.submit();
