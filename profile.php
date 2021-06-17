@@ -56,9 +56,9 @@
                                 echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your old password cannot be same with new password !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
                             }
                         }
-
-                        if (isset($_GET["success"])) {
-                            echo "<div class=\"alert alert-success alert-dismissable\" role=\"alert\"><span>Your password has been changed successfully !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
+                        
+                        if(isset($_GET["success"])){
+                            echo "<div class=\"alert alert-success alert-dismissable\" role=\"alert\"><span>Password has been changed successfully !</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
                         }
                         ?>
                     </div>
@@ -133,8 +133,9 @@
                                                         </div>
                                                     </div>
 
-
-                                                    <button type="submit" class="btn btn-primary" name="submitted">Submit</button>
+                                                    <input type="hidden" name="changepw_submit">
+                                                    <button type="button" class="btn btn-primary btn-submit">Submit</button>
+                                      
                                                 </form>
                                             </div>
                                         </div>
@@ -147,6 +148,35 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.btn-submit').on('click', function(e){
+                    var $form = $(this).parents('form');
+
+                    Swal.fire({
+                        icon: 'warning',
+                        type: 'warning',
+                        html: '<p>Are you sure you want to change your password?</p>',
+                        showCancelButton: true,
+                        confirmButtonText: 'Change',
+                        confirmButtonColor: '#f29d16',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if(result.value){
+                            Swal.fire({
+                                icon: 'success',
+                                type: 'success',
+                                title: 'Changing password...',
+                                showConfirmButton: false
+                            });
+                            $form.submit();
+                        }
+                    });
+                });
+            });
+            
+        </script>
     </body>
 
     <?php
