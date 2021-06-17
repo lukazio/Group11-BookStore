@@ -65,7 +65,8 @@
                                                 . '<button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>'
                                                 . '<div class="dropdown-menu dropdown-menu-right py-1">'
                                                     . '<form action="action/delete_book_action.php" method="post">'
-                                                        . '<button type="submit" name="deletebook_submit" value="'.$row['isbn'].'" onclick="return confirm(\'Confirm delete book '.$row['title'].'?\')" class="btn btn-link text-danger py-0"><i class="fa fa-times"></i>&nbsp; Delete</button>'
+                                                        . '<input type="hidden" name="deletebook_submit" value="'.$row['isbn'].'">'
+                                                        . '<button type="button" class="btn btn-link text-danger py-0 btn-delete-book"><i class="fa fa-times"></i>&nbsp; Delete</button>'
                                                     . '</form>'
                                                 . '</div>'
                                             . '</div>'
@@ -89,6 +90,32 @@
                     var value = $(this).val().toLowerCase();
                     $('#stockTable tr').filter(function() {
                         $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf(value) > -1);
+                    });
+                });
+                
+                $('.btn-delete-book').on('click', function(e){
+                    var $form = $(this).closest('form');
+                    
+                    Swal.fire({
+                        icon: 'warning',
+                        type: 'warning',
+                        title: 'Confirm book deletion?',
+                        text: 'Once this book is deleted, it cannot be restored!',
+                        showCancelButton: true,
+                        confirmButtonText: 'Delete',
+                        confirmButtonColor: '#d9534f',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if(result.value){
+                            Swal.fire({
+                                icon: 'success',
+                                type: 'success',
+                                title: 'Deleting...',
+                                showConfirmButton: false
+                            });
+                            $form.submit();
+                        }
                     });
                 });
             });
