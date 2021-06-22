@@ -227,13 +227,13 @@
                 return array("status"=>$status, "msg"=>"Quantity Reduced Successfully!");
             }
             else if($func == "reduce" && $status == "fail"){
-                return array("status"=>$status, "msg"=>"Quantity Reduced Failed...");
+                return array("status"=>$status, "msg"=>"Quantity Reduce Failed...");
             }
             else if($func == "remove" && $status == "success"){
                 return array("status"=>$status, "msg"=>"Item Removed Successfully!");
             }
             else if($func == "remove" && $status == "fail"){
-                return array("status"=>$status, "msg"=>"Item Removed Failed...");
+                return array("status"=>$status, "msg"=>"Item Remove Failed...");
             }
             else{
                 return array("status"=>$status, "msg"=>"ERROR!");
