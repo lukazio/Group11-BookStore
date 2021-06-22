@@ -76,7 +76,7 @@ if (!isset($_SESSION))
                                 
                                 <div class="row">
                                 <div class="col">
-                                <img src=' . $props['pic'] . ' class= "cart-img" alt="item1" />
+                                <img src="' . $props['pic'] . '" class="cart-img" alt="item1" />
                                 </div>
                                 <div class="col">
                                 <span class="cart-title">' . $props['title'] . '</span><br>
@@ -120,6 +120,10 @@ if (!isset($_SESSION))
             $('#profileDropdownContainer').removeClass('show');
             $('#profileDropdownMenu').removeClass('show');
         }, 150);
+    });
+    
+    $('.cart-img').on('error', function(){
+        $(this).attr('src', './img/placeholder.png');
     });
 </script>
 

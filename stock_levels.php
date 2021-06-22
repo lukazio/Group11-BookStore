@@ -19,10 +19,16 @@
     <body class="bg-dark">
         <div class="container text-white">
             <h1 class="py-4 font-weight-light">Welcome, Administrator.</h1>
-            <h3>
-                Stock Levels
-                <span class="float-right"><a class="mb-3 btn btn-success" href="add_stock.php"><i class="fa fa-plus"></i>&nbsp; Add Stock</a></span>
-            </h3>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h3>Stock Levels</h3>
+                </div>
+                <div class="col-12 col-md-6 text-md-right">
+                    <span><a class="btn btn-info" href="order_history.php"><i class="fa fa-clock-o"></i>&nbsp; Orders</a></span>
+                    <span class="ml-1"><a class="btn btn-success" href="add_stock.php"><i class="fa fa-plus"></i>&nbsp; Add Stock</a></span>
+                </div>
+            </div>
+            
             <hr>
             
             <div class="form-group search mb-3">
