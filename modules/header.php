@@ -43,7 +43,7 @@ if (!isset($_SESSION))
                 <?php if (isset($_SESSION['username'])) { ?>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown" id="profileDropdownMenu">
                         <a class="dropdown-item" href="profile.php">Profile</a>
-                        <a class="dropdown-item text-danger" href="action/logout_action.php">Logout</a>
+                        <a id="btnLogout" class="dropdown-item text-danger">Logout</a>
                     </div>
                 <?php } else { ?>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown" id="profileDropdownMenu">
@@ -57,7 +57,7 @@ if (!isset($_SESSION))
                     <a class="nav-link h4" href="" id="cartDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-shopping-cart d-inline-block align-middle mr-1"></i>
                         <?php echo "<span class='badge badge-warning' id='lblCartCount'>" . count($_SESSION['cart']) . "</span>" ?>
-                    </a>           
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-right cart-dropdown-menu" id="cartDropdownMenu">
                         <?php
                         if (count($_SESSION['cart']) == 0) {
@@ -138,6 +138,32 @@ if (!isset($_SESSION))
                 document.getElementById('navbar_top').classList.remove('fixed-top');
                 document.body.style.paddingTop = '0';
             }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#btnLogout').on('click', function(e){
+            Swal.fire({
+                icon: 'warning',
+                title: 'Logout?',
+                html: '<b>Warning:</b> This will also clear your shopping cart!',
+                showCancelButton: true,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#f29d16',
+                cancelButtonText: 'Cancel',
+                reverseButtons: true
+            }).then((result) => {
+                if(result.value){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Logging out...',
+                        showConfirmButton: false
+                    });
+                    window.location.href = "action/logout_action.php";
+                }
+            });
         });
     });
 </script>

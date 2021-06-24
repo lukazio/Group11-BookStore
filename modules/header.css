@@ -97,3 +97,7 @@
     margin-right: 7px;
     float: left;
 }
+
+#btnLogout {
+    cursor: pointer;
+}
