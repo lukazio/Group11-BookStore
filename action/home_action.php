@@ -46,5 +46,5 @@ function updateDuplicateItem($id, $tempPrice) {
 
     $_SESSION['cart'][$id]['price'] = $tempPrice * $_SESSION['cart'][$id]['amt'];
 }
-
 ?>
+
