@@ -19,7 +19,7 @@ class TestPassword {
             }elseif(!preg_match("#[a-z]+#",$password)){
               return false;
               $errorcount++;
-            }elseif(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/',$password)){
+            }elseif(!preg_match('/[\'^£$%&*()}!{@#~?><>,|=_+¬-]/',$password)){
               return false;
               $errorcount++;
             }
