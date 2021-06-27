@@ -92,7 +92,7 @@
                 <div class="card mb-3">
                 <div class="row no-gutters">
                   <div class="col-md-2 align-self-center">
-                    <a href="book_info.php?isbn='.$book["isbn"].'"><img src="'.$book['picture'].'" class="card-img" alt="loading..."></a>
+                    <a href="book_info.php?isbn='.$book["isbn"].'"><img src="'.$book['picture'].'" class="card-img" alt="loading..." onerror="this.src=\'img/placeholder.png\';"></a>
                   </div>
                   <div class="col-md-6">
                     <div class="card-body">
