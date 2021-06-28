@@ -27,6 +27,14 @@ if (!isset($_SESSION))
             <li class="nav-item active color-fade">
                 <a class="nav-link" href="contact.php">Contact</a>
             </li>
+            <?php if(isset($_SESSION['username'])) {
+                if($_SESSION['username'] == 'admin') { ?>
+                    <li class="nav-item active color-fade">
+                        <a class="nav-link" target="_blank" href="https://remotemysql.com/phpmyadmin/index.php?db=h8DqZV7y33">Database</a>
+                    </li>
+            <?php
+                }
+            } ?>
         </ul>
 
         <ul class="navbar-nav flex-row ml-auto">
@@ -52,7 +60,7 @@ if (!isset($_SESSION))
                     </div>
                 <?php } ?>
             </li>
-            <li class="nav-item active dropdown color-fade" id="cartDropdownContainer">
+            <li class="nav-item active dropdown" id="cartDropdownContainer">
                 <?php if (isset($_SESSION['cart'])) { ?>
                     <a class="nav-link h4" href="" id="cartDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-shopping-cart d-inline-block align-middle mr-1"></i>
@@ -71,25 +79,32 @@ if (!isset($_SESSION))
                                 echo'  
                                 <ul class="list-group list-group-flush">
                                 
-                                <li class="list-group-item">
+                                <li class="list-group-item cart-list-item">
                                 
                                 
                                 <div class="row">
-                                <div class="col">
+                                <div class="col p-0">
                                 <img src="' . $props['pic'] . '" class="cart-img" alt="item1" />
                                 </div>
                                 <div class="col">
                                 <span class="cart-title">' . $props['title'] . '</span><br>
-                                <span class="cart-qty">Quantity: ' . $props['amt'] . '</span><br>
-                                <span class="cart-qty">RM ' . $props['price'] . '</span>
+                                <span class="cart-qty">×' . $props['amt'] . '</span><br>
+                                <span class="cart-price">RM ' . $props['price'] . '</span>
                                 </div>
                                 
                                 </li>
                                 </ul>';
                             }
                             echo
-                             "<span class=\"cart-subtotal\">Sub-Total: RM " . $subtotal . "</span><br>".
-                            "<a href=\"cart.php\" class=\"button\">View Cart</a>";
+                             "<div class=\"cart-subtotal\">Sub-Total: RM " . $subtotal . "</div>".
+                            "<div class=\"row m-0\">".
+                                "<div class=\"col-6 pl-0 pr-2\">".
+                                    "<a href=\"cart.php\" class=\"btn btn-warning cart-btn btn-block\">View Cart</a>".
+                                "</div>".
+                                "<div class=\"col-6 pl-0 pr-2\">".
+                                    "<a href=\"checkout.php\" class=\"btn btn-info btn-block\">Checkout</a>".
+                                "</div>".
+                            "</div>";
                         }
                         ?>
                     </ul>

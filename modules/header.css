@@ -85,12 +85,21 @@
 .cart-qty{
     font-weight: lighter;
 }
+.cart-price{
+    font-size: 20px;
+    font-weight: lighter;
+}
 .cart-subtotal{
+    margin-top: 12px;
     padding-bottom: 8px;
     font-weight: bold;
+    font-size: 20px;
     color: #55a2d9; 
 }
-
+.cart-btn {
+    color: white;
+    background-color: #f29d16;
+}
 .cart-icon {
     color: #515783;
     font-size: 24px;
@@ -100,4 +109,9 @@
 
 #btnLogout {
     cursor: pointer;
+}
+
+.cart-list-item {
+    padding-left: 16px;
+    padding-right: 16px;
 }
