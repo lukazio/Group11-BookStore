@@ -19,14 +19,15 @@
         /**
          * MAIN
          */
-        if(isset($_SESSION['cart'])){
-            if (count($_SESSION['cart']) < 1) {
+        $cart = json_decode($_COOKIE['cart'], true);
+        if(isset($cart)){
+            if (count($cart) < 1) {
                 echo '<center><h1 class="cart-msg">Your cart is empty...<br>Add some books to view it here</h1><center>';
             }
             else{
                 $total=0;
                 $query = "SELECT * FROM book WHERE ";
-                $query = appendQuery($query);
+                $query = appendQuery($query, $cart);
                 $result = $conn->query($query);                
                 // Title and Headings
                 echo '<div id="alert_box" class="hide" role="alert">
@@ -38,7 +39,7 @@
                 echo '<div class="container"><h3 class="cart-heading">Your Cart</h3>';
                 
                 // Display Each Book
-                foreach ($_SESSION['cart'] as $id => $props) {
+                foreach ($cart as $id => $props) {
                     
                     foreach ($result as $sqlBook){
                         if($sqlBook["isbn"] == $props["isbn"]){
@@ -67,9 +68,9 @@
          * and execute only one query instead of
          * looping the execution of multiple queries.
          */
-        function appendQuery($queryToAppend){
+        function appendQuery($queryToAppend, $cart){
             $counter = 0;
-            foreach ($_SESSION['cart'] as $id => $properties) {
+            foreach ($cart as $id => $properties) {
                 // First Append
                 if($counter == 0){
                     $queryToAppend .= 'isbn='.$properties['isbn'].' ';
@@ -112,17 +113,28 @@
                       </div>
                       <p class="card-text center-text-align"><small id="available'.$id.'" class="text-muted">Available: '.$available.'</small></p>
                       <script type="text/javascript">
-                            var availableTxt = $("#available'.$id.'");
-                            var addBtn = $("#plus'.$id.'");
-                            var minusBtn = $("#minus'.$id.'");
-                            var qtyLabel = $("#qty-label'.$id.'");
-                            if(availableTxt.text() === "Available: 0"){
-                                availableTxt.addClass("unavailable").removeClass("text-muted");
-                                addBtn.addClass("disabled");
+                            var availableTxt'.$id.' = $("#available'.$id.'");
+                            var addBtn'.$id.' = $("#plus'.$id.'");
+                            var minusBtn'.$id.' = $("#minus'.$id.'");
+                            var qtyLabel'.$id.' = $("#qty-label'.$id.'");
+                            addBtn'.$id.'.removeClass("disabled");
+                            minusBtn'.$id.'.removeClass("disabled");
+                            if(availableTxt'.$id.'.text() === "Available: 0" || ~availableTxt'.$id.'.text().indexOf("-")){
+                                availableTxt'.$id.'.addClass("unavailable").removeClass("text-muted");
+                                addBtn'.$id.'.addClass("disabled");
                             }
-                            if(qtyLabel.text() === "1"){
-                                minusBtn.addClass("disabled");
+                            if(qtyLabel'.$id.'.text() === "1"){
+                                minusBtn'.$id.'.addClass("disabled");
                             }
+                            
+                            addBtn'.$id.'.click(function(){
+                                addBtn'.$id.'.addClass("disabled");
+                                minusBtn'.$id.'.addClass("disabled");
+                            });
+                            minusBtn'.$id.'.click(function(){
+                                addBtn'.$id.'.addClass("disabled");
+                                minusBtn'.$id.'.addClass("disabled");
+                            });
                         </script>
                     </div>
                   </div>

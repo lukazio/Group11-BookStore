@@ -1,5 +1,4 @@
 <?php
-session_start();
 $id = $_GET['id'];
 if(removeItem($id)){
     // Return success
@@ -12,8 +11,11 @@ else{
 
 
 function removeItem($id){
-    if(isset($_SESSION['cart'][$id])){
-        unset($_SESSION['cart'][$id]);
+    $cart = json_decode($_COOKIE['cart'], true);
+    if(isset($cart[$id])){
+        unset($cart[$id]);
+        setcookie("cart", json_encode($cart), time()+60*60*24*365,'/');
+        $_COOKIE['cart'] = json_encode($cart);
         return true;
     }
     else{
