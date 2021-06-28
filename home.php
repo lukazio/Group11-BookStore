@@ -154,9 +154,10 @@
                         "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">" . $row["author"] . "</p></div>" .
                         "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">RM " . $row["retail_price"] . "</p></div>";
 
-                        if (isset($_SESSION['cart'])) { //if cart session is intialized
+                        if (isset($_COOKIE['cart'])) { //if cart cookie is intialized
                             $available = true;
-                            foreach ($_SESSION['cart'] as $id => $props) {
+                            $tempCart = json_decode($_COOKIE['cart'], true);
+                            foreach ($tempCart as $id => $props) {
                                 if ($props['isbn'] == $row["isbn"]) {
                                     if ($props['amt'] >= $row["quantity"]) { //if cart amount> DB qty
                                         $available = false;
@@ -169,7 +170,7 @@
                             } else { //if cart amount> DB qty
                                 echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn disabled\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> No Stock</i></a></div>";
                             }
-                        } else {//if cart session not  intialized
+                        } else {//if cart cookie not intialized
                             if ($row["quantity"] == 0) { //when DB qty is 0
                                 echo "<div data-role=\"cartBtn\"><a class=\"btn cart-btn disabled\" role=\"button\"><i class=\"fa fa-shopping-cart\"></i> No Stock</i></a></div>";
                             } else {

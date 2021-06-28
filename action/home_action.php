@@ -1,50 +1,45 @@
 <?php
 
-session_start();
 $addCart = array("isbn" => $_GET['isbn'], "amt" => 1, "title" => $_GET['title'], "pic" => $_GET['pic'], "price" => $_GET['price']);
 $tempISBN = $_GET['isbn'];
 $tempPrice = $_GET['price'];
+$tempCart = array();
 
-//initialize 'cart' session
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = array();
+//initialize 'cart' array cookie
+if (!isset($_COOKIE['cart'])) {
+    $_COOKIE['cart'] = array();
 }
 
-//for first entry
-if (count($_SESSION['cart']) == 0) {
-    addNewItem($addCart);
+//if cookie is empty, pass first element into tempCart
+if (empty($_COOKIE['cart'])) {
+    array_push($tempCart, $addCart);
 }
-// non first entry
+//if cookie is not empty, get prev cookie data first, only pass new element into tempCart
 else {
     $same_counter = 0;
-    foreach ($_SESSION['cart'] as $id => $props) {
-        //if equal isbn, increment 'amt', no create new element
+    $tempCart = json_decode($_COOKIE['cart'], true);
+    foreach ($tempCart as $id => $props) {
         if ($props['isbn'] == $tempISBN) {
-            updateDuplicateItem($id, $tempPrice);
+            $tempCart[$id]['amt']++;
+            $tempCart[$id]['price'] = $tempPrice * $tempCart[$id]['amt'];
+            echo "DUPLICATED" . $tempCart[$id]['title'] . " " . $tempCart[$id]['amt'] . " " . $tempCart[$id]['price'] . "<br>";
             $same_counter++;
         }
     }
-
-//if dont have same only create new element
+    //if dont have same only create new element
     if ($same_counter == 0) {
-        addNewItem($addCart);
+        array_push($tempCart, $addCart);
     }
 }
 
-var_dump($_SESSION['cart']);
+setcookie("cart", json_encode($tempCart), time()+60*60*24*365,'/');
+$_COOKIE['cart'] = json_encode($tempCart);
 
-header("Location: ../home.php");
+var_dump($_COOKIE['cart']);
 
-//$_SESSION['cart'] = array(); //for debugging reset
+header("Location: ../home.php"); //uncommnet this to see home_action output
 
-function addNewItem($addCart) {
-    array_push($_SESSION['cart'], $addCart);
-}
+//setcookie("cart", "", time() - 3600);//reset for debugging 
 
-function updateDuplicateItem($id, $tempPrice) {
-    $_SESSION['cart'][$id]['amt']++;
-
-    $_SESSION['cart'][$id]['price'] = $tempPrice * $_SESSION['cart'][$id]['amt'];
-}
 ?>
 
