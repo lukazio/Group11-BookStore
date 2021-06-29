@@ -98,10 +98,11 @@
                         <div>
                             <?php
                             $cart_qty = 0;
-                            if(isset($_SESSION['cart'])){
-                                foreach($_SESSION['cart'] as $id => $props){
+                            if(isset($_COOKIE['cart'])){
+                                $tempCart = json_decode($_COOKIE['cart'], true);
+                                foreach ($tempCart as $id => $props) {
                                     if($props['isbn'] == $bookRow['isbn']){
-                                        $cart_qty = $_SESSION['cart'][$id]['amt'];
+                                        $cart_qty = $tempCart[$id]['amt'];
                                         break;
                                     }
                                 }
