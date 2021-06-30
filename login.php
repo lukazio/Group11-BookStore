@@ -20,7 +20,15 @@
     <section class="container-fluid bg">
         <section class="row justify-content-center">
             <section class="col-12 col-sm-6 col-md-3">
-                <form class="form-container" action="action/login_action.php" method="post">
+                
+                <?php
+                    if(isset($_GET["fromcart"])){
+                        echo '<form class="form-container" action="action/login_action.php?fromcart=1" method="post">';
+                    }
+                    else{
+                        echo '<form class="form-container" action="action/login_action.php?fromcart=1" method="post">';
+                    }
+                ?>
                     
                     <section class="login_section">
                         <h2>Log In</h2>

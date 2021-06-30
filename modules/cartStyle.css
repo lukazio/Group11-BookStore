@@ -50,6 +50,7 @@
 }
 
 .checkout-btn{
+    color: white !important;
     margin-bottom: 32px;
     display: block;
     width: 80%;

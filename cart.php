@@ -17,7 +17,7 @@
 
     <?php
         /**
-         * MAIN
+         *======================================== MAIN ===================================================
          */
         $cart = json_decode($_COOKIE['cart'], true);
         if(isset($cart)){
@@ -54,7 +54,8 @@
                 // TOTAL and CHECK OUT
                 echo
                  "<h3 class=\"cart-heading\">Total: <b>RM " . $total . "</b></h3>".
-                "<div class=\"row justify-content-md-center\"><a class=\"btn btn-info checkout-btn\" href=\"checkout.php\" class=\"button\">Check Out</a></div></div>";
+                "<div class=\"row justify-content-md-center\"><a id=\"checkOut\" class=\"btn btn-info checkout-btn\" onclick=\"checkOutOnClick()\">Check Out</a></div></div>";
+                onCheckOut(); // Handle Check Out
             }
             // PRINT JSCRIPT for Response Handling
             printScript();
@@ -62,6 +63,7 @@
         else{
             echo '<center><h1 class="cart-msg">Error Retrieving Cart from Session!</h1></center>';
         }
+        //====================================== MAIN END =================================================
         
         /**
          * Function to append SQL query in looping
@@ -249,6 +251,43 @@
             }
             else{
                 return array("status"=>$status, "msg"=>"ERROR!");
+            }
+        }
+        
+        /**
+         * Function to handle CheckOut
+         */
+        function onCheckOut(){
+            // If User not login handle with JScript
+            if(!isset($_SESSION['username'])){
+                echo '<script>
+                        function checkOutOnClick(){
+                            var link = "login.php?fromcart=1";
+                            Swal.fire({
+                                icon: "warning",
+                                type: "warning",
+                                title: "Login Required for Checking Out",
+                                text: "You are required to be signed in with a user account to place your order.",
+                                showCancelButton: true,
+                                confirmButtonText: "Login",
+                                confirmButtonColor: "#17a2b8",
+                                cancelButtonText: "Cancel",
+                                reverseButtons: true
+                            }).then((result) => {
+                                if(result.value){
+                                    window.location.href=link;
+                                }
+                            });
+                        }
+                      </script>';
+            }
+            else{
+                echo '<script>
+                        function checkOutOnClick(){
+                            var link = "checkout.php";
+                            window.location=link;
+                        }
+                      </script>';
             }
         }
     ?>
