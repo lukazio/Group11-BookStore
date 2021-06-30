@@ -63,6 +63,10 @@
                                     <label>Publication Date</label>
                                     <input type="date" class="form-control" name="date" value="'.$row["publish_date"].'" required>
                                 </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label>ISBN-13</label> <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="ISBN-13 cannot be edited"></i>
+                                    <input type="text" class="form-control isbn-disabled" placeholder="ISBN-13 Number" value="'.$row["isbn"].'" disabled="disabled">
+                                </div>
                                 <div class="form-group col-12">
                                     <label>Description</label>
                                     <textarea class="form-control" rows="5" name="description" placeholder="Enter New Description">'.$row["description"].'</textarea>
@@ -101,7 +105,7 @@
                             <hr>
                             <input type="hidden" name="target_isbn" value="'.$isbn.'">
                             <div class="text-right">
-                                <button type="submit" class="btn btn-success" name="edit_book_submit"><i class="fa fa-floppy-o"></i>&nbsp; Submit</button>
+                                <button id="btnEditBook" type="button" class="btn btn-success" name="edit_book_submit"><i class="fa fa-floppy-o"></i>&nbsp; Submit</button>
                             </div>
                         </form>
                     </div>
@@ -190,6 +194,41 @@
                         $(this).val(0);
                         $('#rangeQty').val(0);
                     }
+                });
+                
+                $('#btnEditBook').on('click', function(e){
+                    var $form = $(this).closest('form');
+                    
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Confirm book edit?',
+                        text: 'Please check if details are entered correctly.',
+                        showCancelButton: true,
+                        confirmButtonColor: '#5cb85c',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if(result.value){
+                            jQuery('<button></button>', {
+                                id: 'btnEditBookSubmit',
+                                type: 'submit',
+                                name: 'edit_book_submit',
+                                style: 'display: none;'
+                            }).insertAfter('#btnEditBook');
+                            
+                            setTimeout(function(){
+                                $('#btnEditBookSubmit').click();
+                            }, 300);
+                            
+                            $form.submit(function(){
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Editing book...',
+                                    showConfirmButton: false
+                                });
+                            });
+                        }
+                    });
                 });
             });
         </script>

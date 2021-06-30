@@ -202,7 +202,8 @@
                             $form.submit(function(){
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Adding new book...'
+                                    title: 'Adding new book...',
+                                    showConfirmButton: false
                                 });
                             });
                         }
