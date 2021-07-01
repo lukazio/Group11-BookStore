@@ -38,7 +38,7 @@ if(isset($_POST['submitted'])){
     }elseif(!preg_match("#[a-z]+#",$password)){
         echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your Password Must Contain At Least 1 Number,1 Capital letter,1 Lowercase Letter, and 1 Special Character!!</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
-    }elseif(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/',$password)){
+    }elseif(!preg_match('/[\'^£$%&*()}{@#~?><>!,|=_+¬-]/',$password)){
         echo "<div class=\"alert alert-danger alert-dismissable\" role=\"alert\"><span>Your Password Must Contain At Least 1 Number,1 Capital letter,1 Lowercase Letter, and 1 Special Character!</span><button type=\"button\" class=\"close\" data-dismiss = \"alert\"><span aria-hidden = \"true\">&times</span></div>";
         $errorcount++;
     }elseif($password!=$password2){
