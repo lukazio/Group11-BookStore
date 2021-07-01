@@ -52,7 +52,7 @@
                                 '<div class = "form-row">
                                 <div class = "form-group col-md-4 mb-3">
                                 <label for = "input-country" class = "lead">Country</label>
-                                <select class="form-control" id="input-country" required>';                               
+                                <select class="form-control" id="input-country" required>';
                                 if ($row["country"] == null) {
                                     echo'<option value = "">Select country</option>';
                                 }
@@ -82,7 +82,7 @@
                             }
                         }
                     } else {
-                        echo'<h5>No user detail found!<br> Please Login </h5>';
+                        echo'<h5>No user detail found!<br> Please Login To Your Account </h5>';
                     }
                     ?>
                 </div>
@@ -136,22 +136,26 @@
                         '<div class="col-8">' .
                         '<h6>Delivery Fee:</h6>' .
                         '</div>';
-                        $sql = "SELECT country FROM user WHERE username ='" . $_SESSION['username'] . "'";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                if ($row["country"] != null) {
-                                    $shipping_fee = getShipping($row["country"]);
-                                    echo '<div class="col-auto"><span class ="text-muted" id="delivery-fee">RM' . $shipping_fee . '</span></div>';
-                                } else {
-                                    $shipping_fee = 0;
-                                    echo
-                                    '<div class="col-auto"><span class ="text-muted" id="delivery-fee">RM0</span></div>';
-                                }
-                            }
+                        if (!isset($_SESSION['username'])) {
+                           echo '<div class="col-auto"><span class ="text-muted" id="delivery-fee">RM -</span></div>';
                         } else {
-                            echo
-                            '<div class="col-auto"><span class ="text-muted" id="delivery-fee">RM 0</span></div>';
+                            $sql = "SELECT country FROM user WHERE username ='" . $_SESSION['username'] . "'";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    if ($row["country"] != null) {
+                                        $shipping_fee = getShipping($row["country"]);
+                                        echo '<div class="col-auto"><span class ="text-muted" id="delivery-fee">RM' . $shipping_fee . '</span></div>';
+                                    } else {
+                                        $shipping_fee = 0;
+                                        echo
+                                        '<div class="col-auto"><span class ="text-muted" id="delivery-fee">RM0</span></div>';
+                                    }
+                                }
+                            } else {
+                                echo
+                                '<div class="col-auto"><span class ="text-muted" id="delivery-fee">RM 0</span></div>';
+                            }
                         }
                         $grand_total = $shipping_fee + $subtotal;
                         echo
