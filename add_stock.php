@@ -31,7 +31,7 @@
                     if($addstock_status == 'success')
                         echo '<i class="fa fa-fw fa-check-circle"></i> Book successfully added! <a href="stock_levels.php">Click here</a> if you wish to return to previous page.';
                     else if($addstock_status == 'danger')
-                        echo '<i class="fa fa-fw fa-exclamation-triangle"></i> Failed to add book, please ensure valid details and ISBN-13 number must not be a duplicate.';
+                        echo '<i class="fa fa-fw fa-exclamation-triangle"></i> Failed to add book, please ensure valid link, details, and ISBN-13 number must not be a duplicate.';
                     ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

@@ -23,6 +23,8 @@ if(isset($_POST['addstock_submit'])) {
         
         if($checkIsbnResult)
             $_SESSION['addstock_alert'] = 'danger';
+        else if(!preg_match("/^97[89](\d{9}(?:\d|X))$/", $isbn))
+            $_SESSION['addstock_alert'] = 'danger';
         else {
             $insertBookSql = "INSERT INTO book(isbn, title, author, publish_date, description, picture, trade_price, retail_price, quantity) "
                            . "VALUES('$isbn','$title','$author','$date','$description','$img_link','$price_trade','$price_retail','$quantity');";
