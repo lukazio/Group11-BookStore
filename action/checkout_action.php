@@ -24,7 +24,7 @@
             // Get from POST
             $user_email = $_POST["email"];
             $ship_address = $_POST["address"].". ".$_POST["city"].". ".$_POST["zipcode"].". ".$_POST["state"].". ".$_POST["country"];
-            $total_price = $_GET["grand"];
+            $total_price = $_POST["grandTotalHidden"];
 
             // Get from Cart
             $booksOrdered = array();
