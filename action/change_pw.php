@@ -31,7 +31,7 @@ if(isset($_POST['changepw_submit'])){
             } elseif (!preg_match("#[a-z]+#", $new_pw)) {
                 header("Location: ../profile.php?error=format_password");
                 exit();
-            } elseif (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $new_pw)) {
+            } elseif (!preg_match('/[\'^£$%&*()}{@#~?!><>,|=_+¬-]/', $new_pw)) {
                 header("Location: ../profile.php?error=format_password");
                 exit();
             } elseif ($new_pw == $old_pw) {
