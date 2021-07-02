@@ -19,49 +19,54 @@
         /**
          *======================================== MAIN ===================================================
          */
-        $cart = json_decode($_COOKIE['cart'], true);
-        if(isset($cart)){
-            if (count($cart) < 1) {
-                echo '<center><h1 class="cart-msg">Your cart is empty...<br>Add some books to view it here</h1><center>';
+        if(isset($_COOKIE['cart'])){
+            $cart = json_decode($_COOKIE['cart'], true);
+            if(isset($cart)){
+                if (count($cart) < 1) {
+                    echo '<center><h1 class="cart-msg">Your cart is empty...<br>Add some books to view it here</h1><center>';
+                }
+                else{
+                    $total=0;
+                    $query = "SELECT * FROM book WHERE ";
+                    $query = appendQuery($query, $cart);
+                    $result = $conn->query($query);                
+                    // Title and Headings
+                    echo '<div id="alert_box" class="hide" role="alert">
+                                <h6 id="alert_msg"></h6>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span id="close_btn" hidden="true" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                    echo '<div class="container"><h3 class="cart-heading">Your Cart</h3>';
+
+                    // Display Each Book
+                    foreach ($cart as $id => $props) {
+
+                        foreach ($result as $sqlBook){
+                            if($sqlBook["isbn"] == $props["isbn"]){
+                                $total+=$props["price"];
+                                displayBook($sqlBook, $props["amt"], $props["price"],$id);
+                                break;  // prevent unecessary executions
+                            }
+                            continue; // prevent unecessary executions
+                        }                    
+                    }
+
+                    // TOTAL and CHECK OUT
+                    echo
+                     "<h3 class=\"cart-heading\">Total: <b>RM " . $total . "</b></h3>".
+                    "<div class=\"row justify-content-md-center\"><a id=\"checkOut\" class=\"btn btn-info checkout-btn\" onclick=\"checkOutOnClick()\">Check Out</a></div></div>";
+                    onCheckOut(); // Handle Check Out
+                }
+                // PRINT JSCRIPT for Response Handling
+                printScript();
             }
             else{
-                $total=0;
-                $query = "SELECT * FROM book WHERE ";
-                $query = appendQuery($query, $cart);
-                $result = $conn->query($query);                
-                // Title and Headings
-                echo '<div id="alert_box" class="hide" role="alert">
-                            <h6 id="alert_msg"></h6>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span id="close_btn" hidden="true" aria-hidden="true">&times;</span>
-                            </button>
-                        </div>';
-                echo '<div class="container"><h3 class="cart-heading">Your Cart</h3>';
-                
-                // Display Each Book
-                foreach ($cart as $id => $props) {
-                    
-                    foreach ($result as $sqlBook){
-                        if($sqlBook["isbn"] == $props["isbn"]){
-                            $total+=$props["price"];
-                            displayBook($sqlBook, $props["amt"], $props["price"],$id);
-                            break;  // prevent unecessary executions
-                        }
-                        continue; // prevent unecessary executions
-                    }                    
-                }
-                
-                // TOTAL and CHECK OUT
-                echo
-                 "<h3 class=\"cart-heading\">Total: <b>RM " . $total . "</b></h3>".
-                "<div class=\"row justify-content-md-center\"><a id=\"checkOut\" class=\"btn btn-info checkout-btn\" onclick=\"checkOutOnClick()\">Check Out</a></div></div>";
-                onCheckOut(); // Handle Check Out
+                echo '<center><h1 class="cart-msg">Error Retrieving Cart from Session!</h1></center>';
             }
-            // PRINT JSCRIPT for Response Handling
-            printScript();
         }
         else{
-            echo '<center><h1 class="cart-msg">Error Retrieving Cart from Session!</h1></center>';
+            echo '<center><h1 class="cart-msg">Your cart is empty...<br>Add some books to view it here</h1><center>';
         }
         //====================================== MAIN END =================================================
         

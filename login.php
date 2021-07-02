@@ -26,7 +26,7 @@
                         echo '<form class="form-container" action="action/login_action.php?fromcart=1" method="post">';
                     }
                     else{
-                        echo '<form class="form-container" action="action/login_action.php?fromcart=1" method="post">';
+                        echo '<form class="form-container" action="action/login_action.php" method="post">';
                     }
                 ?>
                     
