@@ -33,9 +33,13 @@
                 array_push($booksOrdered, $book);
             }
 
+            // Get today's Date
+            date_default_timezone_set("Asia/Kuala_Lumpur");
+            $today = date("Y-m-d H:i:s");
+            
             // MySQL Queries
             $uid = getUID($conn);
-            $orderQuery = "INSERT INTO orders (user_id, ship_address, total_price) VALUES (".$uid.", '".$ship_address."', ".$total_price.");";
+            $orderQuery = "INSERT INTO orders (user_id, order_date, ship_address, total_price) VALUES (".$uid.", '".$today."', '".$ship_address."', ".$total_price.");";
             // Run Query 1: Order
             if ($conn->query($orderQuery) === TRUE) {
                 $order_id = $conn->insert_id;
