@@ -17,3 +17,20 @@ hr {
     pointer-events: none;
     color: #aaaaaa;
 }
+
+.order-details {
+    padding: 12px;
+}
+
+.book-details-table {
+    background-color: unset !important;
+}
+.book-details-table tbody * {
+    border: 0 !important;
+}
+.book-details-table thead * {
+    border-color: white !important;
+}
+.book-details-table tbody > tr:last-child {
+    border-bottom: 1px solid white !important;
+}

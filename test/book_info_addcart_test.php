@@ -23,7 +23,7 @@ class BookInfoCart {
         }
         $amt *= $times;
         
-        if($this->result['amt'] == $amt && $this->result['price'] == $price*$amt)
+        if($this->result["amt"] == $amt && $this->result["price"] == $price*$amt)
             return true;
         else
             return false;
@@ -35,11 +35,10 @@ class BookInfoCart {
         $tempAmt = $amt;
         $tempCart = array("amt" => 0, "price" => 0);
 
-        if (!isset($cart))
-            $cart = array();
         if (empty($cart))
             $tempCart = $addCart;
         else {
+            $tempCart = $this->result;
             $tempCart["amt"] += $tempAmt;
             $tempCart["price"] = $tempPrice * $tempCart["amt"];
         }
