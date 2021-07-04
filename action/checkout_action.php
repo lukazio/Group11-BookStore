@@ -23,6 +23,7 @@
 
             // Get from POST
             $user_email = $_POST["email"];
+            $user_name = $_POST["username"];
             $ship_address = $_POST["address"].". ".$_POST["city"].". ".$_POST["zipcode"].". ".$_POST["state"].". ".$_POST["country"];
             $total_price = $_POST["grandTotalHidden"];
 
@@ -39,7 +40,7 @@
             
             // MySQL Queries
             $uid = getUID($conn);
-            $orderQuery = "INSERT INTO orders (user_id, order_date, ship_address, total_price) VALUES (".$uid.", '".$today."', '".$ship_address."', ".$total_price.");";
+            $orderQuery = "INSERT INTO orders (user_id, email, username, order_date, ship_address, total_price) VALUES (".$uid.", '".$user_email."', '".$user_name."', '".$today."', '".$ship_address."', ".$total_price.");";
             // Run Query 1: Order
             if ($conn->query($orderQuery) === TRUE) {
                 $order_id = $conn->insert_id;
@@ -113,6 +114,10 @@
         return $query;
     }
     
+    /**
+     * function to write MySQL queries and execute 
+     * related queries for reducing book's quantity in db
+     */
     function reduceDBQty($conn, $books){
         $reduceQuery = "";
         $qtyQuery = "SELECT isbn, quantity FROM book WHERE ";
