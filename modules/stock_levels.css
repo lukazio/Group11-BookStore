@@ -25,3 +25,13 @@ hr {
 .book-img {
     max-width: 120px;
 }
+
+.page-item.active-page .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #292b2c;
+    border-color: #fff;
+}
+.page-item .page-link {
+    color: #292b2c;
+}

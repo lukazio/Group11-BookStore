@@ -31,14 +31,35 @@
             
             <hr>
             
-            <div class="form-group search mb-3">
-                <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control" id="searchStock" name="searchStock" placeholder="Search for book title or ISBN in system">
-            </div>
+            <form action="stock_levels.php" method="get">
+                <div class="form-group search mb-3">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchStock" name="search" <?php if(isset($_GET['search'])) echo 'value="'.$_GET['search'].'"'; ?> placeholder="Search for book title or ISBN in system">
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit">Manual Filter</button>
+                            <a class="btn btn-secondary" href="stock_levels.php">Reset</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
             
             <?php
-            // Get all books in the system
-            $getBooksSql = "SELECT * FROM book ORDER BY isbn;";
+            $limit = 15;
+            if(isset($_GET["page"]))
+                $page = $_GET["page"];
+            else
+                $page = 1;
+            $start_from = ($page-1)*$limit;
+            // Get all orders in the system or filtered
+            if(isset($_GET['search'])) {
+                $getBooksSql = "SELECT * FROM book "
+                        . "WHERE isbn LIKE('%".$_GET['search']."%') "
+                        . "OR title LIKE('%".$_GET['search']."%') "
+                        . "ORDER BY isbn LIMIT $start_from, $limit;";
+            }
+            else
+                $getBooksSql = "SELECT * FROM book ORDER BY isbn LIMIT $start_from, $limit;";
             $getBooksResult = mysqli_query($conn,$getBooksSql);
             ?>
             
@@ -88,6 +109,42 @@
                     </tbody>
                 </table>
             </div>
+            
+            <?php
+            $result_db;
+            $countRowsSql;
+            if(isset($_GET['search'])) {
+                $countRowsSql = "SELECT COUNT(isbn) FROM book "
+                        . "WHERE isbn LIKE('%".$_GET['search']."%') "
+                        . "OR title LIKE('%".$_GET['search']."%');";
+            }
+            else
+                $countRowsSql = "SELECT COUNT(isbn) FROM book;";
+            $result_db = mysqli_query($conn, $countRowsSql);
+            $row_db = mysqli_fetch_row($result_db);
+            $total_records = $row_db[0];
+            $total_pages = ceil($total_records / $limit);
+            
+            if($total_pages > 1) {
+                $pagLink = "<ul class='pagination mb-4'>";
+                for($i=1; $i<=$total_pages; $i++) {
+                    if(isset($_GET['search'])) {
+                        if($page == $i)
+                            $pagLink .= "<li class='page-item active-page'><a class='page-link' href='stock_levels.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
+                        else
+                            $pagLink .= "<li class='page-item'><a class='page-link' href='stock_levels.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
+                    }
+                    else {
+                        if($page == $i)
+                            $pagLink .= "<li class='page-item active-page'><a class='page-link' href='stock_levels.php?page=".$i."'>".$i."</a></li>";
+                        else
+                            $pagLink .= "<li class='page-item'><a class='page-link' href='stock_levels.php?page=".$i."'>".$i."</a></li>";
+                    }
+                }
+                echo $pagLink . "</ul>";
+            }
+            ?>
+            
         </div>
         
         <script type="text/javascript">
