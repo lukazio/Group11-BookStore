@@ -44,15 +44,22 @@
             if ($conn->query($orderQuery) === TRUE) {
                 $order_id = $conn->insert_id;
             } else {
-                echo "Error: " . $conn->error;
+                echo "Error Setting Order: " . $conn->error;
             }
             $orderDetailsQuery = getOrderDetailsQuery($order_id, $booksOrdered);
             // Run Query 2: Order Details
             if ($conn->query($orderDetailsQuery) === TRUE) {
-                setcookie('cart','',time() - 1, "/");
-                header('Location:../checkout.php?order=success');
+                // Run Query 3: Reduce Quantity at Db
+                $response = reduceDBQty($conn, $booksOrdered);
+                if ($response === TRUE){
+                    setcookie('cart','',time() - 1, "/");
+                    header('Location:../checkout.php?order=success');
+                }
+                else{
+                    echo "Error Reducing Book Quantity: ".$response;
+                }
             } else {
-                echo "Error: " . $conn->error;
+                echo "Error Setting Order Details: " . $conn->error;
             }
         }
         else{
@@ -104,6 +111,53 @@
         }
         $query.=";";
         return $query;
+    }
+    
+    function reduceDBQty($conn, $books){
+        $reduceQuery = "";
+        $qtyQuery = "SELECT isbn, quantity FROM book WHERE ";
+        $counter = 0;
+        
+        // Get all current Quantity of Books frm Cart
+        foreach ($books as $book) {
+            if($counter === 0){
+                $qtyQuery .= "isbn='".$book['isbn']."'";
+            }
+            else{
+                $qtyQuery .= " OR isbn='".$book['isbn']."'";
+            }
+            $counter++;
+        }
+        $qtyQuery.=";";
+        $result = $conn->query($qtyQuery);
+        
+        // Append reduce Query
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                if ($row["quantity"] != null) {
+                    foreach ($books as $book){
+                        if ($book["isbn"] === $row["isbn"]){
+                            $remaining = $row["quantity"] - $book["quantity"];
+                            $reduceQuery = "UPDATE book SET quantity=".$remaining." WHERE isbn='".$row["isbn"]."';";
+                            // Run Reduce Query
+                            if ($conn->query($reduceQuery) !== TRUE) {
+                                return $conn->error;
+                            }
+                        }
+                    }
+                } else {
+                    echo 'No Quantity Field Found in Book!';
+                }
+            }
+            return TRUE;
+        }
+        else{
+            echo 'No Result found!';
+        }
+       
+        // Query cannot run HERE because of mysql's max_allowed_packet where
+        // statements that are too long are prohibited.
+        
     }
     
     ?>
