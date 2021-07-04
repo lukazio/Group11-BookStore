@@ -29,20 +29,36 @@
             
             <hr>
             
-            <div class="form-group search mb-3">
-                <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control" id="searchOrder" name="searchOrder" placeholder="Search for order history">
-            </div>
+            <form action="order_history.php" method="get">
+                <div class="form-group search mb-3">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="searchOrder" name="search" <?php if(isset($_GET['search'])) echo 'value="'.$_GET['search'].'"'; ?> placeholder="Search for order ID, email, or username">
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit">Manual Filter</button>
+                            <a class="btn btn-secondary" href="order_history.php">Reset</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
             
             <?php
-            $limit = 20;  
+            $limit = 25;
             if(isset($_GET["page"]))
                 $page = $_GET["page"];
             else
                 $page = 1;
             $start_from = ($page-1)*$limit;
-            // Get all orders in the system
-            $getOrdersSql = "SELECT * FROM orders ORDER BY order_id LIMIT $start_from, $limit;";
+            // Get all orders in the system or filtered
+            if(isset($_GET['search'])) {
+                $getOrdersSql = "SELECT * FROM orders "
+                        . "WHERE order_id LIKE('%".$_GET['search']."%') "
+                        . "OR username LIKE('%".$_GET['search']."%') "
+                        . "OR email LIKE('%".$_GET['search']."%') "
+                        . "ORDER BY order_id DESC LIMIT $start_from, $limit;";
+            }
+            else
+                $getOrdersSql = "SELECT * FROM orders ORDER BY order_id DESC LIMIT $start_from, $limit;";
             $getOrdersResult = mysqli_query($conn,$getOrdersSql);
             ?>
             
@@ -61,16 +77,14 @@
                         <?php
                         if(mysqli_num_rows($getOrdersResult) > 0) {
                             foreach($getOrdersResult as $row) {
-                                $userinfoSql = "SELECT email, username FROM user WHERE user_id='".$row['user_id']."';";
-                                $detailsSql = "SELECT book_isbn, quantity, subtotal FROM order_details WHERE order_id='".$row['order_id']."'";
-                                $userRow = mysqli_fetch_assoc(mysqli_query($conn,$userinfoSql));
+                                $detailsSql = "SELECT book_isbn, book_title, quantity, subtotal FROM order_details WHERE order_id='".$row['order_id']."'";
                                 $detailsResult = mysqli_query($conn,$detailsSql);
                                 echo  '<tr data-toggle="collapse" data-target="#orderno'.$row['order_id'].'" aria-expanded="true" aria-controls="#orderno'.$row['order_id'].'">'
                                         . '<th scope="row" class="order-id">#'.$row['order_id'].'</th>'
-                                        . '<td class="email">'.$userRow['email'].'</td>'
-                                        . '<td class="username">'.$userRow['username'].'</td>'
+                                        . '<td class="email">'.$row['email'].'</td>'
+                                        . '<td class="username">'.$row['username'].'</td>'
                                         . '<td>RM'.$row['total_price'].'</td>'
-                                        . '<td>'.date('d/m/Y',strtotime($row['order_date'])).'</td>'
+                                        . '<td class="date">'.date('d/m/Y',strtotime($row['order_date'])).'</td>'
                                     . '</tr>';
                                 echo  '<tr><td class="p-0" colspan="5">'
                                         . '<div id="orderno'.$row['order_id'].'" class="collapse border-left border-right border-white">'
@@ -87,10 +101,8 @@
                                                         . '<th scope="col">Subtotal</th>'
                                                    . '</thead>';
                                             foreach($detailsResult as $detailsRow) {
-                                                $bookSql = "SELECT title FROM book WHERE isbn='".$detailsRow['book_isbn']."'";
-                                                $bookRow = mysqli_fetch_assoc(mysqli_query($conn,$bookSql));
                                                 echo '<tr>'
-                                                        . '<th scope="row">'.$bookRow['title'].'</th>'
+                                                        . '<th scope="row">'.$detailsRow['book_title'].'</th>'
                                                         . '<td>'.$detailsRow['book_isbn'].'</td>'
                                                         . '<td>×'.$detailsRow['quantity'].'</td>'
                                                         . '<th scope="row">'.$detailsRow['subtotal'].'</th>'
@@ -106,25 +118,50 @@
                                     . '</td></tr>';
                             }
                         }
+                        else {
+                            echo '<tr>'
+                                    . '<td colspan="5" class="text-center">No results!</td>'
+                               . '</tr>';
+                        }
                         ?>
                     </tbody>
                 </table>
             </div>
             
             <?php
-            $result_db = mysqli_query($conn,"SELECT COUNT(order_id) FROM orders");
+            $result_db;
+            $countRowsSql;
+            if(isset($_GET['search'])) {
+                $countRowsSql = "SELECT COUNT(order_id) FROM orders "
+                        . "WHERE order_id LIKE('%".$_GET['search']."%') "
+                        . "OR username LIKE('%".$_GET['search']."%') "
+                        . "OR email LIKE('%".$_GET['search']."%');";
+            }
+            else
+                $countRowsSql = "SELECT COUNT(order_id) FROM orders;";
+            $result_db = mysqli_query($conn, $countRowsSql);
             $row_db = mysqli_fetch_row($result_db);
             $total_records = $row_db[0];
             $total_pages = ceil($total_records / $limit);
-            $pagLink = "<ul class='pagination mb-4'>";
             
-            for($i=1; $i<=$total_pages; $i++) {
-                if($page == $i)
-                    $pagLink .= "<li class='page-item active'><a class='page-link' href='order_history.php?page=".$i."'>".$i."</a></li>";
-                else
-                    $pagLink .= "<li class='page-item'><a class='page-link' href='order_history.php?page=".$i."'>".$i."</a></li>";
+            if($total_pages > 1) {
+                $pagLink = "<ul class='pagination mb-4'>";
+                for($i=1; $i<=$total_pages; $i++) {
+                    if(isset($_GET['search'])) {
+                        if($page == $i)
+                            $pagLink .= "<li class='page-item active-page'><a class='page-link' href='order_history.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
+                        else
+                            $pagLink .= "<li class='page-item'><a class='page-link' href='order_history.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
+                    }
+                    else {
+                        if($page == $i)
+                            $pagLink .= "<li class='page-item active-page'><a class='page-link' href='order_history.php?page=".$i."'>".$i."</a></li>";
+                        else
+                            $pagLink .= "<li class='page-item'><a class='page-link' href='order_history.php?page=".$i."'>".$i."</a></li>";
+                    }
+                }
+                echo $pagLink . "</ul>";
             }
-            echo $pagLink . "</ul>";
             ?>
             
         </div>

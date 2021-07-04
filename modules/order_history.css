@@ -8,7 +8,7 @@ hr {
 
 .search .form-control-feedback {
     position: absolute;
-    z-index: 2;
+    z-index: 4;
     display: block;
     width: 2.375rem;
     height: 2.375rem;
@@ -33,4 +33,14 @@ hr {
 }
 .book-details-table tbody > tr:last-child {
     border-bottom: 1px solid white !important;
+}
+
+.page-item.active-page .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #292b2c;
+    border-color: #fff;
+}
+.page-item .page-link {
+    color: #292b2c;
 }
