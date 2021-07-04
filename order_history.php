@@ -86,7 +86,7 @@
                                         . '<td>RM'.$row['total_price'].'</td>'
                                         . '<td class="date">'.date('d/m/Y',strtotime($row['order_date'])).'</td>'
                                     . '</tr>';
-                                echo  '<tr class="order-details-row"><td class="p-0" colspan="5">'
+                                echo  '<tr class="order-details-row"><td class="p-0 border-0" colspan="5">'
                                         . '<div id="orderno'.$row['order_id'].'" class="collapse border-left border-right border-white">'
                                             . '<div class="order-details">'
                                                 . '<p><b>'.date('d F Y, g:i a',strtotime($row['order_date'])).'</b></p>'
