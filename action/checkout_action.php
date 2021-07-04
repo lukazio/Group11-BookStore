@@ -30,7 +30,7 @@
             // Get from Cart
             $booksOrdered = array();
             foreach ($tempCart as $id => $props) {
-                $book = array("isbn"=>$props["isbn"], "quantity"=>$props["amt"], "subtotal"=>$props["price"]);
+                $book = array("isbn"=>$props["isbn"], "quantity"=>$props["amt"], "subtotal"=>$props["price"], "title"=>$props["title"]);
                 array_push($booksOrdered, $book);
             }
 
@@ -100,13 +100,13 @@
      */
     function getOrderDetailsQuery($order_id, $books){
         $counter = 0;
-        $query = "INSERT INTO order_details (order_id, book_isbn, quantity, subtotal) VALUES ";
+        $query = "INSERT INTO order_details (order_id, book_isbn, book_title, quantity, subtotal) VALUES ";
         foreach ($books as $book){
             if($counter === 0){
-                $query = $query . "(" . $order_id . ", '" . $book['isbn'] . "', " . $book['quantity'] . ", " . $book["subtotal"] . ")";
+                $query = $query . "(" . $order_id . ", '" . $book['isbn']. "', '" . $book['title'] . "', " . $book['quantity'] . ", " . $book["subtotal"] . ")";
             }
             else{
-                $query = $query . ", (" .$order_id . ", '" . $book['isbn'] . "', " . $book['quantity'] . ", " . $book["subtotal"] . ")";
+                $query = $query . ", (" .$order_id . ", '" . $book['isbn']. "', '" . $book['title'] . "', " . $book['quantity'] . ", " . $book["subtotal"] . ")";
             }
             $counter++;
         }
