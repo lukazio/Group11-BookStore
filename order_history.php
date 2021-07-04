@@ -79,14 +79,14 @@
                             foreach($getOrdersResult as $row) {
                                 $detailsSql = "SELECT book_isbn, book_title, quantity, subtotal FROM order_details WHERE order_id='".$row['order_id']."'";
                                 $detailsResult = mysqli_query($conn,$detailsSql);
-                                echo  '<tr data-toggle="collapse" data-target="#orderno'.$row['order_id'].'" aria-expanded="true" aria-controls="#orderno'.$row['order_id'].'">'
+                                echo  '<tr class="order-summary" data-toggle="collapse" data-target="#orderno'.$row['order_id'].'" aria-expanded="true" aria-controls="#orderno'.$row['order_id'].'">'
                                         . '<th scope="row" class="order-id">#'.$row['order_id'].'</th>'
                                         . '<td class="email">'.$row['email'].'</td>'
                                         . '<td class="username">'.$row['username'].'</td>'
                                         . '<td>RM'.$row['total_price'].'</td>'
                                         . '<td class="date">'.date('d/m/Y',strtotime($row['order_date'])).'</td>'
                                     . '</tr>';
-                                echo  '<tr><td class="p-0" colspan="5">'
+                                echo  '<tr class="order-details-row"><td class="p-0" colspan="5">'
                                         . '<div id="orderno'.$row['order_id'].'" class="collapse border-left border-right border-white">'
                                             . '<div class="order-details">'
                                                 . '<p><b>'.date('d F Y, g:i a',strtotime($row['order_date'])).'</b></p>'
@@ -170,9 +170,10 @@
             $(document).ready(function() {
                 $('#searchOrder').on('keyup', function() {
                     var value = $(this).val().toLowerCase();
-                    $('#ordersTable tr').filter(function() {
+                    $('#ordersTable .order-summary').filter(function() {
                         $(this).toggle($(this).find('.order-id, .email, .username').text().toLowerCase().indexOf(value) > -1); // Update find() after table is implemented
                     });
+                    $('.collapse').collapse('hide');
                 });
             });
         </script>
