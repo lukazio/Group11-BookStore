@@ -30,9 +30,15 @@
             <hr>
             
             <form action="order_history.php" method="get">
-                <div class="form-group search mb-3">
-                    <span class="fa fa-search form-control-feedback"></span>
+                <div class="form-group mb-3">
                     <div class="input-group">
+                        <div class="input-group-append">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                <label id="quickSearchContainer" class="btn btn-secondary quicksearch-toggle" data-toggle="tooltip" data-placement="top" title="Toggle Quicksearch">
+                                    <input id="quickSearch" type="checkbox" autocomplete="off"><i class="fa fa-search"></i>
+                                </label>
+                            </div>
+                        </div>
                         <input type="text" class="form-control" id="searchOrder" name="search" <?php if(isset($_GET['search'])) echo 'value="'.$_GET['search'].'"'; ?> placeholder="Search for order ID, email, or username">
                         <div class="input-group-append">
                             <button class="btn btn-info" type="submit">Manual Filter</button>
@@ -167,13 +173,36 @@
         </div>
         
         <script type="text/javascript">
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+            
             $(document).ready(function() {
                 $('#searchOrder').on('keyup', function() {
-                    var value = $(this).val().toLowerCase();
-                    $('#ordersTable .order-summary').filter(function() {
-                        $(this).toggle($(this).find('.order-id, .email, .username').text().toLowerCase().indexOf(value) > -1); // Update find() after table is implemented
-                    });
-                    $('.collapse').collapse('hide');
+                    if($('#quickSearch:checked').length > 0) {
+                        var value = $(this).val().toLowerCase();
+                        $('#ordersTable .order-summary').filter(function() {
+                            $(this).toggle($(this).find('.order-id, .email, .username').text().toLowerCase().indexOf(value) > -1);
+                        });
+                        $('.collapse').collapse('hide');
+                    }
+                });
+                
+                $('#quickSearchContainer').on('click', function() {
+                    setTimeout(function() {
+                        if($('#quickSearch:checked').length > 0) {
+                            var value = $('#searchOrder').val().toLowerCase();
+                            $('#ordersTable .order-summary').filter(function() {
+                                $(this).toggle($(this).find('.order-id, .email, .username').text().toLowerCase().indexOf(value) > -1);
+                            });
+                            $('.collapse').collapse('hide');
+                        }
+                        else {
+                            $('#ordersTable .order-summary').filter(function() {
+                                $(this).toggle($(this).find('.order-id, .email, .username').text().toLowerCase().indexOf('') > -1);
+                            });
+                        }
+                    }, 1);
                 });
             });
         </script>

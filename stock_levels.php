@@ -32,9 +32,15 @@
             <hr>
             
             <form action="stock_levels.php" method="get">
-                <div class="form-group search mb-3">
-                    <span class="fa fa-search form-control-feedback"></span>
+                <div class="form-group mb-3">
                     <div class="input-group">
+                        <div class="input-group-append">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                <label id="quickSearchContainer" class="btn btn-secondary quicksearch-toggle" data-toggle="tooltip" data-placement="top" title="Toggle Quicksearch">
+                                    <input id="quickSearch" type="checkbox" autocomplete="off"><i class="fa fa-search"></i>
+                                </label>
+                            </div>
+                        </div>
                         <input type="text" class="form-control" id="searchStock" name="search" <?php if(isset($_GET['search'])) echo 'value="'.$_GET['search'].'"'; ?> placeholder="Search for book title or ISBN in system">
                         <div class="input-group-append">
                             <button class="btn btn-info" type="submit">Manual Filter</button>
@@ -148,12 +154,34 @@
         </div>
         
         <script type="text/javascript">
-            $(document).ready(function(){
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+            
+            $(document).ready(function() {
                 $('#searchStock').on('keyup', function() {
-                    var value = $(this).val().toLowerCase();
-                    $('#stockTable tr').filter(function() {
-                        $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf(value) > -1);
-                    });
+                    if($('#quickSearch:checked').length > 0) {
+                        var value = $(this).val().toLowerCase();
+                        $('#stockTable tr').filter(function() {
+                            $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf(value) > -1);
+                        });
+                    }
+                });
+                
+                $('#quickSearchContainer').on('click', function() {
+                    setTimeout(function() {
+                        if($('#quickSearch:checked').length > 0) {
+                            var value = $('#searchStock').val().toLowerCase();
+                            $('#stockTable tr').filter(function() {
+                                $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf(value) > -1);
+                            });
+                        }
+                        else {
+                            $('#stockTable tr').filter(function() {
+                                $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf('') > -1);
+                            });
+                        }
+                    }, 1);
                 });
                 
                 $('.btn-delete-book').on('click', function(e){
