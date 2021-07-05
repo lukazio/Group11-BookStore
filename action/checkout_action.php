@@ -19,13 +19,16 @@
         // Get from COOKIES
         if (isset($_COOKIE['cart'])) { 
             $tempCart = json_decode($_COOKIE['cart'], true);
-            echo 'Processing Order...';
-
+            echo 'Processing Order...';         
+            
             // Get from POST
             $user_email = $_POST["email"];
             $user_name = $_POST["username"];
             $ship_address = $_POST["address"].". ".$_POST["city"].". ".$_POST["zipcode"].". ".$_POST["state"].". ".$_POST["country"];
             $total_price = $_POST["grandTotalHidden"];
+            
+            // Check if Need Update User's Address
+            updateUserAddress($conn, $user_email, $_POST["address"], $_POST["city"], $_POST["state"], $_POST["zipcode"], $_POST["country"]);
 
             // Get from Cart
             $booksOrdered = array();
@@ -71,6 +74,19 @@
         echo 'No Order Placed!';
     }
 // =================================================== END MAIN ========================================================
+    /**
+     * function to check and update User's address if needed
+     */
+    function updateUserAddress($conn, $email, $address, $city, $state, $zipcode, $country){
+        if(isset($_POST["update"])){
+            $query = 'UPDATE user SET address_line="'.$address.'", city="'.$city.'", state="'.$state.'", zip_code="'.$zipcode.'", country="'.$country.'" WHERE email="'.$email.'";';            
+            // Run Update Address Query
+            if ($conn->query($query) !== TRUE) {
+                echo $conn->error;
+            }
+        }
+    }
+    
     /**
      * 
      * function to retrieve user_id from SESSION using email
