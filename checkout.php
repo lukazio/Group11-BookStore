@@ -101,6 +101,10 @@
                                 <input type = "text" class = "form-control" name="zipcode" id = "input-zip" placeholder = "Zip Code"  value="' . $row["zip_code"] . '" required>
                                 </div>
                                 </div>
+                                <div class="form-check" style="padding-bottom:10px">
+                                <input type="checkbox" class="form-check-input" name="update" id="updateAddress" >
+                                <label class="form-check-label" for="updateAddress">Update my address</label>
+                                </div>
                                 <input type="hidden" id="grandTotalHidden" name="grandTotalHidden" value="" />
                                 <button id="btn-submit" type="submit" name="submit" class="btn btn-outline-success btn-lg btn-block">Confirm Order</button>
                                 </form>';
@@ -110,7 +114,7 @@
                         echo'<h5>No user detail found!<br> Please Login To Your Account </h5>';
                     }
                     ?>
-                </div>
+                </div>              
 
                 <!--payment summary-->
                 <div class="col-md-4">
