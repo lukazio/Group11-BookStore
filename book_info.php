@@ -171,7 +171,7 @@
                 
                 $('#addToCart').click(function(){
                     var isbn = <?php echo $_GET['isbn']; ?>;
-                    var title = '<?php echo $bookRow['title']; ?>';
+                    var title = '<?php echo addslashes($bookRow['title']); ?>';
                     var pic = '<?php echo $bookRow['picture']; ?>';
                     var price = <?php echo $bookRow['retail_price']; ?>;
                     var quantity = parseInt($('#bookQty').val());
