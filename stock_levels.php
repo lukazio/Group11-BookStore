@@ -62,10 +62,10 @@
                 $getBooksSql = "SELECT * FROM book "
                         . "WHERE isbn LIKE('%".$_GET['search']."%') "
                         . "OR title LIKE('%".$_GET['search']."%') "
-                        . "ORDER BY isbn LIMIT $start_from, $limit;";
+                        . "ORDER BY title LIMIT $start_from, $limit;";
             }
             else
-                $getBooksSql = "SELECT * FROM book ORDER BY isbn LIMIT $start_from, $limit;";
+                $getBooksSql = "SELECT * FROM book ORDER BY title LIMIT $start_from, $limit;";
             $getBooksResult = mysqli_query($conn,$getBooksSql);
             ?>
             
