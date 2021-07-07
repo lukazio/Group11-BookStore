@@ -14,7 +14,7 @@ line-height: 1.5;
 body {
 padding: 0;
 margin: 0;
-background: #f29d16;
+background-image: url("https://www.stmellitus.ac.uk/sites/default/files/Library%20banner_0.png");
 }
 
 </style>
@@ -27,7 +27,7 @@ background: #f29d16;
         <div class="signup-form">
             <form action="register.php" method="post">
                 <h2>Sign Up</h2>
-                <label for="username">Username</label>
+                <label for="username"><b>Username</b></label>
                 <div class="form-group">
                     <input type="text" class="form-control" name="username" id="username" >
                 </div>
@@ -44,10 +44,10 @@ background: #f29d16;
                     <input type="password" class="form-control" name="password2" id="password2" >
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-lg btn-block" name="submitted">Register Now</button>
+                    <button type="submit" class="btn btn-success btn-lg btn-block" name="submitted">Create Account</button>
                 </div>
             </form>
-        <div class="text-center">Already have an account? <a href="login.php">Sign in</a></div>
+            <div class="text-center signin-link rounded p-3">Already have an account? <a href="login.php"><b>Sign In</b></a></div>
         </div>
     </div>
     <?php include ('modules/footer.php')?>
