@@ -111,7 +111,7 @@
                                                         . '<th scope="row">'.$detailsRow['book_title'].'</th>'
                                                         . '<td>'.$detailsRow['book_isbn'].'</td>'
                                                         . '<td>×'.$detailsRow['quantity'].'</td>'
-                                                        . '<th scope="row">'.$detailsRow['subtotal'].'</th>'
+                                                        . '<th scope="row">RM'.$detailsRow['subtotal'].'</th>'
                                                    . '</tr>';
                                             }
                                             echo '</table>'
