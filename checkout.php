@@ -37,7 +37,7 @@
                                             type: "success",
                                             timer: 2000,
                                             title: "Order Placed!",
-                                            text: "You can now view your order details in Profile.",
+                                            text: "Your order has been successfully recorded.",
                                             showCancelButton: false,
                                             confirmButtonText: "Back to Home",
                                             confirmButtonColor: "#17a2b8",
