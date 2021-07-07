@@ -35,7 +35,14 @@ function loginUser($conn, $email, $password){
          $_SESSION["username"] = $uidExists["username"];
         $_SESSION["email"] = $uidExists["email"];
         
-        header("Location: ../home.php");
+        // Check if from Cart Checkout, if yes, straight direct to Cart
+        if(isset($_GET['fromcart'])){
+            header("Location: ../checkout.php");
+        }
+        else{
+            header("Location: ../home.php");
+        }
+        
         exit();
     }
     else{

@@ -1,5 +1,4 @@
 <?php
-session_start();
 $id = $_GET['id'];
 $price = $_GET['price'];
 $qty = $_GET['qty'];
@@ -29,9 +28,13 @@ function enoughQty($qty){
 }
 
 function reduceItem($id, $price) {
-    $_SESSION['cart'][$id]['amt']--;
-
-    $_SESSION['cart'][$id]['price'] = $price * $_SESSION['cart'][$id]['amt'];
+    $cart = json_decode($_COOKIE['cart'], true);
+    
+    $cart[$id]['amt']--;
+    $cart[$id]['price'] = $price * $cart[$id]['amt'];
+    
+    setcookie("cart", json_encode($cart), time()+60*60*24*365,'/');
+    $_COOKIE['cart'] = json_encode($cart);
 }
 
 ?>
