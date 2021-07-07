@@ -33,7 +33,7 @@
             // Get from Cart
             $booksOrdered = array();
             foreach ($tempCart as $id => $props) {
-                $book = array("isbn"=>$props["isbn"], "quantity"=>$props["amt"], "subtotal"=>$props["price"], "title"=>$props["title"]);
+                $book = array("isbn"=>$props["isbn"], "quantity"=>$props["amt"], "subtotal"=>$props["price"], "title"=> mysqli_real_escape_string($conn, $props["title"]));
                 array_push($booksOrdered, $book);
             }
 
