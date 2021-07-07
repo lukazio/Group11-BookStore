@@ -104,12 +104,44 @@ if (!isset($_SESSION))
                              "<div class=\"cart-subtotal\">Sub-Total: RM " . $subtotal . "</div>".
                             "<div class=\"row m-0\">".
                                 "<div class=\"col-6 pl-0 pr-2\">".
-                                    "<a href=\"cart.php\" class=\"btn btn-warning cart-btn btn-block\">View Cart</a>".
+                                    "<a href=\"cart.php\" class=\"btn btn-warning cart-btn btn-block text-white\">View Cart</a>".
                                 "</div>".
                                 "<div class=\"col-6 pl-0 pr-2\">".
-                                    "<a href=\"checkout.php\" class=\"btn btn-info btn-block\">Checkout</a>".
+                                    "<a id=\"headerCheckOut\" class=\"btn btn-info btn-block text-white\" onclick=\"checkOutOnClick()\">Checkout</a>".
                                 "</div>".
                             "</div>";
+                        }
+                        
+                        // If User not login handle with JScript
+                        if(!isset($_SESSION['username'])){
+                            echo '<script>
+                                    function checkOutOnClick(){
+                                        var link = "login.php?fromcart=1";
+                                        Swal.fire({
+                                            icon: "warning",
+                                            type: "warning",
+                                            title: "Login Required for Checking Out",
+                                            text: "You are required to be signed in with a user account to place your order.",
+                                            showCancelButton: true,
+                                            confirmButtonText: "Login",
+                                            confirmButtonColor: "#17a2b8",
+                                            cancelButtonText: "Cancel",
+                                            reverseButtons: true
+                                        }).then((result) => {
+                                            if(result.value){
+                                                window.location.href=link;
+                                            }
+                                        });
+                                    }
+                                  </script>';
+                        }
+                        else{
+                            echo '<script>
+                                    function checkOutOnClick(){
+                                        var link = "checkout.php";
+                                        window.location=link;
+                                    }
+                                  </script>';
                         }
                         ?>
                     </ul>
