@@ -10,3 +10,8 @@ hr {
     padding-top: 6px;
     padding-bottom: 6px;
 }
+
+.isbn-disabled {
+    background-color: #bfbfbf !important;
+    border-color: #808080 !important;
+}

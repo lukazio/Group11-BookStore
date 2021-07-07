@@ -50,6 +50,7 @@
 }
 
 .checkout-btn{
+    color: white !important;
     margin-bottom: 32px;
     display: block;
     width: 80%;
@@ -63,5 +64,9 @@ a.disabled {
 
 .unavailable {
     color: red !important;
+}
+
+.btn-danger{
+    color: white !important;
 }
 
