@@ -31,7 +31,7 @@
                     if($addstock_status == 'success')
                         echo '<i class="fa fa-fw fa-check-circle"></i> Book successfully added! <a href="stock_levels.php">Click here</a> if you wish to return to previous page.';
                     else if($addstock_status == 'danger')
-                        echo '<i class="fa fa-fw fa-exclamation-triangle"></i> Failed to add book, please ensure valid details and ISBN-13 number must not be a duplicate.';
+                        echo '<i class="fa fa-fw fa-exclamation-triangle"></i> Failed to add book, please ensure valid link, details, and ISBN-13 number must not be a duplicate.';
                     ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -112,7 +112,7 @@
                 </div>
                 <hr>
                 <div class="text-right">
-                    <button type="submit" class="btn btn-success" name="addstock_submit"><i class="fa fa-floppy-o"></i>&nbsp; Submit</button>
+                    <button id="btnAddBook" type="button" class="btn btn-success" name="addstock_submit"><i class="fa fa-floppy-o"></i>&nbsp; Submit</button>
                 </div>
             </form>
         </div>
@@ -173,6 +173,41 @@
                         $(this).val(0);
                         $('#rangeQty').val(0);
                     }
+                });
+                
+                $('#btnAddBook').on('click', function(e){
+                    var $form = $(this).closest('form');
+                    
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Confirm book insertion?',
+                        text: 'Please check if details are entered correctly, you may edit the details anytime but the ISBN cannot be changed.',
+                        showCancelButton: true,
+                        confirmButtonColor: '#5cb85c',
+                        cancelButtonText: 'Cancel',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if(result.value){
+                            jQuery('<button></button>', {
+                                id: 'btnAddBookSubmit',
+                                type: 'submit',
+                                name: 'addstock_submit',
+                                style: 'display: none;'
+                            }).insertAfter('#btnAddBook');
+                            
+                            setTimeout(function(){
+                                $('#btnAddBookSubmit').click();
+                            }, 300);
+                            
+                            $form.submit(function(){
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Adding new book...',
+                                    showConfirmButton: false
+                                });
+                            });
+                        }
+                    });
                 });
             });
         </script>

@@ -19,20 +19,53 @@
     <body class="bg-dark">
         <div class="container text-white">
             <h1 class="py-4 font-weight-light">Welcome, Administrator.</h1>
-            <h3>
-                Stock Levels
-                <span class="float-right"><a class="mb-3 btn btn-success" href="add_stock.php"><i class="fa fa-plus"></i>&nbsp; Add Stock</a></span>
-            </h3>
-            <hr>
-            
-            <div class="form-group search mb-3">
-                <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control" id="searchStock" name="searchStock" placeholder="Search for book title or ISBN in system">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h3>Stock Levels</h3>
+                </div>
+                <div class="col-12 col-md-6 text-md-right">
+                    <span><a class="btn btn-info" href="order_history.php"><i class="fa fa-clock-o"></i>&nbsp; Orders</a></span>
+                    <span class="ml-1"><a class="btn btn-success" href="add_stock.php"><i class="fa fa-plus"></i>&nbsp; Add Stock</a></span>
+                </div>
             </div>
             
+            <hr>
+            
+            <form action="stock_levels.php" method="get">
+                <div class="form-group mb-3">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                <label id="quickSearchContainer" class="btn btn-secondary quicksearch-toggle" data-toggle="tooltip" data-placement="top" title="Toggle Quicksearch">
+                                    <input id="quickSearch" type="checkbox" autocomplete="off"><i class="fa fa-search"></i>
+                                </label>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" id="searchStock" name="search" <?php if(isset($_GET['search'])) echo 'value="'.$_GET['search'].'"'; ?> placeholder="Search for book title or ISBN in system">
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="submit">Manual Filter</button>
+                            <a class="btn btn-secondary" href="stock_levels.php">Reset</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
             <?php
-            // Get all books in the system
-            $getBooksSql = "SELECT * FROM book ORDER BY isbn;";
+            $limit = 15;
+            if(isset($_GET["page"]))
+                $page = $_GET["page"];
+            else
+                $page = 1;
+            $start_from = ($page-1)*$limit;
+            // Get all orders in the system or filtered
+            if(isset($_GET['search'])) {
+                $getBooksSql = "SELECT * FROM book "
+                        . "WHERE isbn LIKE('%".$_GET['search']."%') "
+                        . "OR title LIKE('%".$_GET['search']."%') "
+                        . "ORDER BY isbn LIMIT $start_from, $limit;";
+            }
+            else
+                $getBooksSql = "SELECT * FROM book ORDER BY isbn LIMIT $start_from, $limit;";
             $getBooksResult = mysqli_query($conn,$getBooksSql);
             ?>
             
@@ -82,15 +115,73 @@
                     </tbody>
                 </table>
             </div>
+            
+            <?php
+            $result_db;
+            $countRowsSql;
+            if(isset($_GET['search'])) {
+                $countRowsSql = "SELECT COUNT(isbn) FROM book "
+                        . "WHERE isbn LIKE('%".$_GET['search']."%') "
+                        . "OR title LIKE('%".$_GET['search']."%');";
+            }
+            else
+                $countRowsSql = "SELECT COUNT(isbn) FROM book;";
+            $result_db = mysqli_query($conn, $countRowsSql);
+            $row_db = mysqli_fetch_row($result_db);
+            $total_records = $row_db[0];
+            $total_pages = ceil($total_records / $limit);
+            
+            if($total_pages > 1) {
+                $pagLink = "<ul class='pagination mb-4'>";
+                for($i=1; $i<=$total_pages; $i++) {
+                    if(isset($_GET['search'])) {
+                        if($page == $i)
+                            $pagLink .= "<li class='page-item active-page'><a class='page-link' href='stock_levels.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
+                        else
+                            $pagLink .= "<li class='page-item'><a class='page-link' href='stock_levels.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
+                    }
+                    else {
+                        if($page == $i)
+                            $pagLink .= "<li class='page-item active-page'><a class='page-link' href='stock_levels.php?page=".$i."'>".$i."</a></li>";
+                        else
+                            $pagLink .= "<li class='page-item'><a class='page-link' href='stock_levels.php?page=".$i."'>".$i."</a></li>";
+                    }
+                }
+                echo $pagLink . "</ul>";
+            }
+            ?>
+            
         </div>
         
         <script type="text/javascript">
-            $(document).ready(function(){
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+            
+            $(document).ready(function() {
                 $('#searchStock').on('keyup', function() {
-                    var value = $(this).val().toLowerCase();
-                    $('#stockTable tr').filter(function() {
-                        $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf(value) > -1);
-                    });
+                    if($('#quickSearch:checked').length > 0) {
+                        var value = $(this).val().toLowerCase();
+                        $('#stockTable tr').filter(function() {
+                            $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf(value) > -1);
+                        });
+                    }
+                });
+                
+                $('#quickSearchContainer').on('click', function() {
+                    setTimeout(function() {
+                        if($('#quickSearch:checked').length > 0) {
+                            var value = $('#searchStock').val().toLowerCase();
+                            $('#stockTable tr').filter(function() {
+                                $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf(value) > -1);
+                            });
+                        }
+                        else {
+                            $('#stockTable tr').filter(function() {
+                                $(this).toggle($(this).find('.title, .isbn').text().toLowerCase().indexOf('') > -1);
+                            });
+                        }
+                    }, 1);
                 });
                 
                 $('.btn-delete-book').on('click', function(e){
@@ -98,7 +189,6 @@
                     
                     Swal.fire({
                         icon: 'warning',
-                        type: 'warning',
                         title: 'Confirm book deletion?',
                         text: 'Once this book is deleted, it cannot be restored!',
                         showCancelButton: true,
@@ -110,8 +200,7 @@
                         if(result.value){
                             Swal.fire({
                                 icon: 'success',
-                                type: 'success',
-                                title: 'Deleting...',
+                                title: 'Deleting book...',
                                 showConfirmButton: false
                             });
                             $form.submit();
