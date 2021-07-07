@@ -17,11 +17,11 @@ class BookInfoCartTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testAdd1Time() {
-        $result = $this->object->add1Time(5, 50);
-        $this->assertTrue($result);
+        $result = $this->object->add1Time(5, 50);   // Add 5 books each cost 50, 1 time
+        $this->assertTrue($result); // Expected totals: quantity 5, price 250
     }
     public function testAddNTimes() {
-        $result = $this->object->addNTimes(2, 10, 100);
-        $this->assertTrue($result);
+        $result = $this->object->addNTimes(2, 10, 100); // Add 2 books each cost 10, 100 times
+        $this->assertTrue($result); // Expected totals: quantity 200, price 2000
     }
 }
