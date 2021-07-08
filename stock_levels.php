@@ -9,6 +9,7 @@
         ?>
         
         <link rel="stylesheet" type="text/css" href="modules/stock_levels.css">
+        <link rel="stylesheet" type="text/css" href="modules/loader.css">
     </head>
     
     <?php
@@ -50,107 +51,110 @@
                 </div>
             </form>
             
-            <?php
-            $limit = 15;
-            if(isset($_GET["page"]))
-                $page = $_GET["page"];
-            else
-                $page = 1;
-            $start_from = ($page-1)*$limit;
-            // Get all orders in the system or filtered
-            if(isset($_GET['search'])) {
-                $getBooksSql = "SELECT * FROM book "
-                        . "WHERE isbn LIKE('%".$_GET['search']."%') "
-                        . "OR title LIKE('%".$_GET['search']."%') "
-                        . "ORDER BY title LIMIT $start_from, $limit;";
-            }
-            else
-                $getBooksSql = "SELECT * FROM book ORDER BY title LIMIT $start_from, $limit;";
-            $getBooksResult = mysqli_query($conn,$getBooksSql);
-            ?>
+            <div id="loader" class="loader">Loading...</div>
             
-            <div class="table-responsive">
-                <table class="table table-dark table-hover mb-4">
-                    <thead>
-                        <tr>
-                            <th scope="col">Image</th>
-                            <th scope="col">ISBN-13</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Stock</th>
-                            <th scope="col" class="text-right">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="stockTable">
-                        <?php
-                        if(mysqli_num_rows($getBooksResult) > 0){
-                            foreach($getBooksResult as $row){
-                                echo  '<tr>'
-                                        . '<td><img class="book-img" src="'.$row['picture'].'" height="70"></td>'
-                                        . '<td class="isbn">'.$row['isbn'].'</td>'
-                                        . '<td class="title">'.$row['title'].'</td>';
-                                if($row['quantity'] > 5)
-                                    echo  '<td><span class="badge badge-light">'.$row['quantity'].'</span></td>';
-                                else
-                                    echo  '<td><span class="badge badge-danger">'.$row['quantity'].'</span></td>';
-                                echo      '<td class="text-right">'
-                                            . '<div class="btn-group">'
-                                                . '<a href="edit_book.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a>'
-                                                . '<button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>'
-                                                . '<div class="dropdown-menu dropdown-menu-right py-1">'
-                                                    . '<form action="action/delete_book_action.php" method="post">'
-                                                        . '<input type="hidden" name="deletebook_submit" value="'.$row['isbn'].'">'
-                                                        . '<button type="button" class="btn btn-link text-danger py-0 btn-delete-book"><i class="fa fa-times"></i>&nbsp; Delete</button>'
-                                                    . '</form>'
-                                                . '</div>'
-                                            . '</div>'
-                                        . '</td>';
-                            }
-                        }
-                        else{
-                            echo  '<tr>'
-                                    . '<td colspan="5" class="text-center">No books found in the system!</td>'
-                                . '</tr>';
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-            
-            <?php
-            $result_db;
-            $countRowsSql;
-            if(isset($_GET['search'])) {
-                $countRowsSql = "SELECT COUNT(isbn) FROM book "
-                        . "WHERE isbn LIKE('%".$_GET['search']."%') "
-                        . "OR title LIKE('%".$_GET['search']."%');";
-            }
-            else
-                $countRowsSql = "SELECT COUNT(isbn) FROM book;";
-            $result_db = mysqli_query($conn, $countRowsSql);
-            $row_db = mysqli_fetch_row($result_db);
-            $total_records = $row_db[0];
-            $total_pages = ceil($total_records / $limit);
-            
-            if($total_pages > 1) {
-                $pagLink = "<ul class='pagination mb-4'>";
-                for($i=1; $i<=$total_pages; $i++) {
-                    if(isset($_GET['search'])) {
-                        if($page == $i)
-                            $pagLink .= "<li class='page-item active-page'><a class='page-link' href='stock_levels.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
-                        else
-                            $pagLink .= "<li class='page-item'><a class='page-link' href='stock_levels.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
-                    }
-                    else {
-                        if($page == $i)
-                            $pagLink .= "<li class='page-item active-page'><a class='page-link' href='stock_levels.php?page=".$i."'>".$i."</a></li>";
-                        else
-                            $pagLink .= "<li class='page-item'><a class='page-link' href='stock_levels.php?page=".$i."'>".$i."</a></li>";
-                    }
+            <div id="stockLevelsList" style="visibility: hidden;">
+                <?php
+                $limit = 15;
+                if(isset($_GET["page"]))
+                    $page = $_GET["page"];
+                else
+                    $page = 1;
+                $start_from = ($page-1)*$limit;
+                // Get all orders in the system or filtered
+                if(isset($_GET['search'])) {
+                    $getBooksSql = "SELECT * FROM book "
+                            . "WHERE isbn LIKE('%".$_GET['search']."%') "
+                            . "OR title LIKE('%".$_GET['search']."%') "
+                            . "ORDER BY title LIMIT $start_from, $limit;";
                 }
-                echo $pagLink . "</ul>";
-            }
-            ?>
-            
+                else
+                    $getBooksSql = "SELECT * FROM book ORDER BY title LIMIT $start_from, $limit;";
+                $getBooksResult = mysqli_query($conn,$getBooksSql);
+                ?>
+
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover mb-4">
+                        <thead>
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">ISBN-13</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col" class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTable">
+                            <?php
+                            if(mysqli_num_rows($getBooksResult) > 0){
+                                foreach($getBooksResult as $row){
+                                    echo  '<tr>'
+                                            . '<td><img class="book-img" src="'.$row['picture'].'" height="70"></td>'
+                                            . '<td class="isbn">'.$row['isbn'].'</td>'
+                                            . '<td class="title">'.$row['title'].'</td>';
+                                    if($row['quantity'] > 5)
+                                        echo  '<td><span class="badge badge-light">'.$row['quantity'].'</span></td>';
+                                    else
+                                        echo  '<td><span class="badge badge-danger">'.$row['quantity'].'</span></td>';
+                                    echo      '<td class="text-right">'
+                                                . '<div class="btn-group">'
+                                                    . '<a href="edit_book.php?isbn='.$row['isbn'].'" class="btn btn-info"><i class="fa fa-pencil"></i>&nbsp; Details</a>'
+                                                    . '<button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>'
+                                                    . '<div class="dropdown-menu dropdown-menu-right py-1">'
+                                                        . '<form action="action/delete_book_action.php" method="post">'
+                                                            . '<input type="hidden" name="deletebook_submit" value="'.$row['isbn'].'">'
+                                                            . '<button type="button" class="btn btn-link text-danger py-0 btn-delete-book"><i class="fa fa-times"></i>&nbsp; Delete</button>'
+                                                        . '</form>'
+                                                    . '</div>'
+                                                . '</div>'
+                                            . '</td>';
+                                }
+                            }
+                            else{
+                                echo  '<tr>'
+                                        . '<td colspan="5" class="text-center">No books found in the system!</td>'
+                                    . '</tr>';
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <?php
+                $result_db;
+                $countRowsSql;
+                if(isset($_GET['search'])) {
+                    $countRowsSql = "SELECT COUNT(isbn) FROM book "
+                            . "WHERE isbn LIKE('%".$_GET['search']."%') "
+                            . "OR title LIKE('%".$_GET['search']."%');";
+                }
+                else
+                    $countRowsSql = "SELECT COUNT(isbn) FROM book;";
+                $result_db = mysqli_query($conn, $countRowsSql);
+                $row_db = mysqli_fetch_row($result_db);
+                $total_records = $row_db[0];
+                $total_pages = ceil($total_records / $limit);
+
+                if($total_pages > 1) {
+                    $pagLink = "<ul class='pagination mb-4'>";
+                    for($i=1; $i<=$total_pages; $i++) {
+                        if(isset($_GET['search'])) {
+                            if($page == $i)
+                                $pagLink .= "<li class='page-item active-page'><a class='page-link' href='stock_levels.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
+                            else
+                                $pagLink .= "<li class='page-item'><a class='page-link' href='stock_levels.php?page=".$i."&search=".$_GET['search']."'>".$i."</a></li>";
+                        }
+                        else {
+                            if($page == $i)
+                                $pagLink .= "<li class='page-item active-page'><a class='page-link' href='stock_levels.php?page=".$i."'>".$i."</a></li>";
+                            else
+                                $pagLink .= "<li class='page-item'><a class='page-link' href='stock_levels.php?page=".$i."'>".$i."</a></li>";
+                        }
+                    }
+                    echo $pagLink . "</ul>";
+                }
+                ?>
+            </div>
         </div>
         
         <script type="text/javascript">
@@ -159,6 +163,9 @@
             });
             
             $(document).ready(function() {
+                $('#stockLevelsList').removeAttr('style');
+                $('#loader').hide();
+                
                 $('#searchStock').on('keyup', function() {
                     if($('#quickSearch:checked').length > 0) {
                         var value = $(this).val().toLowerCase();

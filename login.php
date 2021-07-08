@@ -38,12 +38,12 @@
                     </section>
                     
                     <div class="form-group">
-                        <label for="text_username_email">Email</label>
+                        <label for="text_username_email"><b>Email</b></label>
                         <input type="email" class="form-control" name="email" placeholder="Enter Email">
                     </div>
                     
                     <div class="form-group">
-                        <label for='text_password'>Password</label>
+                        <label for='text_password'><b>Password</b></label>
                         <input type="password" class="form-control" name="password" placeholder="Enter Password">
                     </div>
                     
@@ -65,7 +65,7 @@
                             }
                             ?>
                     </div>
-                    <button class="btn_login" type="submit" name="submit"> Log In </button>
+                    <button class="btn btn-info btn-login btn-lg btn-block" type="submit" name="submit">Log In</button>
                 </form>
             </section>
         </section>
