@@ -30,28 +30,28 @@
             
             <hr>
             
-            <form action="order_history.php" method="get">
-                <div class="form-group mb-3">
-                    <div class="input-group">
-                        <div class="input-group-append">
-                            <div class="btn-group-toggle" data-toggle="buttons">
-                                <label id="quickSearchContainer" class="btn btn-secondary quicksearch-toggle" data-toggle="tooltip" data-placement="top" title="Toggle Quicksearch">
-                                    <input id="quickSearch" type="checkbox" autocomplete="off"><i class="fa fa-search"></i>
-                                </label>
-                            </div>
-                        </div>
-                        <input type="text" class="form-control" id="searchOrder" name="search" <?php if(isset($_GET['search'])) echo 'value="'.$_GET['search'].'"'; ?> placeholder="Search for order ID, email, or username">
-                        <div class="input-group-append">
-                            <button class="btn btn-info" type="submit">Manual Filter</button>
-                            <a class="btn btn-secondary" href="order_history.php">Reset</a>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            
             <div id="loader" class="loader">Loading...</div>
             
             <div id="orderHistoryList" style="visibility: hidden;">
+                <form action="order_history.php" method="get">
+                    <div class="form-group mb-3">
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <label id="quickSearchContainer" class="btn btn-secondary quicksearch-toggle" data-toggle="tooltip" data-placement="top" title="Toggle Quicksearch">
+                                        <input id="quickSearch" type="checkbox" autocomplete="off"><i class="fa fa-search"></i>
+                                    </label>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control" id="searchOrder" name="search" <?php if(isset($_GET['search'])) echo 'value="'.$_GET['search'].'"'; ?> placeholder="Search for order ID, email, or username">
+                            <div class="input-group-append">
+                                <button class="btn btn-info" type="submit">Manual Filter</button>
+                                <a class="btn btn-secondary" href="order_history.php">Reset</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            
                 <?php
                 $limit = 25;
                 if(isset($_GET["page"]))
