@@ -1,3 +1,10 @@
+.body-bg{
+    background-image: url(../img/background.jpg);
+    background-repeat: repeat;
+    background-position: 50%;
+    background-color: #f2eee5;
+}
+
 .cart-msg{
     font-weight: lighter;
     color: darkgray;
@@ -69,4 +76,3 @@ a.disabled {
 .btn-danger{
     color: white !important;
 }
-
