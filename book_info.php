@@ -37,93 +37,94 @@
                     <div class="card">
                         <img class="img-preview" src="<?php echo $bookRow['picture']; ?>">
                     </div>
-                    <div class="card text-left">
+                    <div class="card text-left mb-0">
                         <h4 class="mb-4">Description</h4>
-                        <!-- TODO: If description too long, make it collapsible -->
                         <p id="descCollapse" class="m-0 text-justify" aria-expanded="false"><?php echo nl2br($bookRow['description']); ?></p>
                         <a id="collapseBtn" role="button" class="collapsed collapse-btn mt-4 orange" data-toggle="collapse" href="#descCollapse" aria-expanded="false" aria-controls="descCollapse"></a>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6 text-center right-column pl-0">
-                    <div class="card text-left">
-                        <h3><?php echo $bookRow['title']; ?></h3>
-                        <?php
-                        if($bookRow['quantity'] > 0)
-                            echo '<h5 class="mb-3"><span class="badge badge-orange">In Stock</span></h5>';
-                        else
-                            echo '<h5 class="mb-3"><span class="badge badge-danger">Out of Stock</span></h5>';
-                        ?>
-                        <p class="orange m-0"><?php echo $bookRow['author']; ?></p>
-                        
-                        <hr class="card-separator">
-                        
-                        <div class="product-info-table d-table">
-                            <div class="d-table-row">
-                                <div class="d-table-cell"><span class="h6">Price:</span></div>
-                                <div class="d-table-cell w-100 pl-3">
-                                    <h4 class="font-weight-normal orange d-block m-0">RM<?php echo $bookRow['retail_price']; ?></h4>
+                    <div class="sticky">
+                        <div class="card text-left">
+                            <h3><?php echo $bookRow['title']; ?></h3>
+                            <?php
+                            if($bookRow['quantity'] > 0)
+                                echo '<h5 class="mb-3"><span class="badge badge-orange">In Stock</span></h5>';
+                            else
+                                echo '<h5 class="mb-3"><span class="badge badge-danger">Out of Stock</span></h5>';
+                            ?>
+                            <p class="orange m-0"><?php echo $bookRow['author']; ?></p>
+
+                            <hr class="card-separator">
+
+                            <div class="product-info-table d-table">
+                                <div class="d-table-row">
+                                    <div class="d-table-cell"><span class="h6">Price:</span></div>
+                                    <div class="d-table-cell w-100 pl-3">
+                                        <h4 class="font-weight-normal orange d-block m-0">RM<?php echo $bookRow['retail_price']; ?></h4>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="d-table-row">
-                                <div class="d-table-cell"><span class="h6">Stock:</span></div>
-                                <div class="d-table-cell w-100 pl-3">
-                                    <?php
-                                    if($bookRow['quantity'] <= 5)
-                                        echo '<span class="font-weight-bold text-red"><span class="small"><i class="fa fa-fw fa-circle"></i></span>&nbsp; Only '.$bookRow['quantity'].' unit(s) left</span>';
-                                    else
-                                        echo '<span class="font-weight-bold text-success"><span class="small"><i class="fa fa-fw fa-circle"></i></span>&nbsp; In stock with '.$bookRow['quantity'].' unit(s)</span>';
-                                    ?>
-                                </div>
-                            </div>
-                            <div class="d-table-row">
-                                <div class="d-table-cell"><span class="h6">Quantity:</span></div>
-                                <div class="d-table-cell w-100 pl-3">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <button id="decQty" type="button" class="btn btn-outline-secondary btn-qty"><span class="small"><i class="fa fa-fw fa-minus"></i></span></button>
-                                        </div>
+                                <div class="d-table-row">
+                                    <div class="d-table-cell"><span class="h6">Stock:</span></div>
+                                    <div class="d-table-cell w-100 pl-3">
                                         <?php
-                                        if($bookRow['quantity'] > 0)
-                                            echo '<input type="number" id="bookQty" class="book-qty form-control text-center" value="1" readonly="readonly">';
+                                        if($bookRow['quantity'] <= 5)
+                                            echo '<span class="font-weight-bold text-red"><span class="small"><i class="fa fa-fw fa-circle"></i></span>&nbsp; Only '.$bookRow['quantity'].' unit(s) left</span>';
                                         else
-                                            echo '<input type="number" id="bookQty" class="book-qty form-control text-center" value="0" readonly="readonly">';
+                                            echo '<span class="font-weight-bold text-success"><span class="small"><i class="fa fa-fw fa-circle"></i></span>&nbsp; In stock with '.$bookRow['quantity'].' unit(s)</span>';
                                         ?>
-                                        <div class="input-group-append">
-                                            <button id="incQty" type="button" class="btn btn-outline-secondary btn-qty"><span class="small"><i class="fa fa-fw fa-plus"></i></span></button>
+                                    </div>
+                                </div>
+                                <div class="d-table-row">
+                                    <div class="d-table-cell"><span class="h6">Quantity:</span></div>
+                                    <div class="d-table-cell w-100 pl-3">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <button id="decQty" type="button" class="btn btn-outline-secondary btn-qty"><span class="small"><i class="fa fa-fw fa-minus"></i></span></button>
+                                            </div>
+                                            <?php
+                                            if($bookRow['quantity'] > 0)
+                                                echo '<input type="number" id="bookQty" class="book-qty form-control text-center" value="1" readonly="readonly">';
+                                            else
+                                                echo '<input type="number" id="bookQty" class="book-qty form-control text-center" value="0" readonly="readonly">';
+                                            ?>
+                                            <div class="input-group-append">
+                                                <button id="incQty" type="button" class="btn btn-outline-secondary btn-qty"><span class="small"><i class="fa fa-fw fa-plus"></i></span></button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <?php
-                            $cart_qty = 0;
-                            if(isset($_COOKIE['cart'])){
-                                $tempCart = json_decode($_COOKIE['cart'], true);
-                                foreach ($tempCart as $id => $props) {
-                                    if($props['isbn'] == $bookRow['isbn']){
-                                        $cart_qty = $tempCart[$id]['amt'];
-                                        break;
+                            <div>
+                                <?php
+                                $cart_qty = 0;
+                                if(isset($_COOKIE['cart'])){
+                                    $tempCart = json_decode($_COOKIE['cart'], true);
+                                    foreach ($tempCart as $id => $props) {
+                                        if($props['isbn'] == $bookRow['isbn']){
+                                            $cart_qty = $tempCart[$id]['amt'];
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                            
-                            if($bookRow['quantity'] > 0){
-                                if($cart_qty >= $bookRow['quantity'])
-                                    echo '<button type="button" class="btn btn-secondary btn-block" disabled="disabled"><i class="fa fa-fw fa-shopping-cart"></i> All Stock in Cart</button>';
+
+                                if($bookRow['quantity'] > 0){
+                                    if($cart_qty >= $bookRow['quantity'])
+                                        echo '<button type="button" class="btn btn-secondary btn-block" disabled="disabled"><i class="fa fa-fw fa-shopping-cart"></i> All Stock in Cart</button>';
+                                    else
+                                        echo '<button id="addToCart" type="button" class="btn btn-warning btn-block"><i class="fa fa-fw fa-shopping-cart"></i> Add to Cart</button>';
+                                }
                                 else
-                                    echo '<button id="addToCart" type="button" class="btn btn-warning btn-block"><i class="fa fa-fw fa-shopping-cart"></i> Add to Cart</button>';
-                            }
-                            else
-                                echo '<button type="button" class="btn btn-secondary btn-block" disabled="disabled"><i class="fa fa-fw fa-shopping-cart"></i> Sold Out</button>';
-                            ?>
+                                    echo '<button type="button" class="btn btn-secondary btn-block" disabled="disabled"><i class="fa fa-fw fa-shopping-cart"></i> Sold Out</button>';
+                                ?>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card text-left">
-                        <p class="mb-2"><span class="h6">Product Details:</span></p>
-                        <p class="mb-2"><span class="h6">Author:</span> <?php echo $bookRow['author']; ?></p>
-                        <p class="mb-2"><span class="h6">ISBN:</span> <?php echo $bookRow['isbn']; ?></p>
-                        <p class="mb-0"><span class="h6">Date:</span> <?php echo date('d/m/Y', strtotime($bookRow['publish_date'])); ?></p>
+                        <div class="card text-left">
+                            <p class="mb-2"><span class="h6">Product Details:</span></p>
+                            <p class="mb-2"><span class="h6">Author:</span> <?php echo $bookRow['author']; ?></p>
+                            <p class="mb-2"><span class="h6">ISBN:</span> <?php echo $bookRow['isbn']; ?></p>
+                            <p class="mb-0"><span class="h6">Date:</span> <?php echo date('d/m/Y', strtotime($bookRow['publish_date'])); ?></p>
+                        </div>
                     </div>
                 </div>
             </div>
