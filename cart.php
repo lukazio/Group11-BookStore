@@ -14,7 +14,8 @@
     require 'modules/dbconnect.php';
     include 'modules/header.php';
     ?>
-
+    
+    <body class="body-bg">
     <?php
         /**
          *======================================== MAIN ===================================================
@@ -296,6 +297,7 @@
             }
         }
     ?>
+    </body>
     
     <?php
     include 'modules/footer.php';

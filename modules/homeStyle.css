@@ -1,5 +1,8 @@
 .body-bg{
-    background-color: #f4f5f7;
+    background-image: url(../img/background.jpg);
+    background-repeat: repeat;
+    background-position: 50%;
+    background-color: #f2eee5;
 }
 
 .jumbotron {

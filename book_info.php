@@ -27,7 +27,7 @@
     $bookRow = mysqli_fetch_assoc($bookInfoResult);
     ?>
     
-    <body>
+    <body class="body-bg">
         <div class="container">
             <div class="back-link">
                 <a href="home.php" class="small"><i class="fa fa-fw fa-angle-left"></i> Back</a>
