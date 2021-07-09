@@ -17,9 +17,11 @@
 
     <body class="body-bg">
         <!-- Banner -->       
-        <div class="jumbotron background-tint">
-            <h1>Welcome to Mondstadt Book Store</h1>
-            <p>WE ARE LOCATED AT PLACES NO ONE KNOWS<br>BUT WE DELIVER TO DOORSTEPS.</p>
+        <div class="jumbotron background-tint text-center">
+            <p class="display-4 font-weight-light m-0">Welcome to</p>
+            <p class="display-4 font-weight-bold">Mondstadt Library Book Store</p>
+            <p class="h3 my-4 font-weight-light">WE ARE LOCATED AT PLACES NO ONE KNOWS,<br>BUT WE SOMEHOW DELIVER TO DOORSTEPS.</p>
+            <p class="m-0 h3"><b>ENJOY YOUR STAY.</b></p>
         </div> 
 
         <!-- Heading -->
@@ -147,7 +149,7 @@
                     while ($row = $result->fetch_assoc()) {
                         echo
                         "<div data-role=\"holder\" class=\"col-6 col-md-3 mb-5\">" .
-                        "<div class=\"card h-100\" data-role=\"book\">" .
+                        "<div class=\"card h-100 box\" data-role=\"book\">" .
                         "<img data-role=\"cardImgTop\" class=\"card-img-top\" src=\"" . $row["picture"] . "\" alt=\"" . $row["title"] . "\" onerror=\"this.src='img/placeholder.png';\">" .
                         "<div data-role=\"cardBody\" class=\"card-body\">" .
                         "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12\"><a class=\"card-title\" href=\"book_info.php?isbn=" . $row["isbn"] . "\">" . $row["title"] . "</a></h5></div>" .
