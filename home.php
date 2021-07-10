@@ -76,11 +76,11 @@
                 selectedIcon.removeClass("fa fa-list").addClass("fa fa-th");
                 // Change Holder to Row
                 var classToChg = $('div[data-role="holder"]');
-                classToChg.addClass('col-md-3').addClass('col-6').addClass('mb-5').removeClass('row').removeClass('listView');
+                classToChg.addClass('col-6').addClass('mb-5').addClass('col-lg-3').addClass('col-md-4').removeClass('row').removeClass('listView');
                 classToChg.parent().addClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
-                card.removeClass("row").addClass("card").addClass("h-100");
+                card.removeClass("row").removeClass('w-100').addClass("card").addClass("h-100");
                 // Change Image View
                 var img = $('img[data-role="cardImgTop"]');
                 img.removeClass("col-3").addClass("card-img-top");
@@ -101,11 +101,11 @@
                 selectedIcon.removeClass("fa fa-th").addClass("fa fa-list");
                 // Change Holder to Row
                 var classToChg = $('div[data-role="holder"]');
-                classToChg.addClass('row').addClass('listView').removeClass('col-md-3').removeClass('mb-5').removeClass('col-6');
+                classToChg.addClass('row').addClass('listView').removeClass('mb-5').removeClass('col-lg-3').removeClass('col-md-4').removeClass('col-6');
                 classToChg.parent().removeClass('row');
                 // Replace Book Card with Row
                 var card = $('div[data-role="book"]');
-                card.removeClass("card").removeClass("h-100").addClass("row");
+                card.removeClass("card").removeClass("h-100").addClass("row").addClass('w-100');
                 // Change Image View
                 var img = $('img[data-role="cardImgTop"]');
                 img.removeClass("card-img-top").addClass("col-3");

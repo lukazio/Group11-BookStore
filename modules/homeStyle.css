@@ -47,8 +47,7 @@
 }
 
 .listView {
-    margin-bottom: 32px;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 16px;
     border-radius: 0.25rem;
 }
 
