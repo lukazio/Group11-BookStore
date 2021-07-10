@@ -24,7 +24,7 @@
             $cart = json_decode($_COOKIE['cart'], true);
             if(isset($cart)){
                 if (count($cart) < 1) {
-                    echo '<center><h1 class="cart-msg">Your cart is empty...<br>Add some books to view it here</h1><center>';
+                    echo '<h1 class="cart-msg my-5 text-center">Your cart is empty...<br>Add some books to view it here</h1>';
                 }
                 else{
                     $total=0;
@@ -63,11 +63,11 @@
                 printScript();
             }
             else{
-                echo '<center><h1 class="cart-msg">Error Retrieving Cart from Session!</h1></center>';
+                echo '<h1 class="cart-msg my-5 text-center">Error Retrieving Cart from Session!</h1>';
             }
         }
         else{
-            echo '<center><h1 class="cart-msg">Your cart is empty...<br>Add some books to view it here</h1><center>';
+            echo '<h1 class="cart-msg my-5 text-center">Your cart is empty...<br>Add some books to view it here</h1>';
         }
         //====================================== MAIN END =================================================
         
