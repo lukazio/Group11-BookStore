@@ -1,0 +1,11 @@
+body {
+    background-color: #f4f5f7;
+}
+.nav-tabs .nav-link {
+    color: #f19a0e;
+    font-weight: 500;
+}
+#imgProfile {
+    width: 150px;
+    height: 150px
+}
