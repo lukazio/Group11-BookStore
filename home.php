@@ -154,9 +154,9 @@
                         "<div class=\"card h-100 box\" data-role=\"book\">" .
                         "<img data-role=\"cardImgTop\" class=\"card-img-top\" src=\"" . $row["picture"] . "\" alt=\"" . $row["title"] . "\" onerror=\"this.src='img/placeholder.png';\">" .
                         "<div data-role=\"cardBody\" class=\"card-body\">" .
-                        "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12\"><a class=\"card-title\" href=\"book_info.php?isbn=" . $row["isbn"] . "\">" . $row["title"] . "</a></h5></div>" .
-                        "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">" . $row["author"] . "</p></div>" .
-                        "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text\">RM " . $row["retail_price"] . "</p></div>";
+                        "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12 card-title-holder\"><a class=\"card-title\" href=\"book_info.php?isbn=" . $row["isbn"] . "\">" . $row["title"] . "</a></h5></div>" .
+                        "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text author pb-0 mb-2\">" . $row["author"] . "</p></div>" .
+                        "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text card-price\">RM " . $row["retail_price"] . "</p></div>";
 
                         if (isset($_COOKIE['cart'])) { //if cart cookie is intialized
                             $available = true;

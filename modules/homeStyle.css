@@ -68,17 +68,39 @@
     color: #aaa;
 }
 
-.card-title{
-    color: #55a2d9;    
+.card-title {
+    color: #f19a0e;
+    font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.card-title:hover {
+    color: #c17b0b;
+    text-decoration: none;
 }
 
-.card-title:hover{
-    text-decoration: none;
+.card-title-holder {
+    height: 65px;
+}
+
+.author {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .card-text{
     padding-bottom: 8px;
     font-weight: lighter
+}
+
+.card-price {
+    font-weight: normal;
 }
 
 .cart-btn{
