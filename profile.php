@@ -34,7 +34,7 @@
         }
         ?>
         <div class="container">
-            <div class="row my-5">
+            <div class="my-5">
                 <div class="my-3">
                     <?php
                     if (isset($_GET["error"])) {
@@ -68,7 +68,7 @@
                         <div class="d-flex justify-content-start">
                             <div class="image-container">
                                 <img src="img/profile_icon.png" alt="" id="imgProfile" class="img-fluid"/>
-                                <div class="userData ml-3">
+                                <div class="userData mt-4">
                                     <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><?php echo $username ?></h2>
                                 </div>
                             </div>
@@ -136,9 +136,12 @@
                                                         <input type="password" class="form-control" name="new_retype_password" id="retypeInputPassword" placeholder="Confirm New Password">
                                                     </div>
                                                 </div>
+                                                <div class="form-group row">
+                                                    <p class="form-desc font-weight-light mt-3 mb-0 h5">Remember to store your new password somewhere secure and safe!</p>
+                                                </div>
 
                                                 <input type="hidden" name="changepw_submit">
-                                                <button type="button" class="btn btn-primary btn-submit">Submit</button>
+                                                <button id="btnChangePassword" type="button" class="btn btn-warning btn-submit mt-3">Submit</button>
 
                                             </form>
                                         </div>
@@ -192,7 +195,7 @@
                                                         echo
                                                         '<select class="form-control" name="newCountry" id="newCountry" required>';
                                                         if ($row["country"] == null) {
-                                                            echo'<option value = "">Select country</option>';
+                                                            echo'<option value = "">Select Country</option>';
                                                         }
                                                         foreach ($countries as $value) {
 
@@ -207,8 +210,11 @@
                                                         ?>
                                                     </div>
                                                 </div>
+                                                <div class="form-group row">
+                                                    <p class="form-desc font-weight-light mt-3 mb-0 h5">Your old address will be overwritten, remember to note it down!</p>
+                                                </div>
 
-                                                <button type="submit" class="btn btn-primary" name="submitted">Submit</button>
+                                                <button type="submit" class="btn btn-warning btn-submit mt-3" name="submitted">Submit</button>
                                             </form>
                                         </div>
                                     </div>
@@ -221,7 +227,7 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function(){
-                $('.btn-submit').on('click', function(e){
+                $('#btnChangePassword').on('click', function(e){
                     var $form = $(this).parents('form');
 
                     Swal.fire({
