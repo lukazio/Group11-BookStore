@@ -18,32 +18,19 @@
   background-blend-mode: multiply;
 }
 
-#grid:hover{
-    background-color: #d99d7b !important;
+.viewchanger a:hover {
+    cursor: pointer;
+    background-color: #f29d16 !important;
+    color: white !important;
 }
-
-#grid.active:after {
+.viewchanger a.active {
+    background-color: #f29d16 !important;
+    color: white !important;
+}
+.viewchanger a.active:after {
     content: '\f00c';
     font-family: FontAwesome;
     float: left;
-}
-
-#grid.active{
-    background-color: #d99d7b !important;
-}
-
-#list:hover{
-    background-color: #d99d7b !important;
-}
-
-#list.active:after {
-    content: '\f00c';
-    font-family: FontAwesome;
-    float: left;
-}
-
-#list.active{
-    background-color: #d99d7b !important;
 }
 
 .listView {
@@ -70,6 +57,8 @@
 .card-title {
     color: #f19a0e;
     font-size: 18px;
+}
+.card-title-grid {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

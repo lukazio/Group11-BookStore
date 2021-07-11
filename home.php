@@ -42,7 +42,7 @@
                               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span id="selectedView" class="fa fa-th"></span>
                               </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <div class="dropdown-menu viewchanger" aria-labelledby="dropdownMenuButton">
                                 <a id="grid" class="dropdown-item active" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
                                 <a id="list" class="dropdown-item" href="#">List View &nbsp;<span class="fa fa-list"></span></a>
                               </div>
@@ -55,9 +55,9 @@
                               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span id="selectedView" class="fa fa-th"></span>
                               </button>
-                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a id="grid" class="dropdown-item active" href="#">Grid View &nbsp;<span class="fa fa-th"></span></a>
-                                <a id="list" class="dropdown-item" href="#">List View &nbsp;<span class="fa fa-list"></span></a>
+                              <div class="dropdown-menu viewchanger" aria-labelledby="dropdownMenuButton">
+                                <a id="grid" class="dropdown-item active">Grid View &nbsp;<span class="fa fa-th"></span></a>
+                                <a id="list" class="dropdown-item">List View &nbsp;<span class="fa fa-list"></span></a>
                               </div>
                             </div>
                         ';
@@ -92,6 +92,11 @@
                 var cartButton = $('div[data-role="cartBtn"]');
                 rows.addClass('row').removeClass('col-3').removeClass('align-self-center');
                 cartButton.removeClass('col-3').removeClass('align-self-center');
+                // Book title length limiter
+                var bookTitle = $('a[data-role="booktitle"]');
+                var bookTitleHolder = $('h5[data-role="booktitle_holder"]');
+                bookTitle.addClass('card-title-grid');
+                bookTitleHolder.addClass('card-title-holder');
             });
             $('#list').on('click', function () {
                 // Tick List
@@ -117,6 +122,11 @@
                 var cartButton = $('div[data-role="cartBtn"]');
                 rows.removeClass('row').addClass('col-3').addClass('align-self-center');
                 cartButton.addClass('col-3').addClass('align-self-center');
+                // Book title length limiter
+                var bookTitle = $('a[data-role="booktitle"]');
+                var bookTitleHolder = $('h5[data-role="booktitle_holder"]');
+                bookTitle.removeClass('card-title-grid');
+                bookTitleHolder.removeClass('card-title-holder');
             });
         </script>
 
@@ -154,7 +164,7 @@
                         "<div class=\"card h-100 box\" data-role=\"book\">" .
                         "<img data-role=\"cardImgTop\" class=\"card-img-top\" src=\"" . $row["picture"] . "\" alt=\"" . $row["title"] . "\" onerror=\"this.src='img/placeholder.png';\">" .
                         "<div data-role=\"cardBody\" class=\"card-body\">" .
-                        "<div data-role=\"detail\" class=\"row\"><h5 class=\"col-12 card-title-holder\"><a class=\"card-title\" href=\"book_info.php?isbn=" . $row["isbn"] . "\">" . $row["title"] . "</a></h5></div>" .
+                        "<div data-role=\"detail\" class=\"row\"><h5 data-role=\"booktitle_holder\" class=\"col-12 card-title-holder\"><a data-role=\"booktitle\" class=\"card-title card-title-grid\" href=\"book_info.php?isbn=" . $row["isbn"] . "\">" . $row["title"] . "</a></h5></div>" .
                         "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text author pb-0 mb-2\">" . $row["author"] . "</p></div>" .
                         "<div data-role=\"detail\" class=\"row\"><p class=\"col-12 card-text card-price\">RM " . $row["retail_price"] . "</p></div>";
 
