@@ -99,7 +99,7 @@
                                 <textarea class="form-control" id="input-message" rows="5" placeholder="Write your message here"></textarea>
                             </div>
                             <a class="btn btn-outline-primary" href="" role="button">
-                                Sent Message</a>
+                                Send Message</a>
                         </form>
                     </div>
                 </div>

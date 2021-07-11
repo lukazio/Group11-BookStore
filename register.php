@@ -29,19 +29,19 @@ background-image: url("https://www.stmellitus.ac.uk/sites/default/files/Library%
                 <h2>Sign Up</h2>
                 <label for="username"><b>Username</b></label>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="username" id="username" >
+                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username">
                 </div>
                 <label for="email"><b>Email</b></label>
                 <div class="form-group">
-                    <input type="email" class="form-control" name="email" id="email" >
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email">
                 </div>
                 <label for="password"><b>Password</b></label>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" id="password" >
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
                 </div>
-                <label for="password2"><b>Retype Password</b></label>
+                <label for="password2"><b>Confirm Password</b></label>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password2" id="password2" >
+                    <input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password">
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success btn-lg btn-block" name="submitted">Create Account</button>

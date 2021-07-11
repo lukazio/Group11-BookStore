@@ -65,8 +65,23 @@ if(isset($_POST['submitted'])){
             $query = "INSERT INTO user (email,username,password,is_admin) 
                               VALUES('$email','$username','$password',0)";
             mysqli_query($conn, $query);
-            $_SESSION['username'] = $username;
-            header('location: home.php');
+            ?>
+            <script type="text/javascript">
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Account Created!',
+                    text: 'Your account has been successfully created, sign in now to start shopping!',
+                    showCancelButton: true,
+                    confirmButtonText: 'Login',
+                    confirmButtonColor: '#5bc0de',
+                    cancelButtonText: 'Back',
+                    reverseButtons: true
+                }).then((result) => {
+                    if(result.value)
+                        window.location.href = "login.php";
+                });
+            </script>
+            <?php
         }
     }
 }

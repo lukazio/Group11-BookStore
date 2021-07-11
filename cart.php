@@ -24,7 +24,7 @@
             $cart = json_decode($_COOKIE['cart'], true);
             if(isset($cart)){
                 if (count($cart) < 1) {
-                    echo '<center><h1 class="cart-msg">Your cart is empty...<br>Add some books to view it here</h1><center>';
+                    echo '<h1 class="cart-msg my-5 text-center">Your cart is empty...<br>Add some books to view it here</h1>';
                 }
                 else{
                     $total=0;
@@ -38,7 +38,7 @@
                                     <span id="close_btn" hidden="true" aria-hidden="true">&times;</span>
                                 </button>
                             </div>';
-                    echo '<div class="container"><h3 class="cart-heading">Your Cart</h3>';
+                    echo '<div class="container"><h1 class="cart-heading font-weight-light">Your Cart</h1>';
 
                     // Display Each Book
                     foreach ($cart as $id => $props) {
@@ -55,19 +55,19 @@
 
                     // TOTAL and CHECK OUT
                     echo
-                     "<h3 class=\"cart-heading\">Total: <b>RM " . $total . "</b></h3>".
-                    "<div class=\"row justify-content-md-center\"><a id=\"checkOut\" class=\"btn btn-info checkout-btn\" onclick=\"checkOutOnClick()\">Check Out</a></div></div>";
+                     "<h3 class=\"cart-heading font-weight-light\">Total: <b>RM " . $total . "</b></h3>".
+                    "<div class=\"row justify-content-center\"><a id=\"checkOut\" class=\"btn btn-info checkout-btn mb-5\" onclick=\"checkOutOnClick()\">Check Out</a></div></div>";
                     onCheckOut(); // Handle Check Out
                 }
                 // PRINT JSCRIPT for Response Handling
                 printScript();
             }
             else{
-                echo '<center><h1 class="cart-msg">Error Retrieving Cart from Session!</h1></center>';
+                echo '<h1 class="cart-msg my-5 text-center">Error Retrieving Cart from Session!</h1>';
             }
         }
         else{
-            echo '<center><h1 class="cart-msg">Your cart is empty...<br>Add some books to view it here</h1><center>';
+            echo '<h1 class="cart-msg my-5 text-center">Your cart is empty...<br>Add some books to view it here</h1>';
         }
         //====================================== MAIN END =================================================
         
@@ -106,15 +106,15 @@
                   <div class="col-md-6">
                     <div class="card-body">
                       <h5><a class="card-title" href="book_info.php?isbn='.$book["isbn"].'">'.$book['title'].'</a></h5>
-                      <p class="card-text"><small class="text-muted">by: '.$book['author'].'</small></p>
+                      <p class="card-text"><small class="text-muted">'.$book['author'].'</small></p>
                       <h5 class="card-text editable-text">SUBTOTAL: RM '.$bookTotalPrice.'</h5>
                       <p class="card-text"><small class="text-muted">Unit Price: RM '.$book['retail_price'].' x '.$bookQty.'</small></p>
                     </div>
                   </div>
                   <div class="col-md-2 align-self-center">
                     <div class="card-body">
-                      <h5 class="card-text center-text-align">Quantity:</h5>
-                      <div class="row justify-content-md-center">
+                      <h5 class="card-text center-text-align">Quantity</h5>
+                      <div class="row justify-content-center">
                         <a id="minus'.$id.'" class="btn btn-danger minus-sign" href="action/reduce_cart_action.php?id='.$id.'&qty='.$bookQty.'&price='.$book["retail_price"].'">-</a>
                         <h5 id="qty-label'.$id.'" class="card-text align-self-center editable-text center-text-align">'.$bookQty.'</h5>
                         <a id="plus'.$id.'" class="btn btn-success plus-sign" href="action/add_cart_action.php?id='.$id.'&stock='.$available.'&price='.$book["retail_price"].'">+</a>

@@ -1,0 +1,24 @@
+body {
+    background-color: #f4f5f7;
+}
+.nav-tabs .nav-link {
+    color: #f19a0e;
+    font-weight: 500;
+}
+#imgProfile {
+    width: 150px;
+    height: 150px
+}
+.btn-submit {
+    color: #fff;
+    background-color: #f29d16;
+    border-color: #f29d16;
+}
+.btn-submit:hover {
+    color: #fff;
+    background-color: #c17b0b;
+    border-color: #c17b0b;
+}
+.form-desc {
+    padding-left: 15px;
+}
