@@ -102,7 +102,7 @@ if (!isset($_SESSION))
                             }
                             echo
                             "<div class=\"cart-bottom position-sticky py-3\">".
-                                "<div class=\"cart-subtotal\">Sub-Total: RM " . $subtotal . "</div>".
+                                "<div class=\"cart-subtotal\">Sub-Total: <span class=\"font-weight-bold\">RM " . $subtotal . "</span></div>".
                                 "<div class=\"row m-0\">".
                                     "<div class=\"col-6 pl-0 pr-2\">".
                                         "<a href=\"cart.php\" class=\"btn btn-warning cart-btn btn-block text-white\">View Cart</a>".

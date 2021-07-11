@@ -81,7 +81,7 @@
 }
 
 .cart-title{
-    color: #55a2d9;  
+    color: #f19a0e;  
 }
 
 .cart-qty{
@@ -89,11 +89,10 @@
 }
 .cart-price{
     font-size: 20px;
-    font-weight: lighter;
+    color: #f19a0e;
 }
 .cart-subtotal{
     padding-bottom: 8px;
-    font-weight: bold;
     font-size: 20px;
     color: #55a2d9; 
 }

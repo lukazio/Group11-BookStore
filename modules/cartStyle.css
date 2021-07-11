@@ -11,7 +11,6 @@
 }
 
 .cart-heading{
-    font-weight: lighter;
     margin: 32px 32px 36px 36px;
 }
 
@@ -22,10 +21,11 @@
 }
 
 .card-title{
-    color: #55a2d9;
+    color: #f19a0e;
 }
 
 .card-title:hover{
+    color: #c17b0b;
     text-decoration: none;
 }
 
