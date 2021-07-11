@@ -14,6 +14,9 @@
     transform: translateY(0px);
     transition: .5s ease all;
 }
+#cartDropdownMenu li.list-group-item {
+    border: 0;
+}
 .color-fade a {
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
@@ -60,7 +63,6 @@
     margin-left: -10px;
 }
 .badge {
-
     padding-left: 9px;
     padding-right: 9px;
     -webkit-border-radius: 9px;
@@ -90,7 +92,6 @@
     font-weight: lighter;
 }
 .cart-subtotal{
-    margin-top: 12px;
     padding-bottom: 8px;
     font-weight: bold;
     font-size: 20px;
@@ -114,4 +115,9 @@
 .cart-list-item {
     padding-left: 16px;
     padding-right: 16px;
+}
+.cart-bottom {
+    z-index: 1000;
+    bottom: -20px;
+    background-color: white;
 }

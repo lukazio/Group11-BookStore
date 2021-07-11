@@ -101,13 +101,15 @@ if (!isset($_SESSION))
                                 </ul>';
                             }
                             echo
-                             "<div class=\"cart-subtotal\">Sub-Total: RM " . $subtotal . "</div>".
-                            "<div class=\"row m-0\">".
-                                "<div class=\"col-6 pl-0 pr-2\">".
-                                    "<a href=\"cart.php\" class=\"btn btn-warning cart-btn btn-block text-white\">View Cart</a>".
-                                "</div>".
-                                "<div class=\"col-6 pl-0 pr-2\">".
-                                    "<a id=\"headerCheckOut\" class=\"btn btn-info btn-block text-white\" onclick=\"checkOutOnClick()\">Checkout</a>".
+                            "<div class=\"cart-bottom position-sticky py-3\">".
+                                "<div class=\"cart-subtotal\">Sub-Total: RM " . $subtotal . "</div>".
+                                "<div class=\"row m-0\">".
+                                    "<div class=\"col-6 pl-0 pr-2\">".
+                                        "<a href=\"cart.php\" class=\"btn btn-warning cart-btn btn-block text-white\">View Cart</a>".
+                                    "</div>".
+                                    "<div class=\"col-6 pl-0 pr-2\">".
+                                        "<a id=\"headerCheckOut\" class=\"btn btn-info btn-block text-white\" onclick=\"checkOutOnClick()\">Checkout</a>".
+                                    "</div>".
                                 "</div>".
                             "</div>";
                         }
