@@ -120,20 +120,20 @@
 
                                                 <div class="form-group row">
                                                     <label for="oldInputPassword" class="col-sm-2 col-form-label" style="font-weight:bold;">Old Password</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="password" class="form-control" name="old_password" id="oldInputPassword" placeholder="Enter Old password">
+                                                    <div class="col-sm-6 col-md-4">
+                                                        <input type="password" class="form-control" name="old_password" id="oldInputPassword" placeholder="Enter Old Password">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="newInputPassword" class="col-sm-2 col-form-label" style="font-weight:bold;">New Password</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="password" class="form-control" name="new_password" id="newInputPassword" placeholder="Enter New password">
+                                                    <div class="col-sm-6 col-md-4">
+                                                        <input type="password" class="form-control" name="new_password" id="newInputPassword" placeholder="Enter New Password">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="retypeInputPassword" class="col-sm-2 col-form-label" style="font-weight:bold;">Retype Password</label>
-                                                    <div class="col-sm-4">
-                                                        <input type="password" class="form-control" name="new_retype_password" id="retypeInputPassword" placeholder="Retype password">
+                                                    <label for="retypeInputPassword" class="col-sm-2 col-form-label" style="font-weight:bold;">Confirm Password</label>
+                                                    <div class="col-sm-6 col-md-4">
+                                                        <input type="password" class="form-control" name="new_retype_password" id="retypeInputPassword" placeholder="Confirm New Password">
                                                     </div>
                                                 </div>
 
