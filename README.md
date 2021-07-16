@@ -3,4 +3,4 @@
 
 Cloud-hosted URL: https://mondstadt-library-bookstore.000webhostapp.com
 
-If the remote host and/or database isn't working, please use the files in this repository and SQL file provided to locally run the website on XAMPP
+If the remote host and/or database isn't working, please use the files in this repository and SQL file provided to locally run the website on XAMPP (if creating a local database, please name it 'agile_bookstore')
