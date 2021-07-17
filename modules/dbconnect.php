@@ -1,9 +1,9 @@
 <?php
 
-$host="remotemysql.com:3306";
-$dbUsername="h8DqZV7y33";
-$dbPassword="729x6UaerS";
-$dbName="h8DqZV7y33";
+$host="localhost";
+$dbUsername="root";
+$dbPassword="";
+$dbName="agile_bookstore";
 
 $conn = mysqli_connect($host,$dbUsername,$dbPassword,$dbName);
 

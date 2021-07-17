@@ -30,7 +30,7 @@ if (!isset($_SESSION))
             <?php if(isset($_SESSION['username'])) {
                 if($_SESSION['username'] == 'admin') { ?>
                     <li class="nav-item active color-fade">
-                        <a class="nav-link" target="_blank" href="https://remotemysql.com/phpmyadmin/index.php?db=h8DqZV7y33">Database</a>
+                        <a class="nav-link" target="_blank" href="https://localhost/phpmyadmin">Database</a>
                     </li>
             <?php
                 }
